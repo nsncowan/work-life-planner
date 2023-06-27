@@ -1,14 +1,14 @@
 import React from "react";
+import NewTimeBlockForm from "./NewTImeBlockForm";
+import Header from "./Header";
+import "./../App.css"
 
 function App(){
-  return ( 
-    <Router>
+  return (
+    <React.Fragment>
       <Header />
-      <Routes>
-        <Route path="/sign-in" element={<SignIn />} />
-        {/* <Route path="/" element={<TicketControl />} /> */}
-      </Routes>
-    </Router>
+      <NewTimeBlockForm />
+    </React.Fragment>
   );
 }
 
