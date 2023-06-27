@@ -11,3 +11,13 @@
 
 ### database
 supabase???
+
+
+### structure notes
+
+- Header
+- TimeBlockControl
+    - TimeBlockList
+        - TimeBlock
+    - TimeBlockForm
+    
