@@ -17,3 +17,4 @@
 * 12:10 pm: research moment.js
 * 1:20 pm: work on TimeBlockControl.js
 * 2:30 pm: work on category form
+* 4:00 pm: attempted to add toggle button component
