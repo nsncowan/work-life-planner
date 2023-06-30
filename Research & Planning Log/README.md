@@ -9,3 +9,8 @@
 #### Saturday, 06/17
 * 1:15 pm: research potential tools needed for stretch goals
 * 5:15 pm: research MaterialUI for styling, and ChartJS for pie charts
+
+
+#### Friday, 6/30
+* 10:55 am: begin work on basic scaffolding
+* 11:15 am: add detail to component diagram
