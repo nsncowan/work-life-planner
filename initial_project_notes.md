@@ -24,3 +24,4 @@ supabase???
 
 ### Task list
  * add timeblocks to list
+  - with submit action - assign category to timeblock (one-to-many)

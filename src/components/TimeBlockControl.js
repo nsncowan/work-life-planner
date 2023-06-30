@@ -13,11 +13,43 @@ function TimeBlockControl() {
   
   // display state slices
   const [selectedTimeBlock, setSelectedTimeBlock] = useState(null);
+  const [formVisible, setFormVisible] = useState(false);
 
 
-  const submitTimeBlockForm0 = async (timeBlock) => {
+  const addTimeBlock0 = async (timeBlock) => {
     await addDoc(collection(db, "timeBlocks"), timeBlock);
   }
+
+
+
+  let currentState = null;
+  let topTaskBar = <PlannerViewSelector />;
+  let bottomTaskBar = <BottomTaskBar />;
+  
+
+  if(formVisible) {
+    currentState = <NewTimeBlockForm addTimeBlock1 = {addTimeBlock0} />;
+  }
+
+
+  else {
+    currentState = <TimeBlockList />;
+  }
+
+  return (
+    <React.Fragment>
+      {topTaskBar}
+      {currentState}
+      {bottomTaskBar}
+    </React.Fragment>
+  );
+
+
+
+
+
+
+
 
 
 

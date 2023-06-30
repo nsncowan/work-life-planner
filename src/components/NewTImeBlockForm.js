@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 function NewTimeBlockForm(props) {
   return (
     <React.Fragment>
-      <form onSubmit={props.submitTimeBlockForm1}>
+      <form onSubmit={props.addTimeBlock1}>
         <input 
           className="timeblock-input"
           type="text"
@@ -22,7 +22,7 @@ function NewTimeBlockForm(props) {
 }
 
 NewTimeBlockForm.propTypes = {
-  submitTimeBlockForm1: PropTypes.func
+  addTimeBlock1: PropTypes.func
 };
 
 export default NewTimeBlockForm;

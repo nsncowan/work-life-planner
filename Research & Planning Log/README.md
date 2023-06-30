@@ -15,3 +15,4 @@
 * 10:55 am: begin work on basic scaffolding
 * 11:15 am: add detail to component diagram
 * 12:10 pm: research moment.js
+* 1:20 pm: work on TimeBlockControl.js
