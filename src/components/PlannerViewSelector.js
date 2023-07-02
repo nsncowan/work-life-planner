@@ -1,13 +1,13 @@
 import React from "react";
-import { ToggleButtonGroup } from "@mui/material";
+import { ToggleButtonGroup, ToggleButton } from "@mui/material";
 
-function PlannerViewSelector(props) {
+function PlannerViewSelector() {
   return (
     <ToggleButtonGroup
       color="secondary"
-      value={alignment}
-      exclusive
-      onChange={handleChange}
+      // value={alignment}
+      // exclusive
+      // onChange={handleChange}
       aria-label="Platform">
       <ToggleButton value="web">TimeBlock List</ToggleButton>
       <ToggleButton value="android">Day View</ToggleButton>

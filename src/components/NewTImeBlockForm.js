@@ -2,9 +2,18 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function NewTimeBlockForm(props) {
+
+  function handleFormSubmission(e) {
+    e.preventDefault();
+    props.addTimeBlock1({
+      name: e.target.name.value,
+      category: e.target.category.value
+    });
+  }
+
   return (
     <React.Fragment>
-      <form onSubmit={props.addTimeBlock1}>
+      <form onSubmit={handleFormSubmission}>
         <input 
           className="timeblock-input"
           type="text"

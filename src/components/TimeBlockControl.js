@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NewTimeBlockForm from "./NewTImeBlockForm";
 import TimeBlockList from "./TimeBlockList";
 import PlannerViewSelector from "./PlannerViewSelector";
 import { db } from "../firebase";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, onSnapshot } from "firebase/firestore";
 
 
 function TimeBlockControl() {
@@ -17,6 +17,26 @@ function TimeBlockControl() {
   const [displayedDate, setDisplayedDate] = useState(/* default date obj is today's date */)
   const [formVisible, setFormVisible] = useState(false);
 
+  // display the list of timeBlocks
+  useEffect(() => {
+    const unSubscribeTimeBlocks = onSnapshot(
+      collection(db, "timeBlocks"),
+      (collectionSnapshot) => {
+        const timeBlocks = [];
+        collectionSnapshot.forEach((doc) => {
+          timeBlocks.push({
+            name: doc.data().name,
+            category: doc.data().category,
+            id: doc.id
+          });
+        });
+        setTimeBlockList(timeBlocks);
+      },
+      // (error) => {}
+    );
+    return () => unSubscribeTimeBlocks();
+  }, []);
+
   // handles button click to toggle between TimeBlockList and NewTimeBlockForm
   const handleClick = () => {
     formVisible ? setFormVisible(false) : setFormVisible(true);
@@ -24,7 +44,8 @@ function TimeBlockControl() {
 
   // adds timeBlock to db
   const addTimeBlock0 = async (timeBlock) => {
-    await addDoc(collection(db, "timeBlocks"), timeBlock);
+    const collectionReference = collection(db, "timeBlocks");
+    await addDoc(collectionReference, timeBlock);
   }
 
   // adds category to db
