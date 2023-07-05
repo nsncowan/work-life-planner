@@ -70,7 +70,7 @@ function TimeBlockControl() {
 
 
   else {
-    currentState = <TimeBlockList />;
+    currentState = <TimeBlockList timeBlockList={timeBlockList}/>;
     buttonText = 'go to timeblock form'
   }
 
