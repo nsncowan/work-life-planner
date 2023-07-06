@@ -9,7 +9,6 @@ function TimeBlockList(props) {
       <React.Fragment>
         <hr/>
         {props.timeBlockList.map((timeBlock) =>
-          
           <TimeBlock 
             name={timeBlock.name}
             category={timeBlock.category}

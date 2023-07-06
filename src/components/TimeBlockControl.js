@@ -4,6 +4,7 @@ import TimeBlockList from "./TimeBlockList";
 import PlannerViewSelector from "./PlannerViewSelector";
 import { db } from "../firebase";
 import { collection, addDoc, onSnapshot } from "firebase/firestore";
+import NewCategoryForm from "./NewCategoryForm";
 
 
 function TimeBlockControl() {
@@ -42,6 +43,7 @@ function TimeBlockControl() {
     formVisible ? setFormVisible(false) : setFormVisible(true);
   }
 
+
   // adds timeBlock to db
   const addTimeBlock0 = async (timeBlock) => {
     const collectionReference = collection(db, "timeBlocks");
@@ -56,29 +58,32 @@ function TimeBlockControl() {
 
 
   let currentState = null;
-  let buttonText = null;
+  let otherCurrentState = null;
+  let buttonOne = null;
   let topTaskBar = <PlannerViewSelector />;
   // let bottomTaskBar = <BottomTaskBar />;
   
 
   if(formVisible) {
     currentState = <NewTimeBlockForm 
-                      addTimeBlock1 = {addTimeBlock0}
+                      addTimeBlock1 = {addTimeBlock0} />;
+    otherCurrentState = <NewCategoryForm
                       addCategory1={addCategory0} />;
-    buttonText = 'back to timeblock list'
+    buttonOne = 'back to timeblock list'
   }
 
 
   else {
     currentState = <TimeBlockList timeBlockList={timeBlockList}/>;
-    buttonText = 'go to timeblock form'
+    buttonOne = 'go to timeblock form';
   }
 
   return (
     <React.Fragment>
       {topTaskBar}
       {currentState}
-      {<button onClick={handleClick}>{buttonText}</button>}
+      {otherCurrentState}
+      {<button onClick={handleClick}>{buttonOne}</button>}
       {/* {bottomTaskBar} */}
     </React.Fragment>
   );

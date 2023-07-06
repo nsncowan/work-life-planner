@@ -2,9 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function NewCategoryForm(props) {
+
+  function handleFormSubmission(e) {
+    e.preventDefault();
+    props.addCategory1({
+      category: e.target.category.value
+    });
+  }
+
   return (
     <React.Fragment>
-      <form onSubmit={props.addCategory1}>
+      <form onSubmit={handleFormSubmission}>
         <input 
           className="timeblock-input"
           type="text"

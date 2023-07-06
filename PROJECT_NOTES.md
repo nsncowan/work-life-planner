@@ -27,11 +27,13 @@ supabase???
   - with submit action - assign category to timeblock (one-to-many)
 
 ### data structure
-  - form takes in tb name, and cat name
-  - goal is to give each tb a cat id as a property
-  - therefore, you can search for all tb's in a given cat by listing all tb's where id === searchId
+  * idea: no category id needed
+  * create a collection of categories, just names, and use that to populate a dropdown list for the new TB form
+  * BUT, the new TB that's created only needs the string value of the category name, and doesn't have to be connected to the category collection.
+  * BECAUSE: in order to display all TBs in a given category, we only need to match the string values of the category property of the TB to the search term.
 
-  * idea: no cat id needed
-  * create a collection of cat's, just names, and use that to populate a dropdown list for the new TB form
-  * BUT, the new TB that's created only needs the string value of the category name, and doesn't have to be connected to the Cat collection.
-  * BECAUSE: in order to display all TBs in a given category, we only need to match the string values of the Cat property of the TB to the search term.
+  - create an add new category form
+  - populate a dropdown with categories
+  - check for duplicate categories
+  - attach dropdown to new timeblock form
+  - 
