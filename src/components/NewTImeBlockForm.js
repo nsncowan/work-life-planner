@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 function NewTimeBlockForm(props) {
 
-  function handleFormSubmission(e) {
+  function handleFormSubmission2(e) {
     e.preventDefault();
     props.addTimeBlock1({
       name: e.target.name.value,
@@ -13,18 +13,24 @@ function NewTimeBlockForm(props) {
 
   return (
     <React.Fragment>
-      <form onSubmit={handleFormSubmission}>
+      <form onSubmit={handleFormSubmission2}>
         <input 
           className="timeblock-input"
           type="text"
           name='name' 
           placeholder="name your TimeBlock" />
-        <input 
+
+        <select /* onChange={} */>
+          <option /* value={} */>Select a Category</option>
+          {props.categoryList.map((cat) => <option value={cat.name}>{cat.name}</option>)}
+        </select>
+
+        {/* <input 
           className="timeblock-input"
           type="text"
           name='category' 
           placeholder="add a category" />
-          {/* <button onClick={() => {props.addCategory1}}>Add Category</button> */}
+          <button onClick={() => {props.addCategory1}}>Add Category</button> */}
         <button type="submit">Add TimeBlock</button>
       </form>
     </React.Fragment>
@@ -33,7 +39,7 @@ function NewTimeBlockForm(props) {
 
 NewTimeBlockForm.propTypes = {
   addTimeBlock1: PropTypes.func,
-  addCategory1: PropTypes.func
+  categoryList: PropTypes.array
 };
 
 export default NewTimeBlockForm;

@@ -6,7 +6,7 @@ function NewCategoryForm(props) {
   function handleFormSubmission(e) {
     e.preventDefault();
     props.addCategory1({
-      category: e.target.category.value
+      name: e.target.name.value
     });
   }
 
@@ -16,7 +16,7 @@ function NewCategoryForm(props) {
         <input 
           className="timeblock-input"
           type="text"
-          name='category' 
+          name='name' 
           placeholder="add a category" />
         <button type="submit">Add Category</button>
       </form>

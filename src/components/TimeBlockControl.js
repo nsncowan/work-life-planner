@@ -35,7 +35,27 @@ function TimeBlockControl() {
       },
       // (error) => {}
     );
-    return () => unSubscribeTimeBlocks();
+
+    const unSubscribeCategory = onSnapshot(
+      collection(db, "categories"),
+      (collectionSnapshot) => {
+        const categories = [];
+        collectionSnapshot.forEach((doc) => {
+          categories.push({
+            name: doc.data().name,
+            id: doc.id
+          });
+        });
+        setCategoryList(categories);
+      },
+      // (error) => {}
+    );
+
+    const initialize = () => {
+      unSubscribeTimeBlocks();
+      unSubscribeCategory();
+    }
+    return initialize;
   }, []);
 
   // handles button click to toggle between TimeBlockList and NewTimeBlockForm
@@ -66,7 +86,8 @@ function TimeBlockControl() {
 
   if(formVisible) {
     currentState = <NewTimeBlockForm 
-                      addTimeBlock1 = {addTimeBlock0} />;
+                      addTimeBlock1 = {addTimeBlock0}
+                      categoryList = {categoryList} />;
     otherCurrentState = <NewCategoryForm
                       addCategory1={addCategory0} />;
     buttonOne = 'back to timeblock list'
