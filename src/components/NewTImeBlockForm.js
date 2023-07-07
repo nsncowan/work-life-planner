@@ -7,7 +7,7 @@ function NewTimeBlockForm(props) {
     e.preventDefault();
     props.addTimeBlock1({
       name: e.target.name.value,
-      category: e.target.category.value
+      category: e.target.categoryName.value
     });
   }
 
@@ -20,17 +20,11 @@ function NewTimeBlockForm(props) {
           name='name' 
           placeholder="name your TimeBlock" />
 
-        <select /* onChange={} */>
-          <option /* value={} */>Select a Category</option>
+        <select name="categoryName">
+          <option>Select a Category</option>
           {props.categoryList.map((cat) => <option value={cat.name}>{cat.name}</option>)}
         </select>
 
-        {/* <input 
-          className="timeblock-input"
-          type="text"
-          name='category' 
-          placeholder="add a category" />
-          <button onClick={() => {props.addCategory1}}>Add Category</button> */}
         <button type="submit">Add TimeBlock</button>
       </form>
     </React.Fragment>
