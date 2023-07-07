@@ -22,8 +22,8 @@ code {
   box-sizing: border-box;
 }
 body {
-  background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
-  color: white;
+  /* background-color: #FFF5E4; */
+  color: #FF9494;
   font-family: "Poppins", sans-serif;
   min-height: 100vh;
 }

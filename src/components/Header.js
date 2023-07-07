@@ -2,7 +2,7 @@ import React from "react";
 
 function Header() {
   return (
-    <h1>WorkLife Planner</h1>
+    <h1>WorkLifePlanner</h1>
   )
 }
 
