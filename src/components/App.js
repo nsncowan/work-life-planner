@@ -23,7 +23,7 @@ function App(){
       <React.Fragment>
         <Header />
         <TimeBlockControl />
-        <DayView />
+        {/* <DayView /> */}
       </React.Fragment>
     </div>
   );
