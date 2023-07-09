@@ -1,4 +1,11 @@
 
+## dnd
+* Create a background that displays the blank daily timetable
+* Create a component that will be superimposed over the blank timetable, and time blocks can be added to that - therefore ‘filling out’ the blank timetable
+* You already have your main list of time blocks.
+* Create new state for each day with a date property and a time block list, property initialized as an empty array, and as time blocks are dragged onto the schedule, those time blocks are pushed to the array instead
+
+
 ### Styling
 * look more into the "styled components" library for react
 * look at react bootstrap
