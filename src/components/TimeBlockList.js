@@ -2,6 +2,8 @@ import React from "react";
 import TimeBlock from "./TimeBlock";
 import PropTypes from "prop-types";
 import styled from 'styled-components';
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+
 
 
 const TimeBlockListStyle = styled.section`
