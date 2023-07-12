@@ -4,9 +4,7 @@ import PropTypes from "prop-types";
 import styled from 'styled-components';
 import { Droppable } from 'react-beautiful-dnd';
 
-
-
-const TimeBlockListStyle = styled.section`
+const StyledTimeBlockDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,19 +19,25 @@ const TimeBlockListStyle = styled.section`
 
 function TimeBlockList(props) {
   return (
-    <TimeBlockListStyle>
-        <React.Fragment>
-          <hr/>
-          {props.timeBlockList.map((timeBlock) =>
-            <TimeBlock
-              name={timeBlock.name}
-              category={timeBlock.category}
-              id={timeBlock.id}
-              key={timeBlock.id}
-            />
-          )}
-        </React.Fragment>
-    </TimeBlockListStyle>
+    <Droppable droppableId="timeBlockList">
+      {provided => (
+        <StyledTimeBlockDiv ref={provided.innerRef} {...provided.droppableProps}>
+          <React.Fragment>
+            <hr/>
+            {props.timeBlockList.map((timeBlock, index) =>
+              <TimeBlock
+                name={timeBlock.name}
+                category={timeBlock.category}
+                id={timeBlock.id}
+                key={timeBlock.id}
+                index={index}
+              />
+            )}
+            {provided.placeholder}
+          </React.Fragment>
+        </StyledTimeBlockDiv>
+      )}
+    </Droppable>
   );
 }
 
@@ -44,21 +48,3 @@ TimeBlockList.propTypes = {
 };
 
 export default TimeBlockList;
-
-/* 
-return (
-  <Container>
-    <Title>{this.props.column.title}</Title>
-    <Droppable droppableId={this.props.column.id}>
-      {provided => (
-        <TaskList innerRef={provided.innerRef} {...provided.droppableProps}>
-          {this.props.tasks.map((task, index) => (
-            <Task key={task.id} task={task} index={index} />
-          ))}
-          {provided.placeholder}
-        </TaskList>
-      )}
-    </Droppable>
-  </Container>
-    );
-*/

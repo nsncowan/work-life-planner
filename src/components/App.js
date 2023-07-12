@@ -2,7 +2,7 @@ import React from "react";
 import "./../App.css"
 import Header from "./Header";
 import TimeBlockControl from "./TimeBlockControl";
-import DayView from "./DayView";
+import { DragDropContext } from "react-beautiful-dnd";
 function App(){
 
   const AppStyles = {
@@ -22,7 +22,9 @@ function App(){
     <div style={AppStyles}>
       <React.Fragment>
         <Header />
-        <TimeBlockControl />
+        <DragDropContext onDragEnd={e => console.log(e)}>
+          <TimeBlockControl />
+        </DragDropContext>
         {/* <DayView /> */}
       </React.Fragment>
     </div>

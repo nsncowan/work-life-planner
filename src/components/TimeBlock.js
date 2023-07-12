@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from 'styled-components';
+import { Draggable } from "react-beautiful-dnd";
 
-
-const TimeBlockStyle = styled.section`
+const TimeBlockStyle = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -25,17 +25,26 @@ const TimeBlockStyle = styled.section`
 
 function TimeBlock(props) {
   return (
-    <TimeBlockStyle>
-        <h4>{props.name}</h4>
-        <h6>{props.category}</h6>
-        <p>{props.id}</p>
-    </TimeBlockStyle>
+    <Draggable draggableId={props.id} index={props.index}>
+      {provided => (
+        <TimeBlockStyle
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}>
+            <h4>{props.name}</h4>
+            <h6>{props.category}</h6>
+            <p>{props.id}</p>
+        </TimeBlockStyle>
+      )}
+    </Draggable>
   );
 }
 
 TimeBlock.propTypes = {
   name: PropTypes.string,
   category: PropTypes.string,
+  id: PropTypes.string,
+  key: PropTypes.string
 };
 
 export default TimeBlock;
