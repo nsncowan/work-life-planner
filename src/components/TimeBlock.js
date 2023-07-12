@@ -28,6 +28,7 @@ function TimeBlock(props) {
     <TimeBlockStyle>
         <h4>{props.name}</h4>
         <h6>{props.category}</h6>
+        <p>{props.id}</p>
     </TimeBlockStyle>
   );
 }

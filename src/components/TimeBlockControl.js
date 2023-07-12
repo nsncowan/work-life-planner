@@ -31,6 +31,7 @@ function TimeBlockControl() {
           timeBlocks.push({
             name: doc.data().name,
             category: doc.data().category,
+            // add key property set to id for help with dnd
             id: doc.id
           });
         });

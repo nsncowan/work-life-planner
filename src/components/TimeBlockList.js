@@ -2,6 +2,7 @@ import React from "react";
 import TimeBlock from "./TimeBlock";
 import PropTypes from "prop-types";
 import styled from 'styled-components';
+import { Droppable } from 'react-beautiful-dnd';
 
 
 
@@ -43,3 +44,21 @@ TimeBlockList.propTypes = {
 };
 
 export default TimeBlockList;
+
+/* 
+return (
+  <Container>
+    <Title>{this.props.column.title}</Title>
+    <Droppable droppableId={this.props.column.id}>
+      {provided => (
+        <TaskList innerRef={provided.innerRef} {...provided.droppableProps}>
+          {this.props.tasks.map((task, index) => (
+            <Task key={task.id} task={task} index={index} />
+          ))}
+          {provided.placeholder}
+        </TaskList>
+      )}
+    </Droppable>
+  </Container>
+    );
+*/
