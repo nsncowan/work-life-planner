@@ -1,99 +1,99 @@
 const initialDayData = [
   // add date property
   {
-    timeSlot: "12:00am",
+    time: "12:00am",
     content: null,
   },
   {
-    timeSlot: "1:00am",
+    time: "1:00am",
     content: null,
   },
   {
-    timeSlot: "2:00am",
+    time: "2:00am",
     content: null,
   },
   {
-    timeSlot: "3:00am",
+    time: "3:00am",
     content: null,
   },
   {
-    timeSlot: "4:00am",
+    time: "4:00am",
     content: null,
   },
   {
-    timeSlot: "5:00am",
+    time: "5:00am",
     content: null,
   },
   {
-    timeSlot: "6:00am",
+    time: "6:00am",
     content: null,
   },
   {
-    timeSlot: "7:00am",
+    time: "7:00am",
     content: null,
   },
   {
-    timeSlot: "8:00am",
+    time: "8:00am",
     content: null,
   },
   {
-    timeSlot: "9:00am",
+    time: "9:00am",
     content: null,
   },
   {
-    timeSlot: "10:00am",
+    time: "10:00am",
     content: null,
   },
   {
-    timeSlot: "11:00am",
+    time: "11:00am",
     content: null,
   },
   {
-    timeSlot: "12:00pm",
+    time: "12:00pm",
     content: null,
   },
   {
-    timeSlot: "1:00pm",
+    time: "1:00pm",
     content: null,
   },
   {
-    timeSlot: "2:00pm",
+    time: "2:00pm",
     content: null,
   },
   {
-    timeSlot: "3:00pm",
+    time: "3:00pm",
     content: null,
   },
   {
-    timeSlot: "4:00pm",
+    time: "4:00pm",
     content: null,
   },
   {
-    timeSlot: "5:00pm",
+    time: "5:00pm",
     content: null,
   },
   {
-    timeSlot: "6:00pm",
+    time: "6:00pm",
     content: null,
   },
   {
-    timeSlot: "7:00pm",
+    time: "7:00pm",
     content: null,
   },
   {
-    timeSlot: "8:00pm",
+    time: "8:00pm",
     content: null,
   },
   {
-    timeSlot: "9:00pm",
+    time: "9:00pm",
     content: null,
   },
   {
-    timeSlot: "10:00pm",
+    time: "10:00pm",
     content: null,
   },
   {
-    timeSlot: "11:00pm",
+    time: "11:00pm",
     content: null,
   },
 ];

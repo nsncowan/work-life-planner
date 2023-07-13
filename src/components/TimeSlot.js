@@ -22,12 +22,21 @@ const StyledTimeSlotDiv = styled.div`
     cursor: pointer;
   `;
 
-export default function TimeSlot(props) {
+function TimeSlot(props) {
   return (
-    <StyledTimeSlotDiv>
-      <h5>{props.timeSlot}</h5>
-      <h6>{props.content}</h6>
-    </StyledTimeSlotDiv>
+    <React.Fragment>
+      <StyledTimeSlotDiv>
+        <h5>{props.time}</h5>
+        <h6>{props.content}</h6>
+      </StyledTimeSlotDiv>
+    </React.Fragment>
   );
 }
+
+TimeSlot.propTypes = {
+  time: PropTypes.string,
+  content: PropTypes.object
+};
+
+export default TimeSlot;
 
