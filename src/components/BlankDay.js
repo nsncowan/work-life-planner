@@ -9,10 +9,6 @@ export default function BlankDay() {
     <React.Fragment>
       <div className="allDay">
         {/* select date component goes here */}
-        <div className="6:00">
-          <p>6:00am</p>
-        </div>
-
       </div>
 
     </React.Fragment>

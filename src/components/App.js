@@ -25,7 +25,6 @@ function App(){
         <DragDropContext onDragEnd={e => console.log(e)}>
           <TimeBlockControl />
         </DragDropContext>
-        {/* <DayView /> */}
       </React.Fragment>
     </div>
   );
