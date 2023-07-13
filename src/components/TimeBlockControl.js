@@ -6,6 +6,8 @@ import PlannerViewSelector from "./PlannerViewSelector";
 import { db } from "../firebase";
 import { collection, addDoc, onSnapshot } from "firebase/firestore";
 import NewCategoryForm from "./NewCategoryForm";
+import { DragDropContext } from "react-beautiful-dnd";
+
 
 
 function TimeBlockControl() {
@@ -79,6 +81,14 @@ function TimeBlockControl() {
     await addDoc(collection(db, "categories"), category);
   }
 
+  const onDragEnd = (result) => {
+    if(!result.destination) return;
+    const newTimeBlockList = Array.from(timeBlockList);
+    const [draggedTimeBlock] = newTimeBlockList.splice(result.source.index, 1);
+    newTimeBlockList.splice(result.destination.index, 0, draggedTimeBlock);
+    setTimeBlockList(newTimeBlockList);
+  }
+
 
 
   let currentState = null;
@@ -106,9 +116,11 @@ function TimeBlockControl() {
   return (
     <React.Fragment>
       {topTaskBar}
-      {currentState}
-      {otherCurrentState}
-      <button onClick={handleClick}>{buttonOne}</button>
+      <DragDropContext onDragEnd={onDragEnd}>
+        {currentState}
+        {otherCurrentState}
+        <button onClick={handleClick}>{buttonOne}</button>
+      </DragDropContext>
       {/* {bottomTaskBar} */}
     </React.Fragment>
   );
