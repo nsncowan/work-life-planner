@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram name="Page-1" id="YI9PkLjTfyj3WVKVnAyu">
-        <mxGraphModel dx="1130" dy="779" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="991" dy="759" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -13,44 +13,64 @@
                 <mxCell id="zqM3rMFpBtw1R0VoXdJV-3" value="TimeBlock Control" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fontSize=18;" parent="1" vertex="1">
                     <mxGeometry x="30" y="120" width="860" height="465" as="geometry"/>
                 </mxCell>
-                <mxCell id="zqM3rMFpBtw1R0VoXdJV-11" value="Time Block List" style="rounded=0;whiteSpace=wrap;html=1;spacingTop=10;verticalAlign=top;spacing=2;spacingBottom=0;horizontal=1;fontSize=16;" parent="1" vertex="1">
-                    <mxGeometry x="220" y="200" width="220" height="300" as="geometry"/>
-                </mxCell>
-                <mxCell id="zqM3rMFpBtw1R0VoXdJV-5" value="Time Block" style="rounded=0;whiteSpace=wrap;html=1;spacingLeft=0;verticalAlign=top;" parent="1" vertex="1">
-                    <mxGeometry x="250" y="250" width="160" height="60" as="geometry"/>
-                </mxCell>
-                <mxCell id="zqM3rMFpBtw1R0VoXdJV-6" value="Category" style="rounded=0;whiteSpace=wrap;html=1;fontSize=9;" parent="1" vertex="1">
-                    <mxGeometry x="260" y="280" width="60" height="20" as="geometry"/>
-                </mxCell>
-                <mxCell id="zqM3rMFpBtw1R0VoXdJV-12" value="Blank Daily Time Table" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;verticalAlign=top;spacingTop=10;" parent="1" vertex="1">
-                    <mxGeometry x="480" y="200" width="220" height="300" as="geometry"/>
-                </mxCell>
-                <mxCell id="2" value="Time Block" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" parent="1" vertex="1">
-                    <mxGeometry x="250" y="320" width="160" height="60" as="geometry"/>
-                </mxCell>
-                <mxCell id="3" value="Time Block" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" parent="1" vertex="1">
-                    <mxGeometry x="250" y="390" width="160" height="60" as="geometry"/>
-                </mxCell>
-                <mxCell id="4" value="Category" style="rounded=0;whiteSpace=wrap;html=1;fontSize=9;" parent="1" vertex="1">
-                    <mxGeometry x="260" y="350" width="60" height="20" as="geometry"/>
-                </mxCell>
-                <mxCell id="5" value="Category" style="rounded=0;whiteSpace=wrap;html=1;fontSize=9;" parent="1" vertex="1">
-                    <mxGeometry x="260" y="420" width="60" height="20" as="geometry"/>
-                </mxCell>
                 <mxCell id="6" value="Planner View Selector: TimeBlocks / Day View / Week View" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;" parent="1" vertex="1">
                     <mxGeometry x="175" y="150" width="570" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="8" value="Header" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;" parent="1" vertex="1">
+                <mxCell id="10" value="Task Bar : Add TimeBlock, Add Category" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="175" y="550" width="570" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="" style="group" vertex="1" connectable="0" parent="1">
+                    <mxGeometry x="470" y="200" width="270" height="340" as="geometry"/>
+                </mxCell>
+                <mxCell id="zqM3rMFpBtw1R0VoXdJV-12" value="Blank Daily Time Table" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;verticalAlign=top;spacingTop=10;" parent="12" vertex="1">
+                    <mxGeometry width="270" height="340" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="Selected Date" style="rounded=0;whiteSpace=wrap;html=1;container=0;" parent="12" vertex="1">
+                    <mxGeometry x="55" y="50" width="160" height="30" as="geometry">
+                        <mxRectangle x="510" y="250" width="120" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="20" value="" style="group" vertex="1" connectable="0" parent="1">
+                    <mxGeometry x="180" y="200" width="270" height="340" as="geometry"/>
+                </mxCell>
+                <mxCell id="zqM3rMFpBtw1R0VoXdJV-11" value="Time Block List" style="rounded=0;whiteSpace=wrap;html=1;spacingTop=10;verticalAlign=top;spacing=2;spacingBottom=0;horizontal=1;fontSize=16;" parent="20" vertex="1">
+                    <mxGeometry width="270" height="340" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="" style="group" vertex="1" connectable="0" parent="20">
+                    <mxGeometry x="55" y="120" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="Time Block" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" parent="14" vertex="1">
+                    <mxGeometry width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="Category" style="rounded=0;whiteSpace=wrap;html=1;fontSize=9;" parent="14" vertex="1">
+                    <mxGeometry x="10" y="30" width="60" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="" style="group" vertex="1" connectable="0" parent="20">
+                    <mxGeometry x="55" y="50" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="zqM3rMFpBtw1R0VoXdJV-5" value="Time Block" style="rounded=0;whiteSpace=wrap;html=1;spacingLeft=0;verticalAlign=top;" parent="16" vertex="1">
+                    <mxGeometry width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="zqM3rMFpBtw1R0VoXdJV-6" value="Category" style="rounded=0;whiteSpace=wrap;html=1;fontSize=9;" parent="16" vertex="1">
+                    <mxGeometry x="10" y="30" width="60" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="" style="group" vertex="1" connectable="0" parent="20">
+                    <mxGeometry x="55" y="190" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="Time Block" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="17">
+                    <mxGeometry width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="Category" style="rounded=0;whiteSpace=wrap;html=1;fontSize=9;" vertex="1" parent="17">
+                    <mxGeometry x="10" y="30" width="60" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="" style="group" vertex="1" connectable="0" parent="1">
                     <mxGeometry x="50" y="50" width="820" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="9" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;Sign In / Sign Out&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;" parent="1" vertex="1">
-                    <mxGeometry x="60" y="65" width="130" height="30" as="geometry"/>
+                <mxCell id="8" value="Header" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;" parent="21" vertex="1">
+                    <mxGeometry width="820" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="10" value="Task Bar : Add TimeBlock, Add Category" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;" parent="1" vertex="1">
-                    <mxGeometry x="175" y="520" width="570" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="11" value="Selected Date" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="510" y="250" width="160" height="30" as="geometry"/>
+                <mxCell id="9" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;Sign In / Sign Out&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;" parent="21" vertex="1">
+                    <mxGeometry x="10" y="15" width="130" height="30" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

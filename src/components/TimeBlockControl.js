@@ -7,6 +7,8 @@ import { db } from "../firebase";
 import { collection, addDoc, onSnapshot } from "firebase/firestore";
 import NewCategoryForm from "./NewCategoryForm";
 import { DragDropContext } from "react-beautiful-dnd";
+import initialDayData from "./initial-day-data";
+import DayView from "./DayView";
 
 
 
@@ -16,6 +18,7 @@ function TimeBlockControl() {
   // data state slices
   const [timeBlockList, setTimeBlockList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
+  const [timeTable, setTimeTable] = useState([initialDayData]);
   const [editing, setEditing] = useState(false);
   
   // display state slices
@@ -111,6 +114,7 @@ function TimeBlockControl() {
 
   else {
     currentState = <TimeBlockList timeBlockList={timeBlockList}/>;
+    otherCurrentState = <DayView timeTable={timeTable} />
     buttonOne = 'go to timeblock form';
   }
 

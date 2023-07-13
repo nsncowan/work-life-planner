@@ -1,4 +1,5 @@
 const initialDayData = [
+  // add date property
   {
     timeSlot: "12:00am",
     content: null,
@@ -95,4 +96,6 @@ const initialDayData = [
     timeSlot: "11:00pm",
     content: null,
   },
-]
+];
+
+export default initialDayData;
