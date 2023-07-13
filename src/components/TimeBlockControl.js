@@ -87,6 +87,7 @@ function TimeBlockControl() {
     const [draggedTimeBlock] = newTimeBlockList.splice(result.source.index, 1);
     newTimeBlockList.splice(result.destination.index, 0, draggedTimeBlock);
     setTimeBlockList(newTimeBlockList);
+    // do I need to update the order in firestore???
   }
 
 
@@ -119,8 +120,8 @@ function TimeBlockControl() {
       <DragDropContext onDragEnd={onDragEnd}>
         {currentState}
         {otherCurrentState}
-        <button onClick={handleClick}>{buttonOne}</button>
       </DragDropContext>
+        <button onClick={handleClick}>{buttonOne}</button>
       {/* {bottomTaskBar} */}
     </React.Fragment>
   );
