@@ -18,7 +18,7 @@ function TimeBlockControl() {
   // data state slices
   const [timeBlockList, setTimeBlockList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
-  const [timeTable, setTimeTable] = useState([initialDayData]);
+  const [timeTable, setTimeTable] = useState(initialDayData);
   const [editing, setEditing] = useState(false);
   
   // display state slices
