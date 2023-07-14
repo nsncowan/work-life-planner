@@ -84,10 +84,17 @@ function TimeBlockControl() {
     await addDoc(collection(db, "categories"), category);
   }
 
+  const rearrangeArr = (arr, sourceIndex, destIndex) => {
+    const arrCopy = [...arr];
+    const [removed] = arrCopy.splice(sourceIndex, 1);
+    arrCopy.splice(destIndex, 0, removed);
+    return arrCopy;
+  }
+
   const onDragEnd = (result) => {
     const { source, destination } = result;
     if(!destination) return;
-    if(destination.droppableId === source.droppableId) {
+    if(destination.droppableId === 'timeTable') {
       // logic for multiple lists goes here
     }
     else {
