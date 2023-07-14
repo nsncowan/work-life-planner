@@ -85,12 +85,18 @@ function TimeBlockControl() {
   }
 
   const onDragEnd = (result) => {
-    if(!result.destination) return;
-    const newTimeBlockList = Array.from(timeBlockList);
-    const [draggedTimeBlock] = newTimeBlockList.splice(result.source.index, 1);
-    newTimeBlockList.splice(result.destination.index, 0, draggedTimeBlock);
-    setTimeBlockList(newTimeBlockList);
-    // do I need to update the order in firestore???
+    const { source, destination } = result;
+    if(!destination) return;
+    if(destination.droppableId === source.droppableId) {
+      // logic for multiple lists goes here
+    }
+    else {
+      const newTimeBlockList = Array.from(timeBlockList);
+      const [draggedTimeBlock] = newTimeBlockList.splice(source.index, 1);
+      newTimeBlockList.splice(destination.index, 0, draggedTimeBlock);
+      setTimeBlockList(newTimeBlockList);
+      // do I need to update the order in firestore???
+    }
   }
 
 

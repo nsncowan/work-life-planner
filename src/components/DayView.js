@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from 'styled-components';
 import TimeSlot from "./TimeSlot";
+import { Droppable } from 'react-beautiful-dnd';
 
 const StyledDayViewDiv = styled.div`
     display: flex;
@@ -18,19 +19,25 @@ const StyledDayViewDiv = styled.div`
 
 function DayView(props) {
   return (
-    <StyledDayViewDiv>
-      <React.Fragment>
-        <h2>Day View</h2>
-          {props.timeTable.map((timeSlot) =>
-            <TimeSlot
-              time={timeSlot.time}
-              content={timeSlot.content}
-            />
-            )}
-      </React.Fragment>
-    </StyledDayViewDiv>
-  )
-};
+    <Droppable droppableId="timeTable">
+      {provided => (
+        <StyledDayViewDiv ref={provided.innerRef} {...provided.droppableProps}>
+          <React.Fragment>
+            <h2>Day View</h2>
+              {props.timeTable.map((timeSlot, index) =>
+                <TimeSlot
+                  time={timeSlot.time}
+                  content={timeSlot.content}
+                  index={index}
+                />
+              )}
+              {provided.placeholder}
+          </React.Fragment>
+        </StyledDayViewDiv>
+      )}
+    </Droppable>
+  );
+}
 
 DayView.propTypes = {
   time: PropTypes.string,
