@@ -95,7 +95,9 @@ function TimeBlockControl() {
     const { source, destination } = result;
     if(!destination) return;
     if(destination.droppableId === 'timeTable') {
-      // logic for multiple lists goes here
+      console.log(source);
+      console.log(destination);
+      setTimeTable(rearrangeArr(timeTable, source.index, destination.index));
     }
     else {
       const newTimeBlockList = Array.from(timeBlockList);

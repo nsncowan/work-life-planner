@@ -25,12 +25,17 @@ const StyledTimeSlotDiv = styled.div`
 
 function TimeSlot(props) {
   return (
-    <React.Fragment>
-      <StyledTimeSlotDiv>
-        <h5>{props.time}</h5>
-        <h6>{props.content}</h6>
-      </StyledTimeSlotDiv>
-    </React.Fragment>
+    <Draggable draggableId={props.id} index={props.index}>
+      {provided => (
+        <StyledTimeSlotDiv 
+        ref={provided.innerRef}
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}>
+          <h5>{props.time}</h5>
+          <h6>{props.content}</h6>
+        </StyledTimeSlotDiv>
+      )}
+    </Draggable>
   );
 }
 

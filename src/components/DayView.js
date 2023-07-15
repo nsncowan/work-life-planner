@@ -28,6 +28,8 @@ function DayView(props) {
                 <TimeSlot
                   time={timeSlot.time}
                   content={timeSlot.content}
+                  id={timeSlot.id}
+                  key={timeSlot.id}
                   index={index}
                 />
               )}
@@ -45,3 +47,5 @@ DayView.propTypes = {
 };
 
 export default DayView;
+
+

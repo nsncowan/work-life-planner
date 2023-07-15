@@ -1,6 +1,7 @@
 ## brainstorm
-- maybe populate a blank day with timeslot objects (with property for time, and property for TB data (initially set to null) )
+- within 'initial-day-data', set up an array of 
 
+- maybe populate a blank day with timeslot objects (with property for time, and property for TB data (initially set to null) )
 
 - create a state slice for 'assigned' time blocks - ie timeblocks that have been added to a specific day
 - dragging a tb to the 'day' template will create a copy of the timeblock and add it to the 'assigned' state
