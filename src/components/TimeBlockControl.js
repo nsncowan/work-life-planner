@@ -89,31 +89,46 @@ function TimeBlockControl() {
     await addDoc(collection(db, "categories"), category);
   }
 
-  const rearrangeArr = (arr, sourceIndex, destIndex) => {
+  const reArrangeArr = (arr, sourceIndex, destIndex) => {
     const arrCopy = [...arr];
     const [removed] = arrCopy.splice(sourceIndex, 1);
     arrCopy.splice(destIndex, 0, removed);
     return arrCopy;
   }
 
+  // const multiListMove = (sourceArr, destArr, sourceIndex, destIndex) => {
+  //   const sourceArrCopy = [...sourceArr];
+  //   const destArrCopy = [...destArr];
+  //   const [removed] = sourceArrCopy.splice(sourceIndex, 1);
+  //   destArrCopy.splice(destIndex, 0, removed);
+  //   setTimeBlockList(sourceArrCopy);
+  //   setTimeTable(destArrCopy);
+  // }
+
   const onDragEnd = (result) => {
-    const { source, destination } = result;
+    const { source, destination, draggableId } = result;
     if(!destination) return;
-    if(destination.droppableId === 'timeTable') {
-      console.log(source);
-      console.log(destination);
-      setTimeTable(rearrangeArr(timeTable, source.index, destination.index));
+    if(source.droppableId === 'timeTable' && destination.droppableId === 'timeTable') {
+      setTimeTable(reArrangeArr(timeTable, source.index, destination.index));
+    }
+    else if (source.droppableId === 'timeBlockList' && destination.droppableId === 'timeBlockList') {
+      setTimeBlockList(reArrangeArr(timeBlockList, source.index, destination.index));
     }
     else {
-      const newTimeBlockList = Array.from(timeBlockList);
-      const [draggedTimeBlock] = newTimeBlockList.splice(source.index, 1);
-      newTimeBlockList.splice(destination.index, 0, draggedTimeBlock);
-      setTimeBlockList(newTimeBlockList);
-      // do I need to update the order in firestore???
+      const sourceArrCopy = Array.from(timeBlockList);
+      sourceArrCopy.splice(source.index, 1);
+      const newSourceArr = sourceArrCopy;
+
+      const destArrCopy = Array.from(timeTable);
+      destArrCopy.splice(destination.index, 0, draggableId);
+      const newDestArr = destArrCopy;
+
+      setTimeBlockList(newSourceArr);
+      setTimeTable(newDestArr);
     }
   }
-
-
+  
+  
 
   let currentState = null;
   let otherCurrentState = null;
@@ -121,23 +136,23 @@ function TimeBlockControl() {
   let topTaskBar = <PlannerViewSelector />;
   // let bottomTaskBar = <BottomTaskBar />;
   
-
+  
   if(formVisible) {
     currentState = <NewTimeBlockForm 
-                      addTimeBlock1 = {addTimeBlock0}
-                      categoryList = {categoryList} />;
+    addTimeBlock1 = {addTimeBlock0}
+    categoryList = {categoryList} />;
     otherCurrentState = <NewCategoryForm
-                      addCategory1={addCategory0} />;
+    addCategory1={addCategory0} />;
     buttonOne = 'back to timeblock list'
   }
-
-
+  
+  
   else {
     currentState = <TimeBlockList timeBlockList={timeBlockList}/>;
     otherCurrentState = <DayView timeTable={timeTable} />
     buttonOne = 'go to timeblock form';
   }
-
+  
   return (
     <React.Fragment>
       {topTaskBar}
@@ -151,11 +166,11 @@ function TimeBlockControl() {
       {/* {bottomTaskBar} */}
     </React.Fragment>
   );
-
-
-
-
-
+  
+  
+  
+  
+  
 }
 
 export default TimeBlockControl;

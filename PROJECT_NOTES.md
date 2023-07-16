@@ -1,4 +1,8 @@
 ## brainstorm
+
+- convert timeslots to timeblocks with all data exept 'time' set to null.
+- the end goal is to make everything a 'timeblock', but with null fields depending on source and destination.
+
 - within 'initial-day-data', set up an array of 
 
 - maybe populate a blank day with timeslot objects (with property for time, and property for TB data (initially set to null) )

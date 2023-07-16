@@ -19,7 +19,7 @@ const StyledDayViewDiv = styled.div`
 
 function DayView(props) {
   return (
-    <Droppable droppableId="timeTable">
+    <Droppable droppableId="timeTable" isCombineEnabled>
       {provided => (
         <StyledDayViewDiv ref={provided.innerRef} {...provided.droppableProps}>
           <React.Fragment>
@@ -33,7 +33,7 @@ function DayView(props) {
                   index={index}
                 />
               )}
-              {provided.placeholder}
+              {/* {provided.placeholder} */}
           </React.Fragment>
         </StyledDayViewDiv>
       )}
