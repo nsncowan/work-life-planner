@@ -10,11 +10,16 @@ import { DragDropContext } from "react-beautiful-dnd";
 import initialDayData from "./initial-day-data";
 import DayView from "./DayView";
 
-
+const StyledMainBodyDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  align-content: center;
+  justify-content: center;
+  width: 100%;
+  `;
 
 function TimeBlockControl() {
-
-
   // data state slices
   const [timeBlockList, setTimeBlockList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
@@ -136,11 +141,13 @@ function TimeBlockControl() {
   return (
     <React.Fragment>
       {topTaskBar}
-      <DragDropContext onDragEnd={onDragEnd}>
-        {currentState}
-        {otherCurrentState}
-      </DragDropContext>
-        <button onClick={handleClick}>{buttonOne}</button>
+      <StyledMainBodyDiv>
+        <DragDropContext onDragEnd={onDragEnd}>
+          {currentState}
+          {otherCurrentState}
+        </DragDropContext>
+          <button onClick={handleClick}>{buttonOne}</button>
+      </StyledMainBodyDiv>
       {/* {bottomTaskBar} */}
     </React.Fragment>
   );
