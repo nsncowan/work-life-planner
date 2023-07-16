@@ -77,9 +77,9 @@ const StyledTimeSlotDiv = styled.div`
 
 function DayView(props) {
   return (
-    <Droppable droppableId="timeTable" isCombineEnabled>
-      {provided => (
-        <StyledDayViewDiv ref={provided.innerRef} {...provided.droppableProps}>
+    // <Droppable droppableId="timeTable" isCombineEnabled>
+      // {provided => (
+        <StyledDayViewDiv /* ref={provided.innerRef} {...provided.droppableProps} */>
           <React.Fragment>
             <h2>Day View</h2>
               {props.timeTable.map((timeSlot, index) =>
@@ -91,17 +91,17 @@ function DayView(props) {
                   index={index}
                 />
               )}
-              {provided.placeholder}
+              {/* {provided.placeholder} */}
           </React.Fragment>
         </StyledDayViewDiv>
-      )}
-    </Droppable>
+      // )}
+    // </Droppable>
   );
 }
 
 DayView.propTypes = {
   time: PropTypes.string,
-  content: PropTypes.object
+  content: PropTypes.array
 };
 
 export default DayView;

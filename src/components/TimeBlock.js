@@ -25,7 +25,7 @@ const TimeBlockStyle = styled.div`
 
 function TimeBlock(props) {
   return (
-    <Draggable draggableId={props.id} index={props.index}>
+    <Draggable draggableId={props.id} index={props.index} key={props.id}>
       {provided => (
         <TimeBlockStyle
           ref={provided.innerRef}

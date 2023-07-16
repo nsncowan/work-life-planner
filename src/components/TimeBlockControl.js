@@ -9,6 +9,7 @@ import NewCategoryForm from "./NewCategoryForm";
 import { DragDropContext } from "react-beautiful-dnd";
 import initialDayData from "./initial-day-data";
 import DayView from "./DayView";
+import TimeSlot from "./TimeSlot";
 
 const StyledMainBodyDiv = styled.div`
   display: flex;
@@ -96,6 +97,10 @@ function TimeBlockControl() {
     return arrCopy;
   }
 
+  // const addContentToTimeSlot = (timeBlock) => {
+  //   const new
+  // }
+
   // const multiListMove = (sourceArr, destArr, sourceIndex, destIndex) => {
   //   const sourceArrCopy = [...sourceArr];
   //   const destArrCopy = [...destArr];
@@ -107,21 +112,40 @@ function TimeBlockControl() {
 
   const onDragEnd = (result) => {
     const { source, destination, draggableId } = result;
+    console.log(destination);
+    const finish = timeTable[destination.droppableId];
+
     if(!destination) return;
-    if(source.droppableId === 'timeTable' && destination.droppableId === 'timeTable') {
-      setTimeTable(reArrangeArr(timeTable, source.index, destination.index));
-    }
+    // if(source.droppableId === 'timeTable' && destination.droppableId === 'timeTable') {
+    //   setTimeTable(reArrangeArr(timeTable, source.index, destination.index));
+    // }
     else if (source.droppableId === 'timeBlockList' && destination.droppableId === 'timeBlockList') {
       setTimeBlockList(reArrangeArr(timeBlockList, source.index, destination.index));
     }
     else {
-      const sourceArrCopy = Array.from(timeBlockList);
-      sourceArrCopy.splice(source.index, 1);
-      const newSourceArr = sourceArrCopy;
 
-      const destArrCopy = Array.from(timeTable);
-      destArrCopy.splice(destination.index, 0, draggableId);
-      const newDestArr = destArrCopy;
+      const start = timeBlockList[source.droppableId];
+      const finish = timeTable[destination.droppableId];
+
+      
+
+
+      
+
+
+
+
+      // const sourceArrCopy = Array.from(timeBlockList);
+      // sourceArrCopy.splice(source.index, 1);
+      // const newSourceArr = sourceArrCopy;
+
+      
+      // const finishArr = Array.from(finish.content);
+      // finishArr.splice(destination.index, 0, draggableId);
+
+      // const destArrCopy = Array.from(timeTable);
+      // destArrCopy.splice(destination.index, 0, draggableId);
+      // const newDestArr = destArrCopy;
 
       setTimeBlockList(newSourceArr);
       setTimeTable(newDestArr);

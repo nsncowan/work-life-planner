@@ -4,7 +4,7 @@ const initialDayData = [
   // add date property
   {
     time: "12:00am",
-    content: [],
+    content: ["content test"],
     id: v4()
   },
   {
