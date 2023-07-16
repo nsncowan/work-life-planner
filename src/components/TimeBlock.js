@@ -9,8 +9,8 @@ const TimeBlockStyle = styled.div`
     align-items: center;
     align-content: space-around;
     justify-content: center;
-    width: 8.11rem;
-    padding: .77rem;
+    width: 9rem;
+    padding: .75rem;
     margin: .15rem;
     border-radius: 54px;
     text-align: center;
