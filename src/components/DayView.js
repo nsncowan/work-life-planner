@@ -33,7 +33,7 @@ function DayView(props) {
                   index={index}
                 />
               )}
-              {/* {provided.placeholder} */}
+              {provided.placeholder}
           </React.Fragment>
         </StyledDayViewDiv>
       )}

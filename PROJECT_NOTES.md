@@ -1,5 +1,6 @@
 ## brainstorm
 
+
 - convert timeslots to timeblocks with all data exept 'time' set to null.
 - the end goal is to make everything a 'timeblock', but with null fields depending on source and destination.
 
