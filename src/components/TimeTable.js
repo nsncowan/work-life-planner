@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import TimeSlot from "./TimeSlot";
 import { Droppable } from 'react-beautiful-dnd';
 
-const StyledDayViewDiv = styled.div`
+const StyledTimeTableDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -37,13 +37,13 @@ const StyledTimeSlotDiv = styled.div`
   background-color: #FFF5E4;
 `;
 
-// function DayView(props) {
+// function TimeTable(props) {
 //   return (
 //     <Droppable droppableId="timeTable" isCombineEnabled>
 //       {provided => (
-//         <StyledDayViewDiv ref={provided.innerRef} {...provided.droppableProps}>
+//         <StyledTimeTableDiv ref={provided.innerRef} {...provided.droppableProps}>
 //           <React.Fragment>
-//             <h2>Day View</h2>
+//             <h2>TimeTable</h2>
 //             <StyledTimeSlotDiv>12:00</StyledTimeSlotDiv>
 //             <StyledTimeSlotDiv>1:00</StyledTimeSlotDiv>
 //             <StyledTimeSlotDiv>2:00</StyledTimeSlotDiv>
@@ -69,41 +69,42 @@ const StyledTimeSlotDiv = styled.div`
 //             <StyledTimeSlotDiv>10:00</StyledTimeSlotDiv>
 //             <StyledTimeSlotDiv>11:00</StyledTimeSlotDiv>
 //           </React.Fragment>
-//         </StyledDayViewDiv>
+//         </StyledTimeTableDiv>
 //       )}
 //     </Droppable>
 //   );
 // }
 
-function DayView(props) {
+function TimeTable(props) {
   return (
-    // <Droppable droppableId="timeTable" isCombineEnabled>
-      // {provided => (
-        <StyledDayViewDiv /* ref={provided.innerRef} {...provided.droppableProps} */>
+    <Droppable droppableId="timeTable" isCombineEnabled>
+      {provided => (
+        <StyledTimeTableDiv ref={provided.innerRef} {...provided.droppableProps}>
           <React.Fragment>
-            <h2>Day View</h2>
+            <h2>TimeTable</h2>
               {props.timeTable.map((timeSlot, index) =>
                 <TimeSlot
                   time={timeSlot.time}
-                  content={timeSlot.content}
+                  name={timeSlot.name}
+                  category={timeSlot.category}
                   id={timeSlot.id}
                   key={timeSlot.id}
                   index={index}
                 />
               )}
-              {/* {provided.placeholder} */}
+              {provided.placeholder}
           </React.Fragment>
-        </StyledDayViewDiv>
-      // )}
-    // </Droppable>
+        </StyledTimeTableDiv>
+      )}
+    </Droppable>
   );
 }
 
-DayView.propTypes = {
+TimeTable.propTypes = {
   time: PropTypes.string,
   content: PropTypes.array
 };
 
-export default DayView;
+export default TimeTable;
 
 

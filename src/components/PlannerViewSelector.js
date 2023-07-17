@@ -10,7 +10,7 @@ function PlannerViewSelector() {
       // onChange={handleChange}
       aria-label="Platform">
       <ToggleButton value="web">TimeBlock List</ToggleButton>
-      <ToggleButton value="android">Day View</ToggleButton>
+      <ToggleButton value="android">TimeTable</ToggleButton>
       <ToggleButton value="ios">Month View</ToggleButton>
     </ToggleButtonGroup>
   )

@@ -8,7 +8,7 @@ import { collection, addDoc, onSnapshot } from "firebase/firestore";
 import NewCategoryForm from "./NewCategoryForm";
 import { DragDropContext } from "react-beautiful-dnd";
 import initialDayData from "./initial-day-data";
-import DayView from "./DayView";
+import TimeTable from "./TimeTable";
 import TimeSlot from "./TimeSlot";
 
 const StyledMainBodyDiv = styled.div`
@@ -78,7 +78,6 @@ function TimeBlockControl() {
     formVisible ? setFormVisible(false) : setFormVisible(true);
   }
 
-
   // adds timeBlock to db
   const addTimeBlock0 = async (timeBlock) => {
     const collectionReference = collection(db, "timeBlocks");
@@ -90,66 +89,51 @@ function TimeBlockControl() {
     await addDoc(collection(db, "categories"), category);
   }
 
-  const reArrangeArr = (arr, sourceIndex, destIndex) => {
-    const arrCopy = [...arr];
-    const [removed] = arrCopy.splice(sourceIndex, 1);
-    arrCopy.splice(destIndex, 0, removed);
-    return arrCopy;
-  }
+  const reorder = (list, startIndex, endIndex) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
 
-  // const addContentToTimeSlot = (timeBlock) => {
-  //   const new
-  // }
+    return result;
+  };
 
-  // const multiListMove = (sourceArr, destArr, sourceIndex, destIndex) => {
-  //   const sourceArrCopy = [...sourceArr];
-  //   const destArrCopy = [...destArr];
-  //   const [removed] = sourceArrCopy.splice(sourceIndex, 1);
-  //   destArrCopy.splice(destIndex, 0, removed);
-  //   setTimeBlockList(sourceArrCopy);
-  //   setTimeTable(destArrCopy);
-  // }
+  const move = (source, destination, droppableSource, droppableDestination) => {
+    const sourceClone = Array.from(source);
+    const destClone = Array.from(destination);
+    const [removed] = sourceClone.splice(droppableSource.index, 1);
+
+    destClone.splice(droppableDestination.index, 0, removed);
+
+    const result = {};
+    result[droppableSource.droppableId] = sourceClone;
+    result[droppableDestination.droppableId] = destClone;
+
+    return result;
+  };
 
   const onDragEnd = (result) => {
-    const { source, destination, draggableId } = result;
-    console.log(destination);
-    const finish = timeTable[destination.droppableId];
+    const { source, destination } = result;
 
     if(!destination) return;
-    // if(source.droppableId === 'timeTable' && destination.droppableId === 'timeTable') {
-    //   setTimeTable(reArrangeArr(timeTable, source.index, destination.index));
-    // }
+    
+    if(source.droppableId === 'timeTable' && destination.droppableId === 'timeTable') {
+      setTimeTable(reorder(timeTable, source.index, destination.index));
+    }
     else if (source.droppableId === 'timeBlockList' && destination.droppableId === 'timeBlockList') {
-      setTimeBlockList(reArrangeArr(timeBlockList, source.index, destination.index));
+      setTimeBlockList(reorder(timeBlockList, source.index, destination.index));
     }
     else {
-
-      const start = timeBlockList[source.droppableId];
-      const finish = timeTable[destination.droppableId];
-
-      
-
-
-      
-
-
-
-
-      // const sourceArrCopy = Array.from(timeBlockList);
-      // sourceArrCopy.splice(source.index, 1);
-      // const newSourceArr = sourceArrCopy;
-
-      
-      // const finishArr = Array.from(finish.content);
-      // finishArr.splice(destination.index, 0, draggableId);
-
-      // const destArrCopy = Array.from(timeTable);
-      // destArrCopy.splice(destination.index, 0, draggableId);
-      // const newDestArr = destArrCopy;
-
-      setTimeBlockList(newSourceArr);
-      setTimeTable(newDestArr);
-    }
+      const result = move(
+        timeBlockList,
+        timeTable,
+        source,
+        destination
+      );
+      setTimeBlockList(result.timeBlockList)
+      setTimeTable(result.timeTable)
+    };
+    console.log(timeBlockList);
+    console.log(timeTable);
   }
   
   
@@ -173,7 +157,7 @@ function TimeBlockControl() {
   
   else {
     currentState = <TimeBlockList timeBlockList={timeBlockList}/>;
-    otherCurrentState = <DayView timeTable={timeTable} />
+    otherCurrentState = <TimeTable timeTable={timeTable} />
     buttonOne = 'go to timeblock form';
   }
   
