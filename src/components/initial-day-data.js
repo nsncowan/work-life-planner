@@ -6,6 +6,7 @@ const initialDayData = [
     time: "6:00am",
     name: null,
     category: null,
+    content: [],
     id: v4(),
   },
   {

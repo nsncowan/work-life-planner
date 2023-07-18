@@ -44,18 +44,21 @@ function TimeTable(props) {
         <StyledTimeTableDiv 
           ref={provided.innerRef} 
           {...provided.droppableProps}
-          isDraggingOver={snapshot.isDraggingOver}>
+          style={{
+            background: snapshot.isDraggingOver ? 'lightblue' : 'lightgrey'
+          }}>
           <React.Fragment>
             <h2>TimeTable</h2>
               {props.timeTable.map((timeSlot, index) =>
-                <TimeSlot
-                  time={timeSlot.time}
-                  name={timeSlot.name}
-                  category={timeSlot.category}
-                  id={timeSlot.id}
-                  key={timeSlot.id}
-                  index={index}
-                />
+                <StyledTimeSlotDiv>
+                  <TimeSlot
+                    time={timeSlot.time}
+                    content={timeSlot.content}
+                    id={timeSlot.id}
+                    key={timeSlot.id}
+                    index={index}
+                  />
+                </StyledTimeSlotDiv>
               )}
               {provided.placeholder}
           </React.Fragment>
