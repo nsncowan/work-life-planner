@@ -149,7 +149,7 @@ function TimeBlockControl() {
   };
 
   const onDragEnd = (result) => {
-    const { source, destination, combine } = result;
+    const { source, destination, draggableId, combine } = result;
 
     if(!destination) return;
     

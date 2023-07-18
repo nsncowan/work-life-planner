@@ -22,9 +22,7 @@ function App(){
     <div style={AppStyles}>
       <React.Fragment>
         <Header />
-        <DragDropContext onDragEnd={e => console.log(e)}>
-          <TimeBlockControl />
-        </DragDropContext>
+        <TimeBlockControl />
       </React.Fragment>
     </div>
   );

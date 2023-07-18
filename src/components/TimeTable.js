@@ -78,8 +78,11 @@ const StyledTimeSlotDiv = styled.div`
 function TimeTable(props) {
   return (
     <Droppable droppableId="timeTable" isCombineEnabled>
-      {provided => (
-        <StyledTimeTableDiv ref={provided.innerRef} {...provided.droppableProps}>
+      {(provided, snapshot) => (
+        <StyledTimeTableDiv 
+          ref={provided.innerRef} 
+          {...provided.droppableProps}
+          draggingOver={snapshot.draggingOver}>
           <React.Fragment>
             <h2>TimeTable</h2>
               {props.timeTable.map((timeSlot, index) =>
