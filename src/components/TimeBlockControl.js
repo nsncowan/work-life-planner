@@ -6,7 +6,6 @@ import PlannerViewSelector from "./PlannerViewSelector";
 import { db } from "../firebase";
 import { collection, addDoc, onSnapshot } from "firebase/firestore";
 import NewCategoryForm from "./NewCategoryForm";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import initialDayData from "./initial-day-data";
 import TimeTable from "./TimeTable";
 import TimeSlot from "./TimeSlot";
@@ -89,67 +88,67 @@ function TimeBlockControl() {
     await addDoc(collection(db, "categories"), category);
   }
 
-  const reorder = (list, startIndex, endIndex) => {
-    const result = Array.from(list);
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
+  // const reorder = (list, startIndex, endIndex) => {
+  //   const result = Array.from(list);
+  //   const [removed] = result.splice(startIndex, 1);
+  //   result.splice(endIndex, 0, removed);
 
-    return result;
-  };
+  //   return result;
+  // };
 
-  const move = (source, destination, droppableSource, droppableDestination) => {
-    const sourceClone = Array.from(source);
-    const destClone = Array.from(destination);
-    const [removed] = sourceClone.splice(droppableSource.index, 1);
+  // const move = (source, destination, droppableSource, droppableDestination) => {
+  //   const sourceClone = Array.from(source);
+  //   const destClone = Array.from(destination);
+  //   const [removed] = sourceClone.splice(droppableSource.index, 1);
 
-    destClone.splice(droppableDestination.index, 0, removed);
+  //   destClone.splice(droppableDestination.index, 0, removed);
 
-    const result = {};
-    result[droppableSource.droppableId] = sourceClone;
-    result[droppableDestination.droppableId] = destClone;
+  //   const result = {};
+  //   result[droppableSource.droppableId] = sourceClone;
+  //   result[droppableDestination.droppableId] = destClone;
 
-    return result;
-  };
+  //   return result;
+  // };
 
   const combine = (origin, destiny) => ({
     id: destiny.id,
-    time: `${destiny.time}`,
+    time: `${destiny.time} , ${origin.name}`,
     name: `${origin.name}`,
     category: `${origin.category}`,
   });
   
-  const handleCombine = (source, destination, droppableSource, droppableDestination) => {
-      const sourceClone = Array.from(source);
-      const destClone = Array.from(destination);
-      const [removed] = sourceClone.splice(droppableSource.index, 1);
-      const combinedItem = combine(droppableSource.index, droppableDestination.index)
-      destClone.splice(droppableDestination.index, 0, combinedItem);
-  
-      const result = {};
-      result[droppableSource.droppableId] = sourceClone;
-      result[droppableDestination.droppableId] = destClone;
-  
-      return result;
-    };
-
-  const handleCombine2 = (source, destination, originPos, destinyId) => {
-    const sourceClone = Array.from(source);
-    const destClone = Array.from(destination);
-    const origin = sourceClone[originPos];
-    const destinyPos = destClone.findIndex(({ id }) => id === destinyId);
-    const destiny = destClone[destinyPos];
+  const handleCombine = (originPos, destinyId) => {
+    const timeTableClone = Array.from(timeTable);
+    const origin = timeTableClone[originPos];
+    const destinyPos = timeTableClone.findIndex(({ id }) => id === destinyId);
+    const destiny = timeTableClone[destinyPos];
     const combinedItem = combine(origin, destiny);
-    destClone.splice(destinyPos, 1, combinedItem);
-    sourceClone.splice(originPos, 1);
-    console.log(sourceClone);
-    console.log(destClone);
 
-    setTimeBlockList(sourceClone);
-    setTimeTable(destClone);
+    timeTableClone.splice(destinyPos, 1, combinedItem);
+    timeTableClone.splice(originPos, 1);
+    console.log(timeTableClone);
+
+    setTimeTable(timeTableClone);
   };
 
-  const onDragEnd = (result) => {
-    const { source, destination, draggableId, combine } = result;
+  // const handleCombine2 = (source, destination, originPos, destinyId) => {
+  //   const sourceClone = Array.from(source);
+  //   const destClone = Array.from(destination);
+  //   const origin = sourceClone[originPos];
+  //   const destinyPos = destClone.findIndex(({ id }) => id === destinyId);
+  //   const destiny = destClone[destinyPos];
+  //   const combinedItem = combine(origin, destiny);
+  //   destClone.splice(destinyPos, 1, combinedItem);
+  //   sourceClone.splice(originPos, 1);
+  //   console.log(sourceClone);
+  //   console.log(destClone);
+
+  //   setTimeBlockList(sourceClone);
+  //   setTimeTable(destClone);
+  // };
+
+  /* const onDragEnd = (result) => {
+    const { source, destination, combine } = result;
 
     if(!destination) return;
     
@@ -180,7 +179,7 @@ function TimeBlockControl() {
     console.log(timeBlockList);
     console.log(timeTable);
     console.log(result);
-  }
+  } */
   
   
 
@@ -203,7 +202,7 @@ function TimeBlockControl() {
   
   else {
     currentState = <TimeBlockList timeBlockList={timeBlockList}/>;
-    otherCurrentState = <TimeTable timeTable={timeTable} />
+    otherCurrentState = <TimeTable timeTable={timeTable} handleCombine={handleCombine} />
     buttonOne = 'go to timeblock form';
   }
   
@@ -211,10 +210,10 @@ function TimeBlockControl() {
     <React.Fragment>
       {topTaskBar}
       <StyledMainBodyDiv>
-        <DragDropContext onDragEnd={onDragEnd}>
+        {/* <DragDropContext onDragEnd={onDragEnd}> */}
           {currentState}
           {otherCurrentState}
-        </DragDropContext>
+        {/* </DragDropContext> */}
           <button onClick={handleClick}>{buttonOne}</button>
       </StyledMainBodyDiv>
       {/* {bottomTaskBar} */}

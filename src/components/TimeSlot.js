@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styled from 'styled-components';
 import { Draggable, Droppable } from "react-beautiful-dnd";
@@ -37,8 +37,14 @@ const StyledTimeSlotDiv = styled.div`
 // }
 
 function TimeSlot(props) {
+  const [isDraggable, setIsDraggable] = useState(true);
+
   return (
-    <Draggable draggableId={props.id} index={props.index} key={props.id}>
+    <Draggable 
+    draggableId={props.id} 
+    index={props.index} 
+    key={props.id} 
+    isDraggable={isDraggable}>
       {(provided, snapshot) => (
         <StyledTimeSlotDiv 
           ref={provided.innerRef}
