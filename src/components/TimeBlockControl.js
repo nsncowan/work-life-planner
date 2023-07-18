@@ -107,46 +107,56 @@ function TimeBlockControl() {
     const result = {};
     result[droppableSource.droppableId] = sourceClone;
     result[droppableDestination.droppableId] = destClone;
-
+    console.log('REMOVED', removed);
     return result;
   };
 
-  const combine = (origin, destiny) => ({
-    id: destiny.id,
-    time: `${destiny.time}`,
-    name: `${origin.name}`,
-    category: `${origin.category}`,
-  });
+  // const combine = (origin, destiny) => ({
+  //   id: destiny.id,
+  //   time: `${destiny.time}, ${origin.time}`,
+  //   name: `${origin.name}`,
+  //   category: `${origin.category}`,
+  // });
   
-  const handleCombine = (source, destination, droppableSource, droppableDestination) => {
-      const sourceClone = Array.from(source);
-      const destClone = Array.from(destination);
-      const [removed] = sourceClone.splice(droppableSource.index, 1);
-      const combinedItem = combine(droppableSource.index, droppableDestination.index)
-      destClone.splice(droppableDestination.index, 0, combinedItem);
-  
-      const result = {};
-      result[droppableSource.droppableId] = sourceClone;
-      result[droppableDestination.droppableId] = destClone;
-  
-      return result;
-    };
+  // const handleDragUpdate = ({ combine }) => {
+  //   setDragOverId(combine ? combine.draggableId : null);
+  // };
 
-  const handleCombine2 = (source, destination, originPos, destinyId) => {
-    const sourceClone = Array.from(source);
-    const destClone = Array.from(destination);
-    const origin = sourceClone[originPos];
-    const destinyPos = destClone.findIndex(({ id }) => id === destinyId);
-    const destiny = destClone[destinyPos];
-    const combinedItem = combine(origin, destiny);
-    destClone.splice(destinyPos, 1, combinedItem);
-    sourceClone.splice(originPos, 1);
-    console.log(sourceClone);
-    console.log(destClone);
+  // const checkIsDraggable = (snapshot) => {
+  //   const { isDragging, draggingOver } = snapshot;
 
-    setTimeBlockList(sourceClone);
-    setTimeTable(destClone);
-  };
+  //   if (isDragging && !draggingOver) {
+  //     setIsDraggable(false);
+  //   }
+  // };
+
+  // const handleCombine = (source, destination, droppableSource, droppableDestination) => {
+  //     const sourceClone = Array.from(source);
+  //     const destClone = Array.from(destination);
+  //     const [removed] = sourceClone.splice(droppableSource.index, 1);
+  //     const combinedItem = combine(droppableSource.index, droppableDestination.index)
+  //     destClone.splice(droppableDestination.index, 0, combinedItem);
+  
+  //     const result = {};
+  //     result[droppableSource.droppableId] = sourceClone;
+  //     result[droppableDestination.droppableId] = destClone;
+  
+  //     return result;
+  //   };
+
+  // const testCombineOneList = (list, originPos, destinyId) => {
+  //   const newList = Array.from(list);
+  //   const origin = newList[originPos];
+  //   const destinyPos = newList.findIndex(({ id }) => id === destinyId);
+  //   const destiny = newList[destinyPos];
+  //   const combinedItem = combine(origin, destiny);
+
+  //   newList.splice(destinyPos, 1, combinedItem);
+  //   newList.splice(originPos, 1);
+  //   console.log(newList);
+
+  //   return newList;
+  // };
 
   const onDragEnd = (result) => {
     const { source, destination, draggableId, combine } = result;
@@ -159,15 +169,11 @@ function TimeBlockControl() {
     else if (source.droppableId === 'timeBlockList' && destination.droppableId === 'timeBlockList') {
       setTimeBlockList(reorder(timeBlockList, source.index, destination.index));
     }
-    else if(combine) {
-      handleCombine2(
-        timeBlockList,
-        timeTable,
-        source,
-        destination
-      );
-    }
+    // else if(combine) {
+    //   setTimeTable(testCombineOneList(timeTable, source.index, draggableId))
+    // }
     else {
+
       const result = move(
         timeBlockList,
         timeTable,
@@ -211,9 +217,11 @@ function TimeBlockControl() {
     <React.Fragment>
       {topTaskBar}
       <StyledMainBodyDiv>
-        <DragDropContext onDragEnd={onDragEnd}>
-          {currentState}
-          {otherCurrentState}
+        <DragDropContext 
+          onDragEnd={onDragEnd}
+          /* handleDragUpdate={handleDragUpdate} */>
+            {currentState}
+            {otherCurrentState}
         </DragDropContext>
           <button onClick={handleClick}>{buttonOne}</button>
       </StyledMainBodyDiv>
