@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
+import { v4 } from 'uuid';
 import NewTimeBlockForm from "./NewTImeBlockForm";
 import TimeBlockList from "./TimeBlockList";
 import PlannerViewSelector from "./PlannerViewSelector";
@@ -21,23 +22,20 @@ const StyledMainBodyDiv = styled.div`
   `;
 
 function TimeBlockControl() {
-  // data state slices
   const [timeBlockList, setTimeBlockList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
   const [timeTable, setTimeTable] = useState(initialDayData);
   const [editing, setEditing] = useState(false);
   
-  // display state slices
   const [viewSelector, setViewSelector] = useState('timeBlockList');
   const [displayedDate, setDisplayedDate] = useState(/* default date obj is today's date */)
   const [formVisible, setFormVisible] = useState(false);
 
-  // display the list of timeBlocks
   useEffect(() => {
     const unSubscribeTimeBlocks = onSnapshot(
       collection(db, "timeBlocks"),
       (collectionSnapshot) => {
-        const timeBlocks = [];
+        const timeBlocks = initialTimeBlocks;
         collectionSnapshot.forEach((doc) => {
           timeBlocks.push({
             name: doc.data().name,
@@ -73,18 +71,15 @@ function TimeBlockControl() {
     return initialize;
   }, []);
 
-  // handles button click to toggle between TimeBlockList and NewTimeBlockForm
   const handleClick = () => {
     formVisible ? setFormVisible(false) : setFormVisible(true);
   }
 
-  // adds timeBlock to db
   const addTimeBlock0 = async (timeBlock) => {
     const collectionReference = collection(db, "timeBlocks");
     await addDoc(collectionReference, timeBlock);
   }
 
-  // adds category to db
   const addCategory0 = async (category) => {
     await addDoc(collection(db, "categories"), category);
   }
@@ -111,41 +106,14 @@ function TimeBlockControl() {
     return result;
   };
 
-  const combine = (origin, destiny) => ({
-    id: destiny.id,
-    time: `${destiny.time}`,
-    name: `${origin.name}`,
-    category: `${origin.category}`,
-  });
-  
-  const handleCombine = (source, destination, droppableSource, droppableDestination) => {
-      const sourceClone = Array.from(source);
-      const destClone = Array.from(destination);
-      const [removed] = sourceClone.splice(droppableSource.index, 1);
-      const combinedItem = combine(droppableSource.index, droppableDestination.index)
-      destClone.splice(droppableDestination.index, 0, combinedItem);
-  
-      const result = {};
-      result[droppableSource.droppableId] = sourceClone;
-      result[droppableDestination.droppableId] = destClone;
-  
-      return result;
-    };
-
-  const handleCombine2 = (source, destination, originPos, destinyId) => {
+  const copy = (source, destination, droppableSource, droppableDestination) => {
     const sourceClone = Array.from(source);
     const destClone = Array.from(destination);
-    const origin = sourceClone[originPos];
-    const destinyPos = destClone.findIndex(({ id }) => id === destinyId);
-    const destiny = destClone[destinyPos];
-    const combinedItem = combine(origin, destiny);
-    destClone.splice(destinyPos, 1, combinedItem);
-    sourceClone.splice(originPos, 1);
-    console.log(sourceClone);
-    console.log(destClone);
+    const copyItem = sourceClone[droppableSource.index];
 
-    setTimeBlockList(sourceClone);
-    setTimeTable(destClone);
+    destClone.splice(droppableDestination.index, 0, { ...copyItem, id: v4() });
+
+    return destClone;
   };
 
   const onDragEnd = (result) => {
@@ -159,16 +127,8 @@ function TimeBlockControl() {
     else if (source.droppableId === 'timeBlockList' && destination.droppableId === 'timeBlockList') {
       setTimeBlockList(reorder(timeBlockList, source.index, destination.index));
     }
-    else if(combine) {
-      handleCombine2(
-        timeBlockList,
-        timeTable,
-        source,
-        destination
-      );
-    }
     else {
-      const result = move(
+      const result = move /* copy */(
         timeBlockList,
         timeTable,
         source,
@@ -182,8 +142,6 @@ function TimeBlockControl() {
     console.log(result);
   }
   
-  
-
   let currentState = null;
   let otherCurrentState = null;
   let buttonOne = null;
