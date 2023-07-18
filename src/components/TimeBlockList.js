@@ -19,7 +19,7 @@ const StyledTimeBlockDiv = styled.div`
 
 function TimeBlockList(props) {
   return (
-    <Droppable droppableId="timeBlockList">
+    <Droppable droppableId="timeBlockList" isCombineEnabled>
       {provided => (
         <StyledTimeBlockDiv ref={provided.innerRef} {...provided.droppableProps}>
           <React.Fragment>

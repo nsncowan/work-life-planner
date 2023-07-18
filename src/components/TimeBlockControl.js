@@ -6,7 +6,7 @@ import PlannerViewSelector from "./PlannerViewSelector";
 import { db } from "../firebase";
 import { collection, addDoc, onSnapshot } from "firebase/firestore";
 import NewCategoryForm from "./NewCategoryForm";
-import { DragDropContext } from "react-beautiful-dnd";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import initialDayData from "./initial-day-data";
 import TimeTable from "./TimeTable";
 import TimeSlot from "./TimeSlot";
@@ -111,8 +111,45 @@ function TimeBlockControl() {
     return result;
   };
 
+  const combine = (origin, destiny) => ({
+    id: destiny.id,
+    time: `${destiny.time}`,
+    name: `${origin.name}`,
+    category: `${origin.category}`,
+  });
+  
+  const handleCombine = (source, destination, droppableSource, droppableDestination) => {
+      const sourceClone = Array.from(source);
+      const destClone = Array.from(destination);
+      const [removed] = sourceClone.splice(droppableSource.index, 1);
+      const combinedItem = combine(droppableSource.index, droppableDestination.index)
+      destClone.splice(droppableDestination.index, 0, combinedItem);
+  
+      const result = {};
+      result[droppableSource.droppableId] = sourceClone;
+      result[droppableDestination.droppableId] = destClone;
+  
+      return result;
+    };
+
+  const handleCombine2 = (source, destination, originPos, destinyId) => {
+    const sourceClone = Array.from(source);
+    const destClone = Array.from(destination);
+    const origin = sourceClone[originPos];
+    const destinyPos = destClone.findIndex(({ id }) => id === destinyId);
+    const destiny = destClone[destinyPos];
+    const combinedItem = combine(origin, destiny);
+    destClone.splice(destinyPos, 1, combinedItem);
+    sourceClone.splice(originPos, 1);
+    console.log(sourceClone);
+    console.log(destClone);
+
+    setTimeBlockList(sourceClone);
+    setTimeTable(destClone);
+  };
+
   const onDragEnd = (result) => {
-    const { source, destination } = result;
+    const { source, destination, combine } = result;
 
     if(!destination) return;
     
@@ -121,6 +158,14 @@ function TimeBlockControl() {
     }
     else if (source.droppableId === 'timeBlockList' && destination.droppableId === 'timeBlockList') {
       setTimeBlockList(reorder(timeBlockList, source.index, destination.index));
+    }
+    else if(combine) {
+      handleCombine2(
+        timeBlockList,
+        timeTable,
+        source,
+        destination
+      );
     }
     else {
       const result = move(
@@ -134,6 +179,7 @@ function TimeBlockControl() {
     };
     console.log(timeBlockList);
     console.log(timeTable);
+    console.log(result);
   }
   
   

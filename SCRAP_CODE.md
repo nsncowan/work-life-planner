@@ -21,8 +21,8 @@ const handleCombine = (source, destination, droppableSource, droppableDestinatio
     const sourceClone = Array.from(source);
     const destClone = Array.from(destination);
     const [removed] = sourceClone.splice(droppableSource.index, 1);
-
-    destClone.splice(droppableDestination.index, 0, removed);
+    const combinedItem = combine(droppableSource.index, droppableDestination.index)
+    destClone.splice(droppableDestination.index, 0, combinedItem);
 
     const result = {};
     result[droppableSource.droppableId] = sourceClone;
@@ -31,5 +31,21 @@ const handleCombine = (source, destination, droppableSource, droppableDestinatio
     return result;
   };
 
+
+handleCombine = (originPos, destinyId) => {
+    const sourceClone = Array.from(source);
+    const destClone = Array.from(destination);
+    const origin = sourceClone[originPos];
+    const destinyPos = destClone.findIndex(({ id }) => id === destinyId);
+    const destiny = destClone[destinyPos];
+    const combinedItem = combine(origin, destiny);
+    destClone.splice(destinyPos, 1, combinedItem);
+    sourceClone.splice(originPos, 1);
+    console.log(sourceClone);
+    console.log(destClone);
+
+    setTimeBlockList(sourceClone);
+    setTimeTable(destClone);
+  };
 
 ```
