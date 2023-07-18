@@ -54,14 +54,15 @@ function TimeTable(props) {
                   <TimeSlot
                     time={timeSlot.time}
                     content={timeSlot.content}
+                    name={timeSlot.name}
                     id={timeSlot.id}
                     key={timeSlot.id}
                     index={index}
                   />
                 </StyledTimeSlotDiv>
               )}
-              {provided.placeholder}
           </React.Fragment>
+              {provided.placeholder}
         </StyledTimeTableDiv>
       )}
     </Droppable>
