@@ -24,12 +24,12 @@ function TimeBlockControl() {
   const [timeBlockList, setTimeBlockList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
   const [timeTable, setTimeTable] = useState(initialDayData);
-  const [editing, setEditing] = useState(false);
-  const [viewSelector, setViewSelector] = useState('timeBlockList');
-  const [displayedDate, setDisplayedDate] = useState(/* default date obj is today's date */)
+  // const [editing, setEditing] = useState(false);
+  // const [viewSelector, setViewSelector] = useState('timeBlockList');
+  // const [displayedDate, setDisplayedDate] = useState(/* default date obj is today's date */)
   const [formVisible, setFormVisible] = useState(false);
-  const [dragOverId, setDragOverId] = useState(null);
-  const [isDraggable, setIsDraggable] = useState(true);
+  // const [dragOverId, setDragOverId] = useState(null);
+  // const [isDraggable, setIsDraggable] = useState(true);
 
   useEffect(() => {
     const unSubscribeTimeBlocks = onSnapshot(
@@ -102,56 +102,56 @@ function TimeBlockControl() {
     const result = {};
     result[droppableSource.droppableId] = sourceClone;
     result[droppableDestination.droppableId] = destClone;
-
+    console.log('REMOVED', removed);
     return result;
   };
 
-  const combine = (origin, destiny) => ({
-    id: destiny.id,
-    time: `${destiny.time}, ${origin.time}`,
-    name: `${origin.name}`,
-    category: `${origin.category}`,
-  });
+  // const combine = (origin, destiny) => ({
+  //   id: destiny.id,
+  //   time: `${destiny.time}, ${origin.time}`,
+  //   name: `${origin.name}`,
+  //   category: `${origin.category}`,
+  // });
   
-  const handleDragUpdate = ({ combine }) => {
-    setDragOverId(combine ? combine.draggableId : null);
-  };
+  // const handleDragUpdate = ({ combine }) => {
+  //   setDragOverId(combine ? combine.draggableId : null);
+  // };
 
-  const checkIsDraggable = (snapshot) => {
-    const { isDragging, draggingOver } = snapshot;
+  // const checkIsDraggable = (snapshot) => {
+  //   const { isDragging, draggingOver } = snapshot;
 
-    if (isDragging && !draggingOver) {
-      setIsDraggable(false);
-    }
-  };
+  //   if (isDragging && !draggingOver) {
+  //     setIsDraggable(false);
+  //   }
+  // };
 
-  const handleCombine = (source, destination, droppableSource, droppableDestination) => {
-      const sourceClone = Array.from(source);
-      const destClone = Array.from(destination);
-      const [removed] = sourceClone.splice(droppableSource.index, 1);
-      const combinedItem = combine(droppableSource.index, droppableDestination.index)
-      destClone.splice(droppableDestination.index, 0, combinedItem);
+  // const handleCombine = (source, destination, droppableSource, droppableDestination) => {
+  //     const sourceClone = Array.from(source);
+  //     const destClone = Array.from(destination);
+  //     const [removed] = sourceClone.splice(droppableSource.index, 1);
+  //     const combinedItem = combine(droppableSource.index, droppableDestination.index)
+  //     destClone.splice(droppableDestination.index, 0, combinedItem);
   
-      const result = {};
-      result[droppableSource.droppableId] = sourceClone;
-      result[droppableDestination.droppableId] = destClone;
+  //     const result = {};
+  //     result[droppableSource.droppableId] = sourceClone;
+  //     result[droppableDestination.droppableId] = destClone;
   
-      return result;
-    };
+  //     return result;
+  //   };
 
-  const testCombineOneList = (list, originPos, destinyId) => {
-    const newList = Array.from(list);
-    const origin = newList[originPos];
-    const destinyPos = newList.findIndex(({ id }) => id === destinyId);
-    const destiny = newList[destinyPos];
-    const combinedItem = combine(origin, destiny);
+  // const testCombineOneList = (list, originPos, destinyId) => {
+  //   const newList = Array.from(list);
+  //   const origin = newList[originPos];
+  //   const destinyPos = newList.findIndex(({ id }) => id === destinyId);
+  //   const destiny = newList[destinyPos];
+  //   const combinedItem = combine(origin, destiny);
 
-    newList.splice(destinyPos, 1, combinedItem);
-    newList.splice(originPos, 1);
-    console.log(newList);
+  //   newList.splice(destinyPos, 1, combinedItem);
+  //   newList.splice(originPos, 1);
+  //   console.log(newList);
 
-    return newList;
-  };
+  //   return newList;
+  // };
 
   const onDragEnd = (result) => {
     const { source, destination, draggableId, combine } = result;
@@ -164,10 +164,11 @@ function TimeBlockControl() {
     else if (source.droppableId === 'timeBlockList' && destination.droppableId === 'timeBlockList') {
       setTimeBlockList(reorder(timeBlockList, source.index, destination.index));
     }
-    else if(combine) {
-      setTimeTable(testCombineOneList(timeTable, source.index, draggableId))
-    }
+    // else if(combine) {
+    //   setTimeTable(testCombineOneList(timeTable, source.index, draggableId))
+    // }
     else {
+
       const result = move(
         timeBlockList,
         timeTable,
@@ -213,7 +214,7 @@ function TimeBlockControl() {
       <StyledMainBodyDiv>
         <DragDropContext 
           onDragEnd={onDragEnd}
-          handleDragUpdate={handleDragUpdate}>
+          /* handleDragUpdate={handleDragUpdate} */>
             {currentState}
             {otherCurrentState}
         </DragDropContext>

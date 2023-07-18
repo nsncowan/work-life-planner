@@ -44,7 +44,7 @@ function TimeSlot(props) {
 
 TimeSlot.propTypes = {
   time: PropTypes.string,
-  content: PropTypes.array
+  // content: PropTypes.array
 };
 
 export default TimeSlot;

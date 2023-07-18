@@ -30,8 +30,7 @@ function TimeBlock(props) {
         <TimeBlockStyle
           ref={provided.innerRef}
           {...provided.draggableProps}
-          {...provided.dragHandleProps}
-          isDragging={snapshot.isDragging}>
+          {...provided.dragHandleProps}>
             <h4>{props.name}</h4>
             <h6>{props.category}</h6>
         </TimeBlockStyle>

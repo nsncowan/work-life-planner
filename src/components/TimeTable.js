@@ -85,7 +85,7 @@ function TimeTable(props) {
                       }}>
                     <TimeSlot
                       time={timeSlot.time}
-                      content={timeSlot.content}
+                      // content={timeSlot.content}
                       name={timeSlot.name}
                       id={timeSlot.id}
                       key={timeSlot.id}
@@ -103,7 +103,7 @@ function TimeTable(props) {
 
 TimeTable.propTypes = {
   time: PropTypes.string,
-  content: PropTypes.array
+  // content: PropTypes.array
 };
 
 export default TimeTable;
