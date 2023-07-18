@@ -42,25 +42,7 @@ function TimeSlot(props) {
   );
 }
 
-/* 
-function TimeSlot(props) {
-  return (
-    <Draggable draggableId={props.id} index={props.index} key={props.id}>
-      {(provided, snapshot) => (
-        <div
-          ref={provided.innerRef} 
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}>
-            <h5>{props.time}</h5>
-            <h6>{props.name}</h6>
-            <h6>{props.category}</h6>
-        </div>
-      )}
-    </Draggable>     
-  );
-}
 
-*/
 
 TimeSlot.propTypes = {
   time: PropTypes.string,

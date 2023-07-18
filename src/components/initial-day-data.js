@@ -1,5 +1,33 @@
 import { v4 } from 'uuid';
 
+const initialTimeBlocks = [
+  {
+    name: 'family time',
+    category: 'family',
+    id: v4()
+  },
+  {
+    name: 'yoga',
+    category: 'health',
+    id: v4()
+  },
+  {
+    name: 'study',
+    category: 'education',
+    id: v4()
+  },
+  {
+    name: 'relax time',
+    category: 'self care',
+    id: v4()
+  },
+  {
+    name: 'wash dishes',
+    category: 'chores',
+    id: v4()
+  },
+];
+
 const initialDayData = [
   // add date property
   {
