@@ -48,7 +48,7 @@ function TimeTable(props) {
   // const { dragOverId, isDraggable } = this.state;
 
   const handleDragUpdate = ({ combine }) => {
-    setDragOverId(combine ? combine?.draggableId : combine)
+    setDragOverId(combine ? combine?.draggableId : null)
   };
 
   const handleDragEnd = ({ source, combine }) => {
