@@ -48,7 +48,7 @@ function TimeSlot(props) {
             <h5>{props.time}</h5>
             <h6>{props.name}</h6>
             <h6>{props.category}</h6>
-          {/* {provided.placeholder} */}
+          {provided.placeholder}
         </StyledTimeSlotDiv>
       )}
     </Draggable>
