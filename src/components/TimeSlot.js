@@ -23,24 +23,11 @@ const StyledTimeSlotDiv = styled.div`
     background-color: #FFF5E4;
   `;
 
-// function TimeSlot(props) {
-//   return (
-//     <Draggable draggableId={props.id} index={props.index}>
-//       {provided => (
-//         <StyledTimeSlotDiv ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-//           <h5>{props.time}</h5>
-//           <h6>{props.content}</h6>
-//         </StyledTimeSlotDiv>
-//       )}
-//     </Draggable>
-//   );
-// }
-
 function TimeSlot(props) {
   return (
     <Draggable draggableId={props.id} index={props.index} key={props.id}>
       {(provided, snapshot) => (
-        <StyledTimeSlotDiv 
+        <div 
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
@@ -49,11 +36,31 @@ function TimeSlot(props) {
             <h6>{props.name}</h6>
             <h6>{props.category}</h6>
           {/* {provided.placeholder} */}
-        </StyledTimeSlotDiv>
+        </div>
       )}
     </Draggable>
   );
 }
+
+/* 
+function TimeSlot(props) {
+  return (
+    <Draggable draggableId={props.id} index={props.index} key={props.id}>
+      {(provided, snapshot) => (
+        <div
+          ref={provided.innerRef} 
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}>
+            <h5>{props.time}</h5>
+            <h6>{props.name}</h6>
+            <h6>{props.category}</h6>
+        </div>
+      )}
+    </Draggable>     
+  );
+}
+
+*/
 
 TimeSlot.propTypes = {
   time: PropTypes.string,
