@@ -68,4 +68,5 @@ const initialTimeBlocks = [
   },
 ];
 
-export default initialDayData;
+// export default initialDayData;
+export { initialDayData, initialTimeBlocks };
