@@ -37,35 +37,67 @@ const StyledTimeSlotDiv = styled.div`
   background-color: #FFF5E4;
 `;
 
+// function TimeTable(props) {
+//   return (
+//     <Droppable droppableId="timeTable" isCombineEnabled>
+//       {(provided, snapshot) => (
+//         <StyledTimeTableDiv 
+//           ref={provided.innerRef} 
+//           {...provided.droppableProps}
+//           style={{
+//             background: snapshot.isDraggingOver ? 'lightblue' : 'lightgrey'
+//           }}>
+//           <React.Fragment>
+//             <h2>TimeTable</h2>
+//               {props.timeTable.map((timeSlot, index) =>
+//                 <StyledTimeSlotDiv>
+//                   <TimeSlot
+//                     time={timeSlot.time}
+//                     content={timeSlot.content}
+//                     name={timeSlot.name}
+//                     id={timeSlot.id}
+//                     key={timeSlot.id}
+//                     index={index}
+//                   />
+//                 </StyledTimeSlotDiv>
+//               )}
+//           </React.Fragment>
+//               {provided.placeholder}
+//         </StyledTimeTableDiv>
+//       )}
+//     </Droppable>
+//   );
+// }
+
 function TimeTable(props) {
   return (
-    <Droppable droppableId="timeTable" isCombineEnabled>
-      {(provided, snapshot) => (
-        <StyledTimeTableDiv 
-          ref={provided.innerRef} 
-          {...provided.droppableProps}
-          style={{
-            background: snapshot.isDraggingOver ? 'lightblue' : 'lightgrey'
-          }}>
+        <StyledTimeTableDiv>
           <React.Fragment>
             <h2>TimeTable</h2>
               {props.timeTable.map((timeSlot, index) =>
-                <StyledTimeSlotDiv>
-                  <TimeSlot
-                    time={timeSlot.time}
-                    content={timeSlot.content}
-                    name={timeSlot.name}
-                    id={timeSlot.id}
-                    key={timeSlot.id}
-                    index={index}
-                  />
-                </StyledTimeSlotDiv>
+                <Droppable droppableId={timeSlot.id}>
+                  {(provided, snapshot) => (
+                    <StyledTimeSlotDiv
+                      ref={provided.innerRef} 
+                      {...provided.droppableProps}
+                      style={{
+                        background: snapshot.isDraggingOver ? 'lightblue' : 'lightgrey'
+                      }}>
+                    <TimeSlot
+                      time={timeSlot.time}
+                      content={timeSlot.content}
+                      name={timeSlot.name}
+                      id={timeSlot.id}
+                      key={timeSlot.id}
+                      index={index}
+                      />
+                  {provided.placeholder}
+                  </StyledTimeSlotDiv>
+                  )}
+                </Droppable>
               )}
           </React.Fragment>
-              {provided.placeholder}
         </StyledTimeTableDiv>
-      )}
-    </Droppable>
   );
 }
 
