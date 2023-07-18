@@ -65,6 +65,40 @@ function TimeTable(props) {
   );
 }
 
+/* 
+function TimeTable(props) {
+  return (
+        <StyledTimeTableDiv>
+          <React.Fragment>
+            <h2>TimeTable</h2>
+              {props.timeTable.map((timeSlot, index) =>
+                <Droppable droppableId={timeSlot.id}>
+                  {(provided, snapshot) => (
+                    <StyledTimeSlotDiv
+                      ref={provided.innerRef} 
+                      {...provided.droppableProps}
+                      style={{
+                        background: snapshot.isDraggingOver ? 'lightblue' : 'lightgrey'
+                      }}>
+                    <TimeSlot
+                      time={timeSlot.time}
+                      // content={timeSlot.content}
+                      name={timeSlot.name}
+                      id={timeSlot.id}
+                      key={timeSlot.id}
+                      index={index}
+                      />
+                  {provided.placeholder}
+                  </StyledTimeSlotDiv>
+                  )}
+                </Droppable>
+              )}
+          </React.Fragment>
+        </StyledTimeTableDiv>
+  );
+}
+*/
+
 TimeTable.propTypes = {
   time: PropTypes.string,
   content: PropTypes.array
