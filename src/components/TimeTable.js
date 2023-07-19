@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import styled from 'styled-components';
 import TimeSlot from "./TimeSlot";
 import { Droppable } from 'react-beautiful-dnd';
-import { dayColumns } from "./initial-day-data";
 
 const StyledTimeTableDiv = styled.div`
     display: flex;
@@ -42,36 +41,39 @@ const StyledTimeSlotDiv = styled.div`
 
 function TimeTable(props) {
   return (
-    <div>
-    {Object.entries(dayColumns).map(([dayColumnId, dayColumn], index) => {
-      return (
-
-        <Droppable droppableId="timeTable" key='timeTable'>
-        {(provided, snapshot) => (
-          <StyledTimeTableDiv
-          ref={provided.innerRef}
-          {...provided.droppableProps}
-          /* draggingOver={snapshot.draggingOver} */>
-            <React.Fragment>
-              <h2>TimeTable</h2>
-                {props.timeTable.map((timeSlot, index) =>
-                  <TimeSlot
-                  time={timeSlot.time}
-                  name={timeSlot.name}
-                  category={timeSlot.category}
-                  id={timeSlot.id}
-                  key={timeSlot.id}
-                  index={index}
-                  />
-                  )}
-                {provided.placeholder}
-            </React.Fragment>
-          </StyledTimeTableDiv>
-        )}
-            </Droppable>
-        )
-      })};
-      </div>
+    // <div style={{
+    //   display: "flex",
+    //   flexDirection: "row",
+    //   alignItems: "center"
+    // }}>
+    //   {Object.entries(dayColumns).map(([dayColumnId, dayColumn], index) => {
+    //     return (
+          <Droppable droppableId='timeTable' key='timeTable'>
+            {(provided, snapshot) => (
+              <StyledTimeTableDiv
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              /* draggingOver={snapshot.draggingOver} */>
+                <React.Fragment>
+                  <h2>dayColumn.name</h2>
+                    {props.timeTable.map((timeSlot, index) =>
+                      <TimeSlot
+                      time={timeSlot.time}
+                      name={timeSlot.name}
+                      category={timeSlot.category}
+                      id={timeSlot.id}
+                      key={timeSlot.id}
+                      index={index}
+                      />
+                      )}
+                      {provided.placeholder}
+                </React.Fragment>
+              </StyledTimeTableDiv>
+            )}
+          </Droppable>
+      //     )
+      //   })};
+      // </div>
   );
 }
 

@@ -165,7 +165,7 @@ function TimeBlockControl() {
   
   else {
     currentState = <TimeBlockList timeBlockList={timeBlockList}/>;
-    otherCurrentState = <TimeTable timeTable={timeTable} dayColumns={dayColumns}/>;
+    otherCurrentState = <TimeTable timeTable={timeTable} /* dayColumns={dayColumns} *//>;
     buttonOne = 'go to timeblock form';
   }
   
