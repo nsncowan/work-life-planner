@@ -2,43 +2,24 @@ import { v4 } from 'uuid';
 
 const initialDayData = [
   // add date property
-  {
-    time: "10:00am",
-    // name: null,
-    // category: null,
-    id: v4()
-  },
-  {
-    time: "11:00am",
-    // name: null,
-    // category: null,
-    id: v4()
-  },
-  {
-    time: "12:00pm",
-    // name: null,
-    // category: null,
-    id: v4()
-  },
-  {
-    time: "1:00pm",
-    // name: null,
-    // category: null,
-    id: v4()
-  },
-  {
-    time: "2:00pm",
-    // name: null,
-    // category: null,
-    id: v4()
-  },
-  {
-    time: "3:00pm",
-    // name: null,
-    // category: null,
-    id: v4()
-  },
+  { time: "10:00am", id: v4() },
+  { time: "11:00am", id: v4() },
+  { time: "12:00pm", id: v4() },
+  { time: "1:00pm", id: v4() },
+  { time: "2:00pm", id: v4() },
+  { time: "3:00pm", id: v4() },
 ];
+
+const dayColumns = {
+  [v4()]: { name: 'monday', schedule: initialDayData },
+  [v4()]: { name: 'tuesday', schedule: initialDayData },
+  [v4()]: { name: 'wednesday', schedule: initialDayData },
+  [v4()]: { name: 'thursday', schedule: initialDayData },
+  [v4()]: { name: 'friday', schedule: initialDayData },
+  [v4()]: { name: 'saturday', schedule: initialDayData },
+  [v4()]: { name: 'sunday', schedule: initialDayData },
+};
+
 
 const initialTimeBlocks = [
   {
@@ -69,4 +50,4 @@ const initialTimeBlocks = [
 ];
 
 // export default initialDayData;
-export { initialDayData, initialTimeBlocks };
+export { initialDayData, initialTimeBlocks, dayColumns };

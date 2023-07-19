@@ -8,7 +8,7 @@ import { db } from "../firebase";
 import { collection, addDoc, onSnapshot } from "firebase/firestore";
 import NewCategoryForm from "./NewCategoryForm";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { initialDayData, initialTimeBlocks } from "./initial-day-data";
+import { initialDayData, initialTimeBlocks, dayColumns } from "./initial-day-data";
 import TimeTable from "./TimeTable";
 import TimeSlot from "./TimeSlot";
 
