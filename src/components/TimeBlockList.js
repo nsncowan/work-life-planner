@@ -19,7 +19,7 @@ const StyledTimeBlockDiv = styled.div`
 
 function TimeBlockList(props) {
   return (
-    <Droppable droppableId="timeBlockList" isCombineEnabled>
+    <Droppable droppableId="timeBlockList" key="timeBlockList">
       {(provided, snapshot) => (
         <StyledTimeBlockDiv 
           ref={provided.innerRef} 

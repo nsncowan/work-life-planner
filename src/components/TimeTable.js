@@ -37,47 +37,11 @@ const StyledTimeSlotDiv = styled.div`
   background-color: #FFF5E4;
 `;
 
-// function TimeTable(props) {
-//   return (
-//     <Droppable droppableId="timeTable" isCombineEnabled>
-//       {provided => (
-//         <StyledTimeTableDiv ref={provided.innerRef} {...provided.droppableProps}>
-//           <React.Fragment>
-//             <h2>TimeTable</h2>
-//             <StyledTimeSlotDiv>12:00</StyledTimeSlotDiv>
-//             <StyledTimeSlotDiv>1:00</StyledTimeSlotDiv>
-//             <StyledTimeSlotDiv>2:00</StyledTimeSlotDiv>
-//             <StyledTimeSlotDiv>3:00</StyledTimeSlotDiv>
-//             <StyledTimeSlotDiv>4:00</StyledTimeSlotDiv>
-//             <StyledTimeSlotDiv>5:00</StyledTimeSlotDiv>
-//             <StyledTimeSlotDiv>6:00</StyledTimeSlotDiv>
-//             <StyledTimeSlotDiv>7:00</StyledTimeSlotDiv>
-//             <StyledTimeSlotDiv>8:00</StyledTimeSlotDiv>
-//             <StyledTimeSlotDiv>9:00</StyledTimeSlotDiv>
-//             <StyledTimeSlotDiv>10:00</StyledTimeSlotDiv>
-//             <StyledTimeSlotDiv>11:00</StyledTimeSlotDiv>
-//             <StyledTimeSlotDiv>12:00</StyledTimeSlotDiv>
-//             <StyledTimeSlotDiv>1:00</StyledTimeSlotDiv>
-//             <StyledTimeSlotDiv>2:00</StyledTimeSlotDiv>
-//             <StyledTimeSlotDiv>3:00</StyledTimeSlotDiv>
-//             <StyledTimeSlotDiv>4:00</StyledTimeSlotDiv>
-//             <StyledTimeSlotDiv>5:00</StyledTimeSlotDiv>
-//             <StyledTimeSlotDiv>6:00</StyledTimeSlotDiv>
-//             <StyledTimeSlotDiv>7:00</StyledTimeSlotDiv>
-//             <StyledTimeSlotDiv>8:00</StyledTimeSlotDiv>
-//             <StyledTimeSlotDiv>9:00</StyledTimeSlotDiv>
-//             <StyledTimeSlotDiv>10:00</StyledTimeSlotDiv>
-//             <StyledTimeSlotDiv>11:00</StyledTimeSlotDiv>
-//           </React.Fragment>
-//         </StyledTimeTableDiv>
-//       )}
-//     </Droppable>
-//   );
-// }
+
 
 function TimeTable(props) {
   return (
-    <Droppable droppableId="timeTable" isCombineEnabled>
+    <Droppable droppableId="timeTable" key='timeTable'>
       {(provided, snapshot) => (
         <StyledTimeTableDiv 
           ref={provided.innerRef} 
