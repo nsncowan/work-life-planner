@@ -42,34 +42,36 @@ const StyledTimeSlotDiv = styled.div`
 
 function TimeTable(props) {
   return (
-    // {Object.entries(dayColumns).map(([dayColumnId, dayColumn], index) => {
-    //   return (
+    <div>
+    {Object.entries(dayColumns).map(([dayColumnId, dayColumn], index) => {
+      return (
 
-    //   )
-    // })};
-    <Droppable droppableId="timeTable" key='timeTable'>
-      {(provided, snapshot) => (
-        <StyledTimeTableDiv 
-          ref={provided.innerRef} 
+        <Droppable droppableId="timeTable" key='timeTable'>
+        {(provided, snapshot) => (
+          <StyledTimeTableDiv
+          ref={provided.innerRef}
           {...provided.droppableProps}
-          draggingOver={snapshot.draggingOver}>
-          <React.Fragment>
-            <h2>TimeTable</h2>
-              {props.timeTable.map((timeSlot, index) =>
-                <TimeSlot
+          /* draggingOver={snapshot.draggingOver} */>
+            <React.Fragment>
+              <h2>TimeTable</h2>
+                {props.timeTable.map((timeSlot, index) =>
+                  <TimeSlot
                   time={timeSlot.time}
                   name={timeSlot.name}
                   category={timeSlot.category}
                   id={timeSlot.id}
                   key={timeSlot.id}
                   index={index}
-                />
-              )}
-              {provided.placeholder}
-          </React.Fragment>
-        </StyledTimeTableDiv>
-      )}
-    </Droppable>
+                  />
+                  )}
+                {provided.placeholder}
+            </React.Fragment>
+          </StyledTimeTableDiv>
+        )}
+            </Droppable>
+        )
+      })};
+      </div>
   );
 }
 

@@ -24,7 +24,7 @@ function TimeBlockList(props) {
         <StyledTimeBlockDiv 
           ref={provided.innerRef} 
           {...provided.droppableProps}
-          isDraggingOver={snapshot.isDraggingOver}>
+          /* isDraggingOver={snapshot.isDraggingOver} */>
           <React.Fragment>
             <hr/>
             {props.timeBlockList.map((timeBlock, index) =>

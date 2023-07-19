@@ -26,7 +26,7 @@ function TimeBlockControl() {
   const [categoryList, setCategoryList] = useState([]);
   const [timeTable, setTimeTable] = useState(initialDayData);
   const [editing, setEditing] = useState(false);
-  const [dayColumns, setDayColumns] = useState(dayColumns);
+  // const [dayColumns, setDayColumns] = useState(dayColumns);
   
   const [viewSelector, setViewSelector] = useState('timeBlockList');
   const [displayedDate, setDisplayedDate] = useState(/* default date obj is today's date */)
