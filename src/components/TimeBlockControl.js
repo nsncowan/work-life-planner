@@ -95,10 +95,12 @@ function TimeBlockControl() {
   const move = (source, destination, droppableSource, droppableDestination) => {
     const sourceClone = Array.from(source);
     const destClone = Array.from(destination);
-    // const [removed] = sourceClone.splice(droppableSource.index, 1);
-    const copyItem = sourceClone[droppableSource.index];
+    const [removed] = sourceClone.splice(droppableSource.index, 1);
+    // const copyItem = sourceClone[droppableSource.index];
 
-    destClone.splice(droppableDestination.index, 0, copyItem);
+    destClone.splice(droppableDestination.index, 0, removed);
+    sourceClone.splice(droppableSource.index, 0, { ...removed, id: v4() }); // replaces the dragged timeBlock with a copy (but assigns a new id in the process)
+
 
     const result = {};
     result[droppableSource.droppableId] = sourceClone;
