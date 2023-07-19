@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import styled from 'styled-components';
 import TimeSlot from "./TimeSlot";
 import { Droppable } from 'react-beautiful-dnd';
+import { dayColumns } from "./initial-day-data";
 
 const StyledTimeTableDiv = styled.div`
     display: flex;
@@ -41,6 +42,11 @@ const StyledTimeSlotDiv = styled.div`
 
 function TimeTable(props) {
   return (
+    // {Object.entries(dayColumns).map(([dayColumnId, dayColumn], index) => {
+    //   return (
+
+    //   )
+    // })};
     <Droppable droppableId="timeTable" key='timeTable'>
       {(provided, snapshot) => (
         <StyledTimeTableDiv 
