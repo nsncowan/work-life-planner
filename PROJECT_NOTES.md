@@ -1,5 +1,6 @@
 ## brainstorm
 
+Take a cue from the spread operator that reassigns an Id to the copied item. This could be a way to modify items with new times, names, etc
 
 - convert timeslots to timeblocks with all data exept 'time' set to null.
 - the end goal is to make everything a 'timeblock', but with null fields depending on source and destination.
@@ -12,6 +13,15 @@
 - dragging a tb to the 'day' template will create a copy of the timeblock and add it to the 'assigned' state
 - 'assigned' will also have a date property, which will read whichever date is displayed in the component
 - 'assigned' will also have a 'timeslot' property. MAYBE this means we don't necessarily need to worry about re-ordering, but we can just worry about matching the 'timeslot' property of the timeblock to an equivalent timeslot id of the space in the receiving timetable section.
+
+
+## Error Notes
+- Error: Cannot read properties of undefined (reading 'map') 
+  - Cause: the `droppableId` was not matching the `droppableId` mentioned in the function being called for the drag and drop action.
+    - I was dragging and dropping in `<Droppable droppableId='1234' key='1234'>`. 
+      BUT the condition in the function was `if(source.droppableId === 'timeTable' && destination.droppableId === 'timeTable')`
+
+- Error: ReferenceError: Cannot access 'dayColumns' before initialization
 
 
 ## dnd
