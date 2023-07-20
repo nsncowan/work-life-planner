@@ -15,9 +15,9 @@ function SelectDate(props) {
   
   return(
     <StyledDateDiv>
-      <button type="button">back</button>
+      <button type="button" id="previousDay" onClick={props.prevDay}>back</button>
       <h4>{props.currentDay}</h4>
-      <button type="button" onClick={props.nextDay}>forward</button>
+      <button type="button" id="nextDay" onClick={props.nextDay}>forward</button>
     </StyledDateDiv>
   );
 }

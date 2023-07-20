@@ -12,7 +12,7 @@ import { initialDayData, initialTimeBlocks, dayColumns } from "./initial-day-dat
 import Schedule from "./Schedule";
 import TimeSlot from "./TimeSlot";
 import SelectDate from "./SelectDate";
-import { format, addDays, eachDayOfInterval, startOfToday, startOfMonth, endOfMonth, parseISO, parse, add} from "date-fns";
+import { format, addDays, eachDayOfInterval, startOfToday, startOfMonth, endOfMonth, parseISO, parse, add, subDays} from "date-fns";
 
 
 const StyledMainBodyDiv = styled.div`
@@ -41,7 +41,13 @@ function TimeBlockControl() {
     // let nextDay = add(newDay, { days: 1}) /// THIS ALSO WORKS
     setCurrentDay(format(nextDay, 'MM-dd-yyyy'))
   }
-
+  
+  function prevDay() {
+    let newDay = parse(currentDay, 'MM-dd-yyyy', new Date());
+    let nextDay = subDays(newDay, 1)
+    // let nextDay = add(newDay, { days: 1}) /// THIS ALSO WORKS
+    setCurrentDay(format(nextDay, 'MM-dd-yyyy'))
+  }
 
   useEffect(() => {
     const unSubscribeTimeBlocks = onSnapshot(
@@ -192,7 +198,7 @@ function TimeBlockControl() {
   
   let currentState = null;
   let otherCurrentState = null;
-  let dateDisplay = <SelectDate currentDay={currentDay} nextDay={nextDay} />;
+  let dateDisplay = <SelectDate currentDay={currentDay} nextDay={nextDay} prevDay={prevDay} />;
   let buttonOne = null;
   let topTaskBar = <PlannerViewSelector />;
   // let bottomTaskBar = <BottomTaskBar />;
@@ -213,7 +219,8 @@ function TimeBlockControl() {
     otherCurrentState = <Schedule 
                           schedule={schedule} 
                           addItemToSchedule={addItemToSchedule} 
-                          addSchedule0={addSchedule0}/* dayColumns={dayColumns} *//>;
+                          addSchedule0={addSchedule0}
+                          currentDay={currentDay} />;
     buttonOne = 'go to timeblock form';
   }
   
