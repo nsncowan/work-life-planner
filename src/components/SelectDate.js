@@ -11,33 +11,33 @@ const StyledDateDiv = styled.div`
   width: 100%;
   `;
 
-
-function SelectDate() {
-  let today = startOfToday();
-  let julyArray = eachDayOfInterval({ start: startOfMonth(today), end: endOfMonth(today) });
+function SelectDate(props) {
   
-  let [currentDay, setCurrentDay] = useState(format(today, 'MM-dd-yyyy'))
-  console.log(currentDay);
-
-  function nextDay() {
-    let newDay = parse(currentDay, 'MM-dd-yyyy', new Date());
-    let nextDay = addDays(newDay, 1)
-    // let nextDay = add(newDay, { days: 1}) /// THIS ALSO WORKS
-    setCurrentDay(format(nextDay, 'MM-dd-yyyy'))
-  }
-  
-  // const advanceDate = () => {
-  //   const newDate = addDays(parseISO(formattedDate), 1);
-  //   setDisplayedDate(newDate);
-  // };
-
   return(
     <StyledDateDiv>
       <button type="button">back</button>
-      <h4>{currentDay}</h4>
-      <button type="button" onClick={nextDay}>forward</button>
+      <h4>{props.currentDay}</h4>
+      <button type="button" onClick={props.nextDay}>forward</button>
     </StyledDateDiv>
   );
 }
 
 export default SelectDate;
+
+// let today = startOfToday();
+// let julyArray = eachDayOfInterval({ start: startOfMonth(today), end: endOfMonth(today) });
+
+// let [currentDay, setCurrentDay] = useState(format(today, 'MM-dd-yyyy'))
+// console.log(currentDay);
+
+// function nextDay() {
+//   let newDay = parse(currentDay, 'MM-dd-yyyy', new Date());
+//   let nextDay = addDays(newDay, 1)
+//   // let nextDay = add(newDay, { days: 1}) /// THIS ALSO WORKS
+//   setCurrentDay(format(nextDay, 'MM-dd-yyyy'))
+// }
+
+// const advanceDate = () => {
+//   const newDate = addDays(parseISO(formattedDate), 1);
+//   setDisplayedDate(newDate);
+// };

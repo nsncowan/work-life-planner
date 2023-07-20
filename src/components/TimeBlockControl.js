@@ -12,6 +12,8 @@ import { initialDayData, initialTimeBlocks, dayColumns } from "./initial-day-dat
 import Schedule from "./Schedule";
 import TimeSlot from "./TimeSlot";
 import SelectDate from "./SelectDate";
+import { format, addDays, eachDayOfInterval, startOfToday, startOfMonth, endOfMonth, parseISO, parse, add} from "date-fns";
+
 
 const StyledMainBodyDiv = styled.div`
   display: flex;
@@ -23,6 +25,8 @@ const StyledMainBodyDiv = styled.div`
   `;
 
 function TimeBlockControl() {
+  let today = startOfToday();
+  const [currentDay, setCurrentDay] = useState(format(today, 'MM-dd-yyyy'))
   const [timeBlockList, setTimeBlockList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
   const [schedule, setSchedule] = useState([]);
@@ -30,6 +34,14 @@ function TimeBlockControl() {
   // const [dayColumns, setDayColumns] = useState(dayColumns);
   const [viewSelector, setViewSelector] = useState('timeBlockList');
   const [formVisible, setFormVisible] = useState(false);
+
+  function nextDay() {
+    let newDay = parse(currentDay, 'MM-dd-yyyy', new Date());
+    let nextDay = addDays(newDay, 1)
+    // let nextDay = add(newDay, { days: 1}) /// THIS ALSO WORKS
+    setCurrentDay(format(nextDay, 'MM-dd-yyyy'))
+  }
+
 
   useEffect(() => {
     const unSubscribeTimeBlocks = onSnapshot(
@@ -180,7 +192,7 @@ function TimeBlockControl() {
   
   let currentState = null;
   let otherCurrentState = null;
-  let dateDisplay = <SelectDate />
+  let dateDisplay = <SelectDate currentDay={currentDay} nextDay={nextDay} />;
   let buttonOne = null;
   let topTaskBar = <PlannerViewSelector />;
   // let bottomTaskBar = <BottomTaskBar />;
