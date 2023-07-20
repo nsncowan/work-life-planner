@@ -24,7 +24,7 @@ const StyledMainBodyDiv = styled.div`
 function TimeBlockControl() {
   const [timeBlockList, setTimeBlockList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
-  const [schedule, setSchedule] = useState(initialDayData);
+  const [schedule, setSchedule] = useState([]);
   const [editing, setEditing] = useState(false);
   // const [dayColumns, setDayColumns] = useState(dayColumns);
   const [viewSelector, setViewSelector] = useState('timeBlockList');
@@ -64,28 +64,27 @@ function TimeBlockControl() {
       // (error) => {}
     );
 
-    // const unSubscribeSchedule = onSnapshot(
-    //   collection(db, "schedules"),
-    //   (collectionSnapshot) => {
-    //     const schedule = [];
-    //     collectionSnapshot.forEach((doc) => {
-    //       schedule.push({
-    //         id: doc.id,
-    //         time: doc.data().time,
-    //         name: doc.data().name,
-    //         category: doc.data().category,
-    //         key: doc.id
-    //         // add key property set to id for help with dnd
-    //       });
-    //     });
-    //     setSchedule(schedule);
-    //   },
-    //   // (error) => {}
-    // );
+    const unSubscribeSchedule = onSnapshot(
+      collection(db, "schedules"),
+      (collectionSnapshot) => {
+        const schedule = initialDayData;
+        collectionSnapshot.forEach((doc) => {
+          schedule.push({
+            id: doc.id,
+            date: doc.data().date,
+            items: doc.data().items,
+            // add key property set to id for help with dnd
+          });
+        });
+        setSchedule(schedule);
+      },
+      // (error) => {}
+    );
 
     const initialize = () => {
       unSubscribeTimeBlocks();
       unSubscribeCategory();
+      unSubscribeSchedule();
     }
     return initialize;
   }, []);
@@ -129,16 +128,22 @@ function TimeBlockControl() {
     const destClone = Array.from(destination);
     const [removed] = sourceClone.splice(droppableSource.index, 1);
     // const copyItem = sourceClone[droppableSource.index];
-
+    const removedItem = { ...removed, id: v4() };
     destClone.splice(droppableDestination.index, 0, removed);
-    sourceClone.splice(droppableSource.index, 0, { ...removed, id: v4() }); // replaces the dragged timeBlock with a copy (but assigns a new id in the process)
+    sourceClone.splice(droppableSource.index, 0, removedItem); // replaces the dragged timeBlock with a copy (but assigns a new id in the process)
+    
+    // const result = {};
+    // result[droppableSource.droppableId] = sourceClone;
+    // result[droppableDestination.droppableId] = destClone;
+    
+    return {
+      [droppableSource.droppableId]: sourceClone,
+      [droppableDestination.droppableId]: destClone,
+      removedItem
+    };
 
-
-    const result = {};
-    result[droppableSource.droppableId] = sourceClone;
-    result[droppableDestination.droppableId] = destClone;
-
-    return result;
+    
+    // return result;
   };
 
   // const copy = (source, destination, droppableSource, droppableDestination) => {
@@ -163,19 +168,14 @@ function TimeBlockControl() {
       setTimeBlockList(reorder(timeBlockList, source.index, destination.index));
     }
     else {
-      const result = move /* copy */(
-        timeBlockList,
-        schedule,
-        source,
-        destination
-      );
+      const result = move(timeBlockList, schedule, source, destination);
       setTimeBlockList(result.timeBlockList)
       setSchedule(result.schedule)
-      addSchedule0({items: schedule})
+      // addItemToSchedule(result.removedItem)
     };
-    console.log(timeBlockList);
-    console.log(schedule);
-    console.log(result);
+    console.log('timeBlocks', timeBlockList);
+    console.log('schedule', schedule);
+    console.log('result', result);
   }
   
   let currentState = null;
@@ -206,6 +206,7 @@ function TimeBlockControl() {
       {topTaskBar}
       <StyledMainBodyDiv>
         <DragDropContext onDragEnd={onDragEnd}>
+          {console.log({schedule})}
           {currentState}
           {otherCurrentState}
         </DragDropContext>

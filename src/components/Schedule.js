@@ -55,10 +55,12 @@ function Schedule(props) {
               {...provided.droppableProps}
               /* draggingOver={snapshot.draggingOver} */>
                 <React.Fragment>
-                  <h2>dayColumn.name</h2>
+                  <h2>{props.date}</h2>
                     {props.schedule.map((timeSlot, index) =>
                       <TimeSlot
                       time={timeSlot.time}
+                      date={timeSlot.date}
+                      items={timeSlot.items}
                       name={timeSlot.name}
                       category={timeSlot.category}
                       id={timeSlot.id}
