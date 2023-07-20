@@ -59,6 +59,38 @@ supabase???
   - with submit action - assign category to timeblock (one-to-many)
 
 ### data structure
+
+categories (top-level collection)
+    doc(category)
+        id: 
+        name: 
+
+timeBlocks (top-level collection)
+    doc(timeBlock)
+        id:
+        date: 
+        time:  
+        name: 
+        category: 
+
+schedules (top-level collection)
+    doc(schedule) - this represents a date
+        id:
+        items: [timeblocks & timeslots]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   * idea: no category id needed
   * create a collection of categories, just names, and use that to populate a dropdown list for the new TB form
   * BUT, the new TB that's created only needs the string value of the category name, and doesn't have to be connected to the category collection.

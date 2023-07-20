@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import TimeSlot from "./TimeSlot";
 import { Droppable } from 'react-beautiful-dnd';
 
-const StyledTimeTableDiv = styled.div`
+const StyledScheduleeDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -39,7 +39,7 @@ const StyledTimeSlotDiv = styled.div`
 
 
 
-function TimeTable(props) {
+function Schedule(props) {
   return (
     // <div style={{
     //   display: "flex",
@@ -48,15 +48,15 @@ function TimeTable(props) {
     // }}>
     //   {Object.entries(dayColumns).map(([dayColumnId, dayColumn], index) => {
     //     return (
-          <Droppable droppableId='timeTable' key='timeTable'>
+          <Droppable droppableId='schedule' key='schedule'>
             {(provided, snapshot) => (
-              <StyledTimeTableDiv
+              <StyledScheduleeDiv
               ref={provided.innerRef}
               {...provided.droppableProps}
               /* draggingOver={snapshot.draggingOver} */>
                 <React.Fragment>
                   <h2>dayColumn.name</h2>
-                    {props.timeTable.map((timeSlot, index) =>
+                    {props.schedule.map((timeSlot, index) =>
                       <TimeSlot
                       time={timeSlot.time}
                       name={timeSlot.name}
@@ -68,7 +68,7 @@ function TimeTable(props) {
                       )}
                       {provided.placeholder}
                 </React.Fragment>
-              </StyledTimeTableDiv>
+              </StyledScheduleeDiv>
             )}
           </Droppable>
       //     )
@@ -77,11 +77,11 @@ function TimeTable(props) {
   );
 }
 
-TimeTable.propTypes = {
+Schedule.propTypes = {
   time: PropTypes.string,
   content: PropTypes.array
 };
 
-export default TimeTable;
+export default Schedule;
 
 

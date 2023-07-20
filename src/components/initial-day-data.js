@@ -2,12 +2,12 @@ import { v4 } from 'uuid';
 
 const initialDayData = [
   // add date property
-  { time: "10:00am", id: v4() },
-  { time: "11:00am", id: v4() },
-  { time: "12:00pm", id: v4() },
-  { time: "1:00pm", id: v4() },
-  { time: "2:00pm", id: v4() },
-  { time: "3:00pm", id: v4() },
+  { id: v4(), time: "10:00am" },
+  { id: v4(), time: "11:00am" },
+  { id: v4(), time: "12:00pm" },
+  { id: v4(), time: "1:00pm" },
+  { id: v4(), time: "2:00pm" },
+  { id: v4(), time: "3:00pm" },
 ];
 
 const dayColumns = {

@@ -5,11 +5,11 @@ import NewTimeBlockForm from "./NewTImeBlockForm";
 import TimeBlockList from "./TimeBlockList";
 import PlannerViewSelector from "./PlannerViewSelector";
 import { db } from "../firebase";
-import { collection, addDoc, onSnapshot } from "firebase/firestore";
+import { collection, doc, addDoc, onSnapshot, setDoc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 import NewCategoryForm from "./NewCategoryForm";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { initialDayData, initialTimeBlocks, dayColumns } from "./initial-day-data";
-import TimeTable from "./TimeTable";
+import Schedule from "./Schedule";
 import TimeSlot from "./TimeSlot";
 
 const StyledMainBodyDiv = styled.div`
@@ -24,10 +24,9 @@ const StyledMainBodyDiv = styled.div`
 function TimeBlockControl() {
   const [timeBlockList, setTimeBlockList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
-  const [timeTable, setTimeTable] = useState(initialDayData);
+  const [schedule, setSchedule] = useState(initialDayData);
   const [editing, setEditing] = useState(false);
   // const [dayColumns, setDayColumns] = useState(dayColumns);
-  
   const [viewSelector, setViewSelector] = useState('timeBlockList');
   const [displayedDate, setDisplayedDate] = useState(/* default date obj is today's date */)
   const [formVisible, setFormVisible] = useState(false);
@@ -65,6 +64,25 @@ function TimeBlockControl() {
       // (error) => {}
     );
 
+    // const unSubscribeSchedule = onSnapshot(
+    //   collection(db, "schedules"),
+    //   (collectionSnapshot) => {
+    //     const schedule = [];
+    //     collectionSnapshot.forEach((doc) => {
+    //       schedule.push({
+    //         id: doc.id,
+    //         time: doc.data().time,
+    //         name: doc.data().name,
+    //         category: doc.data().category,
+    //         key: doc.id
+    //         // add key property set to id for help with dnd
+    //       });
+    //     });
+    //     setSchedule(schedule);
+    //   },
+    //   // (error) => {}
+    // );
+
     const initialize = () => {
       unSubscribeTimeBlocks();
       unSubscribeCategory();
@@ -76,6 +94,7 @@ function TimeBlockControl() {
     formVisible ? setFormVisible(false) : setFormVisible(true);
   }
 
+// DATABASE LOGIC =================================================================================
   const addTimeBlock0 = async (timeBlock) => {
     const collectionReference = collection(db, "timeBlocks");
     await addDoc(collectionReference, timeBlock);
@@ -84,7 +103,19 @@ function TimeBlockControl() {
   const addCategory0 = async (category) => {
     await addDoc(collection(db, "categories"), category);
   }
+  
+  const addSchedule0 = async (schedule) => {
+    await addDoc(collection(db, "schedules"), schedule);
+  }
 
+  const addItemToSchedule = async (item) => {
+    const reference = doc(db, "schedules", "dayOneTest")
+    await updateDoc(reference, {
+      items: arrayUnion(item)
+    });
+  }
+
+// ================================================================================================
   const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
@@ -125,8 +156,8 @@ function TimeBlockControl() {
 
     if(!destination) return;
     
-    if(source.droppableId === 'timeTable' && destination.droppableId === 'timeTable') {
-      setTimeTable(reorder(timeTable, source.index, destination.index));
+    if(source.droppableId === 'schedule' && destination.droppableId === 'schedule') {
+      setSchedule(reorder(schedule, source.index, destination.index));
     }
     else if (source.droppableId === 'timeBlockList' && destination.droppableId === 'timeBlockList') {
       setTimeBlockList(reorder(timeBlockList, source.index, destination.index));
@@ -134,15 +165,16 @@ function TimeBlockControl() {
     else {
       const result = move /* copy */(
         timeBlockList,
-        timeTable,
+        schedule,
         source,
         destination
       );
       setTimeBlockList(result.timeBlockList)
-      setTimeTable(result.timeTable)
+      setSchedule(result.schedule)
+      addSchedule0({items: schedule})
     };
     console.log(timeBlockList);
-    console.log(timeTable);
+    console.log(schedule);
     console.log(result);
   }
   
@@ -165,7 +197,7 @@ function TimeBlockControl() {
   
   else {
     currentState = <TimeBlockList timeBlockList={timeBlockList}/>;
-    otherCurrentState = <TimeTable timeTable={timeTable} /* dayColumns={dayColumns} *//>;
+    otherCurrentState = <Schedule schedule={schedule} /* dayColumns={dayColumns} *//>;
     buttonOne = 'go to timeblock form';
   }
   
