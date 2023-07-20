@@ -1,5 +1,10 @@
 ## brainstorm
 
+make a select date component that will affect 'currentDate' state
+
+
+
+
 Take a cue from the spread operator that reassigns an Id to the copied item. This could be a way to modify items with new times, names, etc
 
 - convert timeslots to timeblocks with all data exept 'time' set to null.

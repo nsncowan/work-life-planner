@@ -11,6 +11,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { initialDayData, initialTimeBlocks, dayColumns } from "./initial-day-data";
 import Schedule from "./Schedule";
 import TimeSlot from "./TimeSlot";
+import SelectDate from "./SelectDate";
 
 const StyledMainBodyDiv = styled.div`
   display: flex;
@@ -28,7 +29,6 @@ function TimeBlockControl() {
   const [editing, setEditing] = useState(false);
   // const [dayColumns, setDayColumns] = useState(dayColumns);
   const [viewSelector, setViewSelector] = useState('timeBlockList');
-  const [displayedDate, setDisplayedDate] = useState(/* default date obj is today's date */)
   const [formVisible, setFormVisible] = useState(false);
 
   useEffect(() => {
@@ -67,7 +67,7 @@ function TimeBlockControl() {
     const unSubscribeSchedule = onSnapshot(
       collection(db, "schedules"),
       (collectionSnapshot) => {
-        const schedule = initialDayData;
+        const schedule = [];
         collectionSnapshot.forEach((doc) => {
           schedule.push({
             id: doc.id,
@@ -139,7 +139,7 @@ function TimeBlockControl() {
     return {
       [droppableSource.droppableId]: sourceClone,
       [droppableDestination.droppableId]: destClone,
-      removedItem
+      removedItem: removedItem
     };
 
     
@@ -180,6 +180,7 @@ function TimeBlockControl() {
   
   let currentState = null;
   let otherCurrentState = null;
+  let dateDisplay = <SelectDate />
   let buttonOne = null;
   let topTaskBar = <PlannerViewSelector />;
   // let bottomTaskBar = <BottomTaskBar />;
@@ -196,8 +197,11 @@ function TimeBlockControl() {
   
   
   else {
-    currentState = <TimeBlockList timeBlockList={timeBlockList}/>;
-    otherCurrentState = <Schedule schedule={schedule} /* dayColumns={dayColumns} *//>;
+    currentState = <TimeBlockList timeBlockList={timeBlockList} />;
+    otherCurrentState = <Schedule 
+                          schedule={schedule} 
+                          addItemToSchedule={addItemToSchedule} 
+                          addSchedule0={addSchedule0}/* dayColumns={dayColumns} *//>;
     buttonOne = 'go to timeblock form';
   }
   
@@ -207,6 +211,7 @@ function TimeBlockControl() {
       <StyledMainBodyDiv>
         <DragDropContext onDragEnd={onDragEnd}>
           {console.log({schedule})}
+          {dateDisplay}
           {currentState}
           {otherCurrentState}
         </DragDropContext>

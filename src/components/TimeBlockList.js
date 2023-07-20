@@ -17,30 +17,34 @@ const StyledTimeBlockDiv = styled.div`
     font-weight: 500;
   `;
 
+  
+  
 function TimeBlockList(props) {
+  
+  
   return (
-    <Droppable droppableId="timeBlockList" key="timeBlockList">
-      {(provided, snapshot) => (
-        <StyledTimeBlockDiv 
-          ref={provided.innerRef} 
-          {...provided.droppableProps}
-          /* isDraggingOver={snapshot.isDraggingOver} */>
-          <React.Fragment>
-            <hr/>
-            {props.timeBlockList.map((timeBlock, index) =>
-              <TimeBlock
-                name={timeBlock.name}
-                category={timeBlock.category}
-                id={timeBlock.id}
-                key={timeBlock.id}
-                index={index}
-              />
-            )}
-            {provided.placeholder}
-          </React.Fragment>
-        </StyledTimeBlockDiv>
-      )}
-    </Droppable>
+  <Droppable droppableId="timeBlockList" key="timeBlockList">
+    {(provided, snapshot) => (
+      <StyledTimeBlockDiv 
+        ref={provided.innerRef} 
+        {...provided.droppableProps}
+        /* isDraggingOver={snapshot.isDraggingOver} */>
+        <React.Fragment>
+          <hr/>
+          {props.timeBlockList.map((timeBlock, index) =>
+            <TimeBlock
+              name={timeBlock.name}
+              category={timeBlock.category}
+              id={timeBlock.id}
+              key={timeBlock.id}
+              index={index}
+            />
+          )}
+          {provided.placeholder}
+        </React.Fragment>
+      </StyledTimeBlockDiv>
+    )}
+  </Droppable>
   );
 }
 

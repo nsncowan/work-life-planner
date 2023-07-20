@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styled from 'styled-components';
 import TimeSlot from "./TimeSlot";
@@ -40,6 +40,32 @@ const StyledTimeSlotDiv = styled.div`
 
 
 function Schedule(props) {
+
+  // const [currentSchedule, setCurrentSchedule] = useState(props.schedule);
+
+
+  const scheduleDate = "dayTwoTest"
+
+  function handleAddScheduleButtonClick(e) {
+    e.preventDefault();
+    props.addSchedule0({
+      date: scheduleDate
+    });
+  }
+  
+  function handleAddItemToScheduleButtonClick(e) {
+    e.preventDefault();
+    props.addItemToSchedule({
+      date: scheduleDate
+    });
+  }
+
+/* 
+create a func to set currentSchedule to a particular date
+use buttons to run function to set currentSchedule
+pass currentSchedule into component to map through items
+*/
+
   return (
     // <div style={{
     //   display: "flex",
@@ -55,7 +81,9 @@ function Schedule(props) {
               {...provided.droppableProps}
               /* draggingOver={snapshot.draggingOver} */>
                 <React.Fragment>
-                  <h2>{props.date}</h2>
+                  <h2>hello</h2>
+                  <button onClick={handleAddScheduleButtonClick}>addSchedule0</button>
+                  <button onClick={handleAddItemToScheduleButtonClick}>addItemToSchedule</button>
                     {props.schedule.map((timeSlot, index) =>
                       <TimeSlot
                       time={timeSlot.time}
