@@ -41,22 +41,21 @@ const StyledTimeSlotDiv = styled.div`
 
 function Schedule(props) {
 
-  // const [currentSchedule, setCurrentSchedule] = useState(props.schedule);
 
-
-  const scheduleDate = "dayTwoTest"
+  const { schedule, currentDay, addItemToSchedule, addSchedule0 } = props;
+  const scheduleDate = props.currentDay;
 
   function handleAddScheduleButtonClick(e) {
     e.preventDefault();
-    props.addSchedule0({
-      date: scheduleDate
+    addSchedule0({
+      date: currentDay
     });
   }
   
   function handleAddItemToScheduleButtonClick(e) {
     e.preventDefault();
-    props.addItemToSchedule({
-      date: scheduleDate
+    addItemToSchedule({
+      date: currentDay
     });
   }
 
@@ -81,10 +80,10 @@ pass currentSchedule into component to map through items
               {...provided.droppableProps}
               /* draggingOver={snapshot.draggingOver} */>
                 <React.Fragment>
-                  <h2>hello</h2>
+                  <h2>{currentDay}</h2>
                   <button onClick={handleAddScheduleButtonClick}>addSchedule0</button>
                   <button onClick={handleAddItemToScheduleButtonClick}>addItemToSchedule</button>
-                    {props.schedule.map((timeSlot, index) =>
+                    {schedule.map((timeSlot, index) =>
                       <TimeSlot
                       time={timeSlot.time}
                       date={timeSlot.date}
