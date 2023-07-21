@@ -66,6 +66,7 @@ function TimeBlockControl() {
           });
         });
         setTimeBlockList(timeBlocks);
+        console.log('timeblocks: ', timeBlocks);
       },
       // (error) => {}
       );
@@ -87,19 +88,20 @@ function TimeBlockControl() {
 
         // const findSchedule = async () => {
         //   const scheduleToDisplay = [];
-          const ref = collection(db, "schedules");
-          const q = query(ref, where("date", "==", currentDay));
         //   const querySnapshot = await getDocs(q);
         //   querySnapshot.forEach((doc) => {
-        //   scheduleToDisplay.push({
-        //     name: doc.data().name,
-        //     category: doc.data().category,
-        //   })
-        // });
-        //   setDisplayCurrentSchedule(scheduleToDisplay);
-        // }
+          //   scheduleToDisplay.push({
+            //     name: doc.data().name,
+            //     category: doc.data().category,
+            //   })
+            // });
+            //   setDisplayCurrentSchedule(scheduleToDisplay);
+            // }
+            
+    const ref = collection(db, "schedules");
+    const q = query(ref, where("date", "==", currentDay));
 
-      const findSchedule = 
+    const findSchedule = 
         onSnapshot(q,(snapshot) => {
           const scheduleToDisplay = [];
           snapshot.docs.forEach((doc) => {
@@ -136,9 +138,10 @@ function TimeBlockControl() {
     const initialize = () => {
       unSubscribeTimeBlocks();
       unSubscribeCategory();
-      unSubscribeSchedule();
+      // unSubscribeSchedule();
       findSchedule();
     }
+    // console.log("displayCurrentSchedule ITEMS : ", displayCurrentSchedule.items);
     return initialize;
   }, []);
 
@@ -262,7 +265,7 @@ function TimeBlockControl() {
     currentState = <TimeBlockList timeBlockList={timeBlockList} />;
     otherCurrentState = <Schedule 
                           schedule={schedule}
-                          // scheduleToDisplay={displayCurrentSchedule} 
+                          scheduleToDisplay={displayCurrentSchedule} 
                           addItemToSchedule={addItemToSchedule} 
                           addSchedule0={addSchedule0}
                           currentDay={currentDay}
@@ -275,8 +278,8 @@ function TimeBlockControl() {
     <React.Fragment>
       {topTaskBar}
       <StyledMainBodyDiv>
-      {console.log('schedule', schedule)}
-      {console.log('displayCurrentSchedule', displayCurrentSchedule)}
+      {/* {console.log('schedule', schedule)}
+      {console.log('displayCurrentSchedule', displayCurrentSchedule)} */}
         <DragDropContext onDragEnd={onDragEnd}>
           {dateDisplay}
           {currentState}

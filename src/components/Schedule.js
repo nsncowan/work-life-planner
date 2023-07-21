@@ -43,9 +43,11 @@ const StyledTimeSlotDiv = styled.div`
 function Schedule(props) {
 
 
-  const { schedule, currentDay, addItemToSchedule, addSchedule0 } = props;
-  const scheduleToDisplay = schedule.find(({ date }) => date === currentDay);
+  const { schedule, scheduleToDisplay, currentDay, addItemToSchedule, addSchedule0 } = props;
+  // const scheduleToDisplay = schedule.find(({ date }) => date === currentDay);
   // const itemsToDisplay = scheduleToDisplay.items;
+  // const itemsToMap = scheduleToDisplay.items;
+  
 
   function handleAddScheduleButtonClick(e) {
     e.preventDefault();
