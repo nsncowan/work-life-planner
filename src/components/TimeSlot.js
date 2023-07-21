@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from 'styled-components';
-import { Draggable, Droppable } from "react-beautiful-dnd";
+import { Draggable } from "react-beautiful-dnd";
 
 const StyledTimeSlotDiv = styled.div`
     display: flex;
@@ -47,7 +47,8 @@ function TimeSlot(props) {
           /* isDragging={snapshot.isDragging} */>
             <h5>{props.time}</h5>
             <h5>{props.date}</h5>
-            <h6>{props.name}</h6>
+            <h4>{props.name}</h4>
+            <h6>{props.category}</h6>
             <h6>{props.id}</h6>
           {provided.placeholder}
         </StyledTimeSlotDiv>

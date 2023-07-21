@@ -93,14 +93,12 @@ pass currentSchedule into component to map through items
                   <h2>{currentDay}</h2>
                   <button onClick={handleAddScheduleButtonClick}>addSchedule0</button>
                   <button onClick={handleAddItemToScheduleButtonClick}>addItemToSchedule</button>
-                  {scheduleToDisplay.map((entry, index) => 
+                  {scheduleToDisplay?.map((entry, index) => 
                     <div>
                       <h2>{entry.date}</h2>
                           {entry.items.map((timeSlot, index) =>
                             <TimeSlot
                             time={timeSlot.time}
-                            date={timeSlot.date}
-                            items={timeSlot.items}
                             name={timeSlot.name}
                             category={timeSlot.category}
                             id={timeSlot.id}
