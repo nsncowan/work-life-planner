@@ -5,7 +5,7 @@ import NewTimeBlockForm from "./NewTImeBlockForm";
 import TimeBlockList from "./TimeBlockList";
 import PlannerViewSelector from "./PlannerViewSelector";
 import { db } from "../firebase";
-import { collection, doc, addDoc, onSnapshot, setDoc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import { collection, doc, addDoc, onSnapshot, setDoc, updateDoc, arrayUnion, arrayRemove, getDoc } from "firebase/firestore";
 import NewCategoryForm from "./NewCategoryForm";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { initialDayData, initialTimeBlocks, dayColumns } from "./initial-day-data";
@@ -30,8 +30,8 @@ function TimeBlockControl() {
   const [timeBlockList, setTimeBlockList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
   const [schedule, setSchedule] = useState([]);
+  const [displayCurrentSchedule, setDisplayCurrentSchedule] = useState();
   const [editing, setEditing] = useState(false);
-  // const [dayColumns, setDayColumns] = useState(dayColumns);
   const [viewSelector, setViewSelector] = useState('timeBlockList');
   const [formVisible, setFormVisible] = useState(false);
 
@@ -98,6 +98,23 @@ function TimeBlockControl() {
       },
       // (error) => {}
     );
+    
+    // const unSubscribeDisplayCurrentSchedule = onSnapshot(
+    //   collection(db, "schedules"),
+    //   (collectionSnapshot) => {
+    //     const displayCurrentSchedule = [];
+    //     collectionSnapshot.forEach((doc) => {
+    //       displayCurrentSchedule.push({
+    //         id: doc.id,
+    //         date: doc.data().date,
+    //         items: doc.data().items,
+    //         // add key property set to id for help with dnd
+    //       });
+    //     });
+    //     setSchedule(schedule);
+    //   },
+    //   // (error) => {}
+    // );
 
     const initialize = () => {
       unSubscribeTimeBlocks();
@@ -125,8 +142,8 @@ function TimeBlockControl() {
     await addDoc(collection(db, "schedules"), schedule);
   }
 
-  const addItemToSchedule = async (item) => {
-    const reference = doc(db, "schedules", "dayOneTest")
+  const addItemToSchedule = async (item, currentSchedule) => {
+    const reference = doc(db, "schedules", currentSchedule)
     await updateDoc(reference, {
       items: arrayUnion(item)
     });
@@ -189,11 +206,11 @@ function TimeBlockControl() {
       const result = move(timeBlockList, schedule, source, destination);
       setTimeBlockList(result.timeBlockList)
       setSchedule(result.schedule)
-      // addItemToSchedule(result.removedItem)
+      // addItemToSchedule(result.removedItem, schedule)
     };
-    console.log('timeBlocks', timeBlockList);
-    console.log('schedule', schedule);
-    console.log('result', result);
+    // console.log('timeBlocks', timeBlockList);
+    // console.log('schedule', schedule);
+    // console.log('result', result);
   }
   
   let currentState = null;
@@ -228,8 +245,8 @@ function TimeBlockControl() {
     <React.Fragment>
       {topTaskBar}
       <StyledMainBodyDiv>
+      {console.log('schedule', schedule)};
         <DragDropContext onDragEnd={onDragEnd}>
-          {console.log({schedule})}
           {dateDisplay}
           {currentState}
           {otherCurrentState}

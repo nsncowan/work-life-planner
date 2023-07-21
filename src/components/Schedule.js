@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import TimeSlot from "./TimeSlot";
 import { Droppable } from 'react-beautiful-dnd';
 
+
 const StyledScheduleeDiv = styled.div`
     display: flex;
     flex-direction: column;
@@ -43,20 +44,27 @@ function Schedule(props) {
 
 
   const { schedule, currentDay, addItemToSchedule, addSchedule0 } = props;
-  const scheduleDate = props.currentDay;
+  const scheduleToDisplay = schedule.find(({ date }) => date === currentDay);
+  // const itemsToDisplay = scheduleToDisplay.items;
 
   function handleAddScheduleButtonClick(e) {
     e.preventDefault();
     addSchedule0({
-      date: currentDay
+      date: currentDay,
+      items: [
+        { name: 'family time', category: 'family' },
+        { name: 'yoga', category: 'health' },
+        { name: 'study', category: 'education' },
+        { name: 'relax time', category: 'self-care' },
+        { name: 'wash dishes', category: 'chores' },
+        { name: 'gardening', category: 'outdoor time' },
+      ]
     });
   }
   
   function handleAddItemToScheduleButtonClick(e) {
     e.preventDefault();
-    addItemToSchedule({
-      date: currentDay
-    });
+    addItemToSchedule();
   }
 
 /* 
