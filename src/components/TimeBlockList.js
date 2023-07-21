@@ -23,7 +23,7 @@ function TimeBlockList(props) {
   
   
   return (
-  <Droppable droppableId="timeBlockList" key="timeBlockList">
+  <Droppable droppableId="timeBlockList" /* key="timeBlockList" */>
     {(provided, snapshot) => (
       <StyledTimeBlockDiv 
         ref={provided.innerRef} 

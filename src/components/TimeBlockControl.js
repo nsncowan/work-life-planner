@@ -5,7 +5,7 @@ import NewTimeBlockForm from "./NewTImeBlockForm";
 import TimeBlockList from "./TimeBlockList";
 import PlannerViewSelector from "./PlannerViewSelector";
 import { db } from "../firebase";
-import { collection, doc, addDoc, onSnapshot, setDoc, updateDoc, arrayUnion, arrayRemove, getDoc } from "firebase/firestore";
+import { collection, doc, addDoc, onSnapshot, getDocs, setDoc, updateDoc, arrayUnion, arrayRemove, getDoc, query, where } from "firebase/firestore";
 import NewCategoryForm from "./NewCategoryForm";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { initialDayData, initialTimeBlocks, dayColumns } from "./initial-day-data";
@@ -40,6 +40,7 @@ function TimeBlockControl() {
     let nextDay = addDays(newDay, 1)
     // let nextDay = add(newDay, { days: 1}) /// THIS ALSO WORKS
     setCurrentDay(format(nextDay, 'MM-dd-yyyy'))
+    // setDisplayCurrentSchedule(getScheduleToDisplay(schedule));
   }
   
   function prevDay() {
@@ -49,7 +50,9 @@ function TimeBlockControl() {
     setCurrentDay(format(nextDay, 'MM-dd-yyyy'))
   }
 
+  
   useEffect(() => {
+    
     const unSubscribeTimeBlocks = onSnapshot(
       collection(db, "timeBlocks"),
       (collectionSnapshot) => {
@@ -65,22 +68,53 @@ function TimeBlockControl() {
         setTimeBlockList(timeBlocks);
       },
       // (error) => {}
-    );
-
-    const unSubscribeCategory = onSnapshot(
-      collection(db, "categories"),
-      (collectionSnapshot) => {
-        const categories = [];
-        collectionSnapshot.forEach((doc) => {
-          categories.push({
-            name: doc.data().name,
-            id: doc.id
+      );
+      
+      const unSubscribeCategory = onSnapshot(
+        collection(db, "categories"),
+        (collectionSnapshot) => {
+          const categories = [];
+          collectionSnapshot.forEach((doc) => {
+            categories.push({
+              name: doc.data().name,
+              id: doc.id
+            });
           });
-        });
-        setCategoryList(categories);
-      },
-      // (error) => {}
-    );
+          setCategoryList(categories);
+        },
+        // (error) => {}
+        );
+
+        // const findSchedule = async () => {
+        //   const scheduleToDisplay = [];
+          const ref = collection(db, "schedules");
+          const q = query(ref, where("date", "==", currentDay));
+        //   const querySnapshot = await getDocs(q);
+        //   querySnapshot.forEach((doc) => {
+        //   scheduleToDisplay.push({
+        //     name: doc.data().name,
+        //     category: doc.data().category,
+        //   })
+        // });
+        //   setDisplayCurrentSchedule(scheduleToDisplay);
+        // }
+
+      const findSchedule = 
+        onSnapshot(q,(snapshot) => {
+          const scheduleToDisplay = [];
+          snapshot.docs.forEach((doc) => {
+            scheduleToDisplay.push({
+              id: doc.id,
+              date: doc.data().date,
+              items: doc.data().items,
+            });
+          });
+          console.log("scheduleToDisplay : ", scheduleToDisplay);
+          setDisplayCurrentSchedule(scheduleToDisplay);
+          console.log("displayCurrentSchedule : ", displayCurrentSchedule);
+        },
+        // (error) => {}
+      );
 
     const unSubscribeSchedule = onSnapshot(
       collection(db, "schedules"),
@@ -98,28 +132,12 @@ function TimeBlockControl() {
       },
       // (error) => {}
     );
-    
-    // const unSubscribeDisplayCurrentSchedule = onSnapshot(
-    //   collection(db, "schedules"),
-    //   (collectionSnapshot) => {
-    //     const displayCurrentSchedule = [];
-    //     collectionSnapshot.forEach((doc) => {
-    //       displayCurrentSchedule.push({
-    //         id: doc.id,
-    //         date: doc.data().date,
-    //         items: doc.data().items,
-    //         // add key property set to id for help with dnd
-    //       });
-    //     });
-    //     setSchedule(schedule);
-    //   },
-    //   // (error) => {}
-    // );
 
     const initialize = () => {
       unSubscribeTimeBlocks();
       unSubscribeCategory();
       unSubscribeSchedule();
+      findSchedule();
     }
     return initialize;
   }, []);
@@ -148,6 +166,15 @@ function TimeBlockControl() {
       items: arrayUnion(item)
     });
   }
+
+  // const getScheduleToDisplay = (schedules) => {
+  //   const scheduleItemsToDisplay = [];
+  //   const targetSchedule = schedule.find(({ date }) => date === currentDay);
+  //   targetSchedule.items.forEach((item) => {
+  //     scheduleItemsToDisplay.push(item);
+  //   });
+  //   return scheduleItemsToDisplay;
+  // };
 
 // ================================================================================================
   const reorder = (list, startIndex, endIndex) => {
@@ -234,18 +261,22 @@ function TimeBlockControl() {
   else {
     currentState = <TimeBlockList timeBlockList={timeBlockList} />;
     otherCurrentState = <Schedule 
-                          schedule={schedule} 
+                          schedule={schedule}
+                          // scheduleToDisplay={displayCurrentSchedule} 
                           addItemToSchedule={addItemToSchedule} 
                           addSchedule0={addSchedule0}
-                          currentDay={currentDay} />;
+                          currentDay={currentDay}
+                           />;
     buttonOne = 'go to timeblock form';
+    
   }
   
   return (
     <React.Fragment>
       {topTaskBar}
       <StyledMainBodyDiv>
-      {console.log('schedule', schedule)};
+      {console.log('schedule', schedule)}
+      {console.log('displayCurrentSchedule', displayCurrentSchedule)}
         <DragDropContext onDragEnd={onDragEnd}>
           {dateDisplay}
           {currentState}
