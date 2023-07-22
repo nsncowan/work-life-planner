@@ -5,7 +5,7 @@ import TimeSlot from "./TimeSlot";
 import { Droppable } from 'react-beautiful-dnd';
 
 
-const StyledScheduleeDiv = styled.div`
+const StyledScheduleDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -76,45 +76,27 @@ pass currentSchedule into component to map through items
 */
 
   return (
-    // <div style={{
-    //   display: "flex",
-    //   flexDirection: "row",
-    //   alignItems: "center"
-    // }}>
-    //   {Object.entries(dayColumns).map(([dayColumnId, dayColumn], index) => {
-    //     return (
-          <Droppable droppableId='schedule' key='schedule'>
-            {(provided, snapshot) => (
-              <StyledScheduleeDiv
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-              /* draggingOver={snapshot.draggingOver} */>
-                <React.Fragment>
-                  <h2>{currentDay}</h2>
-                  <button onClick={handleAddScheduleButtonClick}>addSchedule0</button>
-                  <button onClick={handleAddItemToScheduleButtonClick}>addItemToSchedule</button>
-                  {scheduleToDisplay?.map((entry, index) => 
-                    <div>
-                      <h2>{entry.date}</h2>
-                          {entry.items.map((timeSlot, index) =>
-                            <TimeSlot
-                            time={timeSlot.time}
-                            name={timeSlot.name}
-                            category={timeSlot.category}
-                            id={timeSlot.id}
-                            key={timeSlot.id}
-                            index={index}
-                            />
-                            )}
-                            {provided.placeholder}
-                    </div>)}
-                </React.Fragment>
-              </StyledScheduleeDiv>
-            )}
-          </Droppable>
-      //     )
-      //   })};
-      // </div>
+         <React.Fragment>
+                    <h2>{currentDay}</h2>
+                    <button onClick={handleAddScheduleButtonClick}>addSchedule0</button>
+                    <button onClick={handleAddItemToScheduleButtonClick}>addItemToSchedule</button>
+                    {scheduleToDisplay?.map((entry, index) =>
+                      <div>
+                        <h2>{entry.date}</h2>
+                        <Droppable droppableId='schedule' key='schedule'>
+                          {(provided, snapshot) => (
+                            <StyledScheduleDiv ref={provided.innerRef} {...provided.droppableProps} style={{background: snapshot.isDraggingOver ? "lightblue" : "lightgrey",}}>
+                                {entry.items.map((timeSlot, index) =>
+                                  <TimeSlot time={timeSlot.time} name={timeSlot.name} category={timeSlot.category} id={timeSlot.id} key={timeSlot.id} index={index}/>
+                                  )}
+                              {provided.placeholder}
+                            </StyledScheduleDiv>
+                          )}
+                        </Droppable>
+                      </div>
+                    )}
+                  </React.Fragment>
+      
   );
 }
 

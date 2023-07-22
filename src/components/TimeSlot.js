@@ -50,7 +50,7 @@ function TimeSlot(props) {
             <h4>{props.name}</h4>
             <h6>{props.category}</h6>
             <h6>{props.id}</h6>
-          {provided.placeholder}
+            {provided.placeholder}
         </StyledTimeSlotDiv>
       )}
     </Draggable>
