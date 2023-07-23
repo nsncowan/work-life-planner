@@ -31,6 +31,17 @@ Take a cue from the spread operator that reassigns an Id to the copied item. Thi
     so passing `props.id` to each `DraggableId` being mapped wasn't actually giving them id's to use. 
     Here's the  bandaid fix: `<Draggable draggableId={props.name} index={props.index} key={props.id}>`
 
+- Bug: was not able to update schedule items in firestore
+  - i forgot that the schedule being passed to the component was a in an array of 1 object
+  - solution: when specifying which schedule id to target for the update, I indicated the `[0]` index:
+    ```js 
+      addItemToSchedule({
+      id: scheduleToDisplay[0].id,
+      date: scheduleToDisplay[0].date,
+      items: scheduleItems
+      });
+    ```
+
 
 ## dnd
 * Create a background that displays the blank daily timetable
