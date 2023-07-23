@@ -23,6 +23,8 @@ const StyledMainBodyDiv = styled.div`
   align-content: center;
   justify-content: center;
   width: 100%;
+  border: 2px solid #FF9494;
+  padding: 5px;
   `;
 
 function TimeBlockControl() {
@@ -289,11 +291,11 @@ const handleClick = () => {
   return (
     <React.Fragment>
       {topTaskBar}
+      {dateDisplay}
       <StyledMainBodyDiv>
       {/* {console.log('schedule', schedule)}
       {console.log('displayCurrentSchedule', displayCurrentSchedule)} */}
         <DragDropContext onDragEnd={onDragEnd}>
-          {dateDisplay}
           {currentState}
           {otherCurrentState}
         </DragDropContext>
