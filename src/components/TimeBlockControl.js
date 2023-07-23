@@ -217,30 +217,13 @@ const handleClick = () => {
     const removedWithNewId = { ...removed, id: v4() };
     destClone.splice(droppableDestination.index, 0, removedWithNewId); // replaces the dragged timeBlock with a copy (and assigns a new id in the process)
     sourceClone.splice(droppableSource.index, 0, removed); 
-    
-    // const result = {};
-    // result[droppableSource.droppableId] = sourceClone;
-    // result[droppableDestination.droppableId] = destClone;
-    
+        
     return {
       [droppableSource.droppableId]: sourceClone,
       [droppableDestination.droppableId]: destClone,
       removedItem: removedWithNewId
     };
-
-    
-    // return result;
   };
-
-  // const copy = (source, destination, droppableSource, droppableDestination) => {
-  //   const sourceClone = Array.from(source);
-  //   const destClone = Array.from(destination);
-  //   const copyItem = sourceClone[droppableSource.index];
-
-  //   destClone.splice(droppableDestination.index, 0, { ...copyItem, id: v4() });
-
-  //   return destClone;
-  // };
 
   const onDragEnd = (result) => {
     const { source, destination, } = result;

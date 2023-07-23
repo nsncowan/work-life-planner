@@ -9,7 +9,7 @@ const StyledTimeSlotDiv = styled.div`
     align-items: center;
     align-content: space-around;
     justify-content: center;
-    width: 9rem;
+    width: 15rem;
     padding: .75rem;
     margin: .15rem;
     border-radius: 54px;
@@ -45,9 +45,9 @@ function TimeSlot(props) {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
            /* isDragging={snapshot.isDragging} */ >
+            <h6>{props.time}</h6>
             <h4>{props.name}</h4>
             <h6>{props.category}</h6>
-            <h6>{props.id}</h6>
             {provided.placeholder}
         </StyledTimeSlotDiv>
       )}

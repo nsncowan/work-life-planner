@@ -28,12 +28,19 @@ function AltSchedule(props) {
     addSchedule0({
       date: currentDay,
       items: [
-        { id: v4(), name: 'aaa', category: '123' },
-        { id: v4(), name: 'bbb', category: '345' },
-        { id: v4(), name: 'ccc', category: '567' },
-        { id: v4(), name: 'ddd', category: '789' },
-        { id: v4(), name: 'eee', category: '222' },
-        { id: v4(), name: 'fff', category: '333' },
+        { id: v4(), hour: '8:00' },
+        { id: v4(), hour: '9:00' },
+        { id: v4(), hour: '10:00' },
+        { id: v4(), hour: '11:00' },
+        { id: v4(), hour: '12:00' },
+        { id: v4(), hour: '1:00' },
+        { id: v4(), hour: '2:00' },
+        { id: v4(), hour: '3:00' },
+        { id: v4(), hour: '4:00' },
+        { id: v4(), hour: '5:00' },
+        { id: v4(), hour: '6:00' },
+        { id: v4(), hour: '7:00' },
+        { id: v4(), hour: '8:00' },
       ]
     });
   }
@@ -60,14 +67,14 @@ function AltSchedule(props) {
   return (
     <React.Fragment>
       <h2>{currentDay}</h2>
-      <button onClick={handleAddScheduleButtonClick}>addSchedule0</button>
+      <button onClick={handleAddScheduleButtonClick}>Add Schedule</button>
       <button onClick={handleAddItemToScheduleButtonClick}>Save Schedule</button>
         {/* <h2>{scheduleToDisplay[0].id}</h2> */}
         <Droppable droppableId='scheduleItems' key='scheduleItems'>
           {(provided, snapshot) => (
             <StyledScheduleDiv ref={provided.innerRef} {...provided.droppableProps} style={{background: snapshot.isDraggingOver ? "lightblue" : "lightgrey",}}>
               {scheduleItems.map((timeSlot, index) =>
-                <TimeSlot time={timeSlot.time} name={timeSlot.name} category={timeSlot.category} id={timeSlot.id} key={timeSlot.id} index={index} v4={v4()}/>
+                <TimeSlot time={timeSlot.hour} name={timeSlot.name} category={timeSlot.category} id={timeSlot.id} key={timeSlot.id} index={index} v4={v4()}/>
               )}
               {provided.placeholder}
             </StyledScheduleDiv>
