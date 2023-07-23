@@ -44,7 +44,7 @@ function TimeSlot(props) {
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-           isDragging={snapshot.isDragging} >
+           /* isDragging={snapshot.isDragging} */ >
             <h5>{props.time}</h5>
             <h5>{props.date}</h5>
             <h4>{props.name}</h4>
