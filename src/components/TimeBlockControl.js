@@ -158,12 +158,21 @@ function TimeBlockControl() {
     await addDoc(collection(db, "schedules"), schedule);
   }
 
-  const addItemToSchedule = async (item, currentSchedule) => {
-    const reference = doc(db, "schedules", currentSchedule)
-    await updateDoc(reference, {
-      items: arrayUnion(item)
-    });
+  // const addItemToSchedule = async (item, currentScheduleId) => {
+  //   const reference = doc(db, "schedules", currentScheduleId)
+  //   await updateDoc(reference, {
+  //     items: arrayUnion(item)
+  //   });
+  // }
+
+  const addItemToSchedule = async (scheduleToEdit) => {
+    const docRef = doc(db, "schedules", scheduleToEdit.id);
+    await updateDoc(docRef, scheduleToEdit);
   }
+
+  // const addItemToSchedule = async (schedule) => {
+  //   await setDoc(collection(db, "schedules"), schedule);
+  // }
 
   // const getScheduleToDisplay = (schedules) => {
   //   const scheduleItemsToDisplay = [];

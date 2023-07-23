@@ -23,32 +23,46 @@ function AltSchedule(props) {
 
   const { schedule, scheduleToDisplay, currentDay, addItemToSchedule, addSchedule0, scheduleItems } = props;
 
+  // function handleAddScheduleButtonClick(e) {
+  //   e.preventDefault();
+  //   addSchedule0({
+  //     date: currentDay,
+  //     items: [
+  //       { id: v4(), name: 'family time 7/23', category: 'family' },
+  //       { id: v4(), name: 'yoga 7/23', category: 'health' },
+  //       { id: v4(), name: 'study 7/23', category: 'education' },
+  //       { id: v4(), name: 'relax time 7/23', category: 'self-care' },
+  //       { id: v4(), name: 'wash dishes 7/23', category: 'chores' },
+  //       { id: v4(), name: 'gardening 7/23', category: 'outdoor time' },
+  //     ]
+  //   });
+  // }
+  
   function handleAddScheduleButtonClick(e) {
     e.preventDefault();
     addSchedule0({
       date: currentDay,
-      items: [
-        { id: v4(), name: 'family time 7/23', category: 'family' },
-        { id: v4(), name: 'yoga 7/23', category: 'health' },
-        { id: v4(), name: 'study 7/23', category: 'education' },
-        { id: v4(), name: 'relax time 7/23', category: 'self-care' },
-        { id: v4(), name: 'wash dishes 7/23', category: 'chores' },
-        { id: v4(), name: 'gardening 7/23', category: 'outdoor time' },
-      ]
+      items: scheduleItems
     });
   }
   
   function handleAddItemToScheduleButtonClick(e) {
     e.preventDefault();
-    addItemToSchedule();
+    addItemToSchedule({
+      id: scheduleToDisplay[0].id,
+      date: scheduleToDisplay[0].date,
+      items: scheduleItems
+    });
   }
+
+  
 
   return (
     <React.Fragment>
       <h2>{currentDay}</h2>
       <button onClick={handleAddScheduleButtonClick}>addSchedule0</button>
       <button onClick={handleAddItemToScheduleButtonClick}>addItemToSchedule</button>
-        {/* <h2>{scheduleToDisplay.date}</h2> */}
+        {/* <h2>{scheduleToDisplay[0].id}</h2> */}
         <Droppable droppableId='scheduleItems' key='scheduleItems'>
           {(provided, snapshot) => (
             <StyledScheduleDiv ref={provided.innerRef} {...provided.droppableProps} style={{background: snapshot.isDraggingOver ? "lightblue" : "lightgrey",}}>
