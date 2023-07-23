@@ -233,6 +233,7 @@ function TimeBlockControl() {
       setScheduleItems(result.scheduleItems)
       // addItemToSchedule(result.removedItem, schedule)
     };
+    console.log('scheduleItems onDragEnd: ', scheduleItems)
   }
   
   let currentState = null;
