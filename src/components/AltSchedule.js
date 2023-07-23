@@ -23,28 +23,28 @@ function AltSchedule(props) {
 
   const { schedule, scheduleToDisplay, currentDay, addItemToSchedule, addSchedule0, scheduleItems } = props;
 
-  // function handleAddScheduleButtonClick(e) {
-  //   e.preventDefault();
-  //   addSchedule0({
-  //     date: currentDay,
-  //     items: [
-  //       { id: v4(), name: 'family time 7/23', category: 'family' },
-  //       { id: v4(), name: 'yoga 7/23', category: 'health' },
-  //       { id: v4(), name: 'study 7/23', category: 'education' },
-  //       { id: v4(), name: 'relax time 7/23', category: 'self-care' },
-  //       { id: v4(), name: 'wash dishes 7/23', category: 'chores' },
-  //       { id: v4(), name: 'gardening 7/23', category: 'outdoor time' },
-  //     ]
-  //   });
-  // }
-  
   function handleAddScheduleButtonClick(e) {
     e.preventDefault();
     addSchedule0({
       date: currentDay,
-      items: scheduleItems
+      items: [
+        { id: v4(), name: 'aaa', category: '123' },
+        { id: v4(), name: 'bbb', category: '345' },
+        { id: v4(), name: 'ccc', category: '567' },
+        { id: v4(), name: 'ddd', category: '789' },
+        { id: v4(), name: 'eee', category: '222' },
+        { id: v4(), name: 'fff', category: '333' },
+      ]
     });
   }
+  
+  // function handleAddScheduleButtonClick(e) {
+  //   e.preventDefault();
+  //   addSchedule0({
+  //     date: currentDay,
+  //     items: scheduleItems
+  //   });
+  // }
   
   function handleAddItemToScheduleButtonClick(e) {
     e.preventDefault();
@@ -61,7 +61,7 @@ function AltSchedule(props) {
     <React.Fragment>
       <h2>{currentDay}</h2>
       <button onClick={handleAddScheduleButtonClick}>addSchedule0</button>
-      <button onClick={handleAddItemToScheduleButtonClick}>addItemToSchedule</button>
+      <button onClick={handleAddItemToScheduleButtonClick}>Save Schedule</button>
         {/* <h2>{scheduleToDisplay[0].id}</h2> */}
         <Droppable droppableId='scheduleItems' key='scheduleItems'>
           {(provided, snapshot) => (

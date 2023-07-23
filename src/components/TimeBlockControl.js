@@ -115,26 +115,7 @@ useEffect(() => {
     //       setScheduleItems(scheduleItems.flat(2));
     //       console.log('scheduleItems: ', scheduleItems);
     //     },
-    //     // (error) => {}
-    //     );
-
-/*     const unSubscribeSchedule = onSnapshot(
-      collection(db, "schedules"),
-      (collectionSnapshot) => {
-        const schedule = [];
-        collectionSnapshot.forEach((doc) => {
-          schedule.push({
-            id: doc.id,
-            date: doc.data().date,
-            items: doc.data().items,
-            // add key property set to id for help with dnd
-          });
-        });
-        setSchedule(schedule);
-      },
-      // (error) => {}
-    );
- */
+    //   );
 
     const initialize = () => {
       unSubscribeTimeBlocks();
@@ -157,7 +138,6 @@ useEffect(() => {
               items: doc.data().items,
             });
           });
-          console.log("scheduleToDisplay : ", scheduleToDisplay);
           setScheduleToDisplay(scheduleToDisplay);
 
           const items = scheduleToDisplay.map((entry) => {
@@ -167,13 +147,12 @@ useEffect(() => {
           items.forEach((item) => {
             scheduleItems.push(item);
           });
-          setScheduleItems(scheduleItems.flat(2));
-          console.log('scheduleItems: ', scheduleItems);
+          setScheduleItems(scheduleItems.flat());
         },
         // (error) => {}
         );
     return () => findSchedule();
-  }, [currentDay])
+  }, [currentDay, /* scheduleItems */])
 // ================================================================================================
 
 const handleClick = () => {
@@ -235,9 +214,9 @@ const handleClick = () => {
     const destClone = Array.from(destination);
     const [removed] = sourceClone.splice(droppableSource.index, 1);
     // const copyItem = sourceClone[droppableSource.index];
-    const removedItem = { ...removed, id: v4() };
-    destClone.splice(droppableDestination.index, 0, removed);
-    sourceClone.splice(droppableSource.index, 0, removedItem); // replaces the dragged timeBlock with a copy (but assigns a new id in the process)
+    const removedWithNewId = { ...removed, id: v4() };
+    destClone.splice(droppableDestination.index, 0, removedWithNewId); // replaces the dragged timeBlock with a copy (and assigns a new id in the process)
+    sourceClone.splice(droppableSource.index, 0, removed); 
     
     // const result = {};
     // result[droppableSource.droppableId] = sourceClone;
@@ -246,7 +225,7 @@ const handleClick = () => {
     return {
       [droppableSource.droppableId]: sourceClone,
       [droppableDestination.droppableId]: destClone,
-      removedItem: removedItem
+      removedItem: removedWithNewId
     };
 
     
@@ -277,10 +256,16 @@ const handleClick = () => {
     else {
       const result = move(timeBlockList, scheduleItems, source, destination);
       setTimeBlockList(result.timeBlockList)
+      addItemToSchedule({
+        id: scheduleToDisplay[0].id,
+        date: scheduleToDisplay[0].date,
+        items: scheduleItems
+      });
       setScheduleItems(result.scheduleItems)
-      // addItemToSchedule(result.removedItem, schedule)
+      // setScheduleToDisplay(scheduleToDisplay)
     };
     console.log('scheduleItems onDragEnd: ', scheduleItems)
+    console.log('scheduleToDisplay[0] onDragEnd: ', scheduleToDisplay[0])
   }
   
   let currentState = null;
