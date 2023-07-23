@@ -35,7 +35,7 @@ function TimeBlockControl() {
   const [editing, setEditing] = useState(false);
   const [viewSelector, setViewSelector] = useState('timeBlockList');
   const [formVisible, setFormVisible] = useState(false);
-  const [scheduleItems, setScheduleItems] = useState([]);
+  /* const [scheduleItems, setScheduleItems] = useState([]); */
   
   function nextDay() {
     let newDay = parse(currentDay, 'MM-dd-yyyy', new Date());
@@ -54,7 +54,6 @@ function TimeBlockControl() {
 
   
   useEffect(() => {
-    
     const unSubscribeTimeBlocks = onSnapshot(
       collection(db, "timeBlocks"),
       (collectionSnapshot) => {
@@ -87,22 +86,9 @@ function TimeBlockControl() {
         },
         // (error) => {}
         );
-
-        // const findSchedule = async () => {
-        //   const scheduleToDisplay = [];
-        //   const querySnapshot = await getDocs(q);
-        //   querySnapshot.forEach((doc) => {
-          //   scheduleToDisplay.push({
-            //     name: doc.data().name,
-            //     category: doc.data().category,
-            //   })
-            // });
-            //   setDisplayCurrentSchedule(scheduleToDisplay);
-            // }
             
     const ref = collection(db, "schedules");
     const q = query(ref, where("date", "==", currentDay));
-
     const findSchedule = 
         onSnapshot(q,(snapshot) => {
           const scheduleToDisplay = [];
@@ -115,22 +101,11 @@ function TimeBlockControl() {
           });
           console.log("scheduleToDisplay : ", scheduleToDisplay);
           setScheduleToDisplay(scheduleToDisplay);
-          console.log("displayCurrentSchedule : ", scheduleToDisplay);
-          const items = scheduleToDisplay.map((entry) => {
-            return entry.items;
-          });
-          const scheduleItems = [];
-          items.forEach((item) => {
-            scheduleItems.push(item);
-          });
-          setScheduleItems(scheduleItems.flat(2));
-          console.log('scheduleItems: ', scheduleItems);
-        
         },
         // (error) => {}
-      );
+        );
 
-    const unSubscribeSchedule = onSnapshot(
+/*     const unSubscribeSchedule = onSnapshot(
       collection(db, "schedules"),
       (collectionSnapshot) => {
         const schedule = [];
@@ -146,14 +121,12 @@ function TimeBlockControl() {
       },
       // (error) => {}
     );
-
+ */
     const initialize = () => {
       unSubscribeTimeBlocks();
       unSubscribeCategory();
-      // unSubscribeSchedule();
       findSchedule();
     }
-    // console.log("displayCurrentSchedule ITEMS : ", displayCurrentSchedule.items);
     return initialize;
   }, []);
 
@@ -239,7 +212,7 @@ function TimeBlockControl() {
     if(!destination) return;
     
     if(source.droppableId === 'schedule' && destination.droppableId === 'schedule') {
-      setSchedule(reorder(schedule, source.index, destination.index));
+      setScheduleToDisplay(reorder(schedule, source.index, destination.index));
     }
     else if (source.droppableId === 'timeBlockList' && destination.droppableId === 'timeBlockList') {
       setTimeBlockList(reorder(timeBlockList, source.index, destination.index));
@@ -270,7 +243,6 @@ function TimeBlockControl() {
   else {
     currentState = <TimeBlockList timeBlockList={timeBlockList} />;
     otherCurrentState = <Schedule 
-                          schedule={schedule}
                           scheduleToDisplay={scheduleToDisplay} 
                           addItemToSchedule={addItemToSchedule} 
                           addSchedule0={addSchedule0}
