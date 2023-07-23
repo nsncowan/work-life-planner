@@ -1,40 +1,7 @@
 ## Data
 
-```js
-import { collection, doc, setDoc, addDoc } from "firebase/firestore"; 
-
-const schedulesRef = collection(db, "schedules");
-const date = "whatever the currentDate state is"
-itemArray = 'array of items'
-
-await setDoc(doc(schedulesRef, date), {
-    name: "San Francisco", state: "CA", country: "USA",
-    capital: false, population: 860000,
-    regions: ["west_coast", "norcal"] });
-await setDoc(doc(citiesRef, "LA"), {
-    name: "Los Angeles", state: "CA", country: "USA",
-    capital: false, population: 3900000,
-    regions: ["west_coast", "socal"] });
-await setDoc(doc(citiesRef, "DC"), {
-    name: "Washington, D.C.", state: null, country: "USA",
-    capital: true, population: 680000,
-    regions: ["east_coast"] });
-await setDoc(doc(citiesRef, "TOK"), {
-    name: "Tokyo", state: null, country: "Japan",
-    capital: true, population: 9000000,
-    regions: ["kanto", "honshu"] });
-await setDoc(doc(citiesRef, "BJ"), {
-    name: "Beijing", state: null, country: "China",
-    capital: true, population: 21500000,
-    regions: ["jingjinji", "hebei"] });
-```
-
-
-
 ## brainstorm
-
 make a select date component that will affect 'currentDate' state
-
 
 Take a cue from the spread operator that reassigns an Id to the copied item. This could be a way to modify items with new times, names, etc
 
@@ -58,6 +25,11 @@ Take a cue from the spread operator that reassigns an Id to the copied item. Thi
       BUT the condition in the function was `if(source.droppableId === 'timeTable' && destination.droppableId === 'timeTable')`
 
 - Error: ReferenceError: Cannot access 'dayColumns' before initialization
+
+- Bug: schedule rendered correctly but the entire list moved as one item when I tried to drag something into it. 
+  - cause: in reading data from firestore, the id's for the individual items were getting lost, 
+    so passing `props.id` to each `DraggableId` being mapped wasn't actually giving them id's to use. 
+    Here's the  bandaid fix: `<Draggable draggableId={props.name} index={props.index} key={props.id}>`
 
 
 ## dnd

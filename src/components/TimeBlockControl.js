@@ -275,21 +275,21 @@ function TimeBlockControl() {
   
   else {
     currentState = <TimeBlockList timeBlockList={timeBlockList} />;
-    // otherCurrentState = <Schedule 
-    //                       schedule={schedule}
-    //                       scheduleToDisplay={displayCurrentSchedule} 
-    //                       addItemToSchedule={addItemToSchedule} 
-    //                       addSchedule0={addSchedule0}
-    //                       currentDay={currentDay}
-    //                        />;
-    otherCurrentState = <AltSchedule 
-                          //  schedule={schedule}
-                           scheduleToDisplay={scheduleToDisplay} 
-                           addItemToSchedule={addItemToSchedule} 
-                           addSchedule0={addSchedule0}
-                           currentDay={currentDay}
-                           scheduleItems={scheduleItems}
-                            />;
+    otherCurrentState = <Schedule 
+                          schedule={schedule}
+                          scheduleToDisplay={scheduleToDisplay} 
+                          addItemToSchedule={addItemToSchedule} 
+                          addSchedule0={addSchedule0}
+                          currentDay={currentDay}
+                           />;
+    // otherCurrentState = <AltSchedule 
+    //                       //  schedule={schedule}
+    //                        scheduleToDisplay={scheduleToDisplay} 
+    //                        addItemToSchedule={addItemToSchedule} 
+    //                        addSchedule0={addSchedule0}
+    //                        currentDay={currentDay}
+    //                        scheduleItems={scheduleItems}
+    //                         />;
     buttonOne = 'go to timeblock form';
     
   }

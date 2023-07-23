@@ -18,36 +18,10 @@ const StyledScheduleDiv = styled.div`
     font-weight: 500;
   `;
 
-const StyledTimeSlotDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: space-around;
-  justify-content: center;
-  width: 9rem;
-  padding: .75rem;
-  margin: .15rem;
-  border-radius: 54px;
-  text-align: center;
-  font-size: .833rem;
-  transition: background-color .25s;
-  border: 2px solid #FF9494;
-  font-weight: 500;
-  cursor: pointer;
-  color: #FF9494;
-  background-color: #FFF5E4;
-`;
-
-
-
 function Schedule(props) {
 
 
   const { schedule, scheduleToDisplay, currentDay, addItemToSchedule, addSchedule0 } = props;
-  // const scheduleToDisplay = schedule.find(({ date }) => date === currentDay);
-  // const itemsToDisplay = scheduleToDisplay.items;
-  // const itemsToMap = scheduleToDisplay.items;
-  
 
   function handleAddScheduleButtonClick(e) {
     e.preventDefault();
@@ -68,12 +42,6 @@ function Schedule(props) {
     e.preventDefault();
     addItemToSchedule();
   }
-
-/* 
-create a func to set currentSchedule to a particular date
-use buttons to run function to set currentSchedule
-pass currentSchedule into component to map through items
-*/
 
   return (
          <React.Fragment>
