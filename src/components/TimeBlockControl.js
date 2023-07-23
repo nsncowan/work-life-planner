@@ -10,6 +10,7 @@ import NewCategoryForm from "./NewCategoryForm";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { initialDayData, initialTimeBlocks, dayColumns } from "./initial-day-data";
 import Schedule from "./Schedule";
+import AltSchedule from "./AltSchedule";
 import TimeSlot from "./TimeSlot";
 import SelectDate from "./SelectDate";
 import { format, addDays, eachDayOfInterval, startOfToday, startOfMonth, endOfMonth, parseISO, parse, add, subDays} from "date-fns";
@@ -30,11 +31,12 @@ function TimeBlockControl() {
   const [timeBlockList, setTimeBlockList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
   const [schedule, setSchedule] = useState([]);
-  const [displayCurrentSchedule, setDisplayCurrentSchedule] = useState();
+  const [scheduleToDisplay, setScheduleToDisplay] = useState([]);
   const [editing, setEditing] = useState(false);
   const [viewSelector, setViewSelector] = useState('timeBlockList');
   const [formVisible, setFormVisible] = useState(false);
-
+  const [scheduleItems, setScheduleItems] = useState([]);
+  
   function nextDay() {
     let newDay = parse(currentDay, 'MM-dd-yyyy', new Date());
     let nextDay = addDays(newDay, 1)
@@ -112,8 +114,18 @@ function TimeBlockControl() {
             });
           });
           console.log("scheduleToDisplay : ", scheduleToDisplay);
-          setDisplayCurrentSchedule(scheduleToDisplay);
-          console.log("displayCurrentSchedule : ", displayCurrentSchedule);
+          setScheduleToDisplay(scheduleToDisplay);
+          console.log("displayCurrentSchedule : ", scheduleToDisplay);
+          const items = scheduleToDisplay.map((entry) => {
+            return entry.items;
+          });
+          const scheduleItems = [];
+          items.forEach((item) => {
+            scheduleItems.push(item);
+          });
+          setScheduleItems(scheduleItems.flat(2));
+          console.log('scheduleItems: ', scheduleItems);
+        
         },
         // (error) => {}
       );
@@ -263,13 +275,21 @@ function TimeBlockControl() {
   
   else {
     currentState = <TimeBlockList timeBlockList={timeBlockList} />;
-    otherCurrentState = <Schedule 
-                          schedule={schedule}
-                          scheduleToDisplay={displayCurrentSchedule} 
-                          addItemToSchedule={addItemToSchedule} 
-                          addSchedule0={addSchedule0}
-                          currentDay={currentDay}
-                           />;
+    // otherCurrentState = <Schedule 
+    //                       schedule={schedule}
+    //                       scheduleToDisplay={displayCurrentSchedule} 
+    //                       addItemToSchedule={addItemToSchedule} 
+    //                       addSchedule0={addSchedule0}
+    //                       currentDay={currentDay}
+    //                        />;
+    otherCurrentState = <AltSchedule 
+                          //  schedule={schedule}
+                           scheduleToDisplay={scheduleToDisplay} 
+                           addItemToSchedule={addItemToSchedule} 
+                           addSchedule0={addSchedule0}
+                           currentDay={currentDay}
+                           scheduleItems={scheduleItems}
+                            />;
     buttonOne = 'go to timeblock form';
     
   }
