@@ -28,12 +28,12 @@ function AltSchedule(props) {
     addSchedule0({
       date: currentDay,
       items: [
-        { name: 'family time', category: 'family' },
-        { name: 'yoga', category: 'health' },
-        { name: 'study', category: 'education' },
-        { name: 'relax time', category: 'self-care' },
-        { name: 'wash dishes', category: 'chores' },
-        { name: 'gardening', category: 'outdoor time' },
+        { id: v4(), name: 'family time 7/23', category: 'family' },
+        { id: v4(), name: 'yoga 7/23', category: 'health' },
+        { id: v4(), name: 'study 7/23', category: 'education' },
+        { id: v4(), name: 'relax time 7/23', category: 'self-care' },
+        { id: v4(), name: 'wash dishes 7/23', category: 'chores' },
+        { id: v4(), name: 'gardening 7/23', category: 'outdoor time' },
       ]
     });
   }
