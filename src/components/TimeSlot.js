@@ -38,15 +38,13 @@ const StyledTimeSlotDiv = styled.div`
 
 function TimeSlot(props) {
   return (
-    <Draggable draggableId={props.name} index={props.index} key={props.id}>
+    <Draggable draggableId={props.id} index={props.index} key={props.id}>
       {(provided, snapshot) => (
         <StyledTimeSlotDiv 
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
            /* isDragging={snapshot.isDragging} */ >
-            <h5>{props.time}</h5>
-            <h5>{props.date}</h5>
             <h4>{props.name}</h4>
             <h6>{props.category}</h6>
             <h6>{props.id}</h6>

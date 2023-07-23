@@ -212,7 +212,7 @@ function TimeBlockControl() {
     if(!destination) return;
     
     if(source.droppableId === 'schedule' && destination.droppableId === 'schedule') {
-      setScheduleToDisplay(reorder(schedule, source.index, destination.index));
+      setScheduleToDisplay(reorder(scheduleToDisplay, source.index, destination.index));
     }
     else if (source.droppableId === 'timeBlockList' && destination.droppableId === 'timeBlockList') {
       setTimeBlockList(reorder(timeBlockList, source.index, destination.index));

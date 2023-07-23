@@ -48,11 +48,11 @@ function TimeBlockList(props) {
   );
 }
 
-TimeBlockList.propTypes = {
-  name: PropTypes.string,
-  category: PropTypes.string,
-  id: PropTypes.string,
-  key: PropTypes.string
-};
+// TimeBlockList.propTypes = {
+//   name: PropTypes.string,
+//   category: PropTypes.string,
+//   id: PropTypes.string,
+//   key: PropTypes.string
+// };
 
 export default TimeBlockList;

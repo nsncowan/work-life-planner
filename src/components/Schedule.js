@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import styled from 'styled-components';
 import TimeSlot from "./TimeSlot";
 import { Droppable } from 'react-beautiful-dnd';
+import { v4 } from 'uuid';
 
 
 const StyledScheduleDiv = styled.div`
@@ -28,12 +29,12 @@ function Schedule(props) {
     addSchedule0({
       date: currentDay,
       items: [
-        { name: 'family time', category: 'family' },
-        { name: 'yoga', category: 'health' },
-        { name: 'study', category: 'education' },
-        { name: 'relax time', category: 'self-care' },
-        { name: 'wash dishes', category: 'chores' },
-        { name: 'gardening', category: 'outdoor time' },
+        { id: v4(), name: 'family time', category: 'family' },
+        { id: v4(), name: 'yoga', category: 'health' },
+        { id: v4(), name: 'study', category: 'education' },
+        { id: v4(), name: 'relax time', category: 'self-care' },
+        { id: v4(), name: 'wash dishes', category: 'chores' },
+        { id: v4(), name: 'gardening', category: 'outdoor time' },
       ]
     });
   }
@@ -50,7 +51,7 @@ function Schedule(props) {
       <button onClick={handleAddItemToScheduleButtonClick}>addItemToSchedule</button>
       {scheduleToDisplay?.map((entry, index) =>
         <StyledScheduleDiv>
-          <h2>{entry.date}</h2>
+          {/* <h2>{entry.date}</h2> */}
           <Droppable droppableId='schedule' key='schedule'>
             {(provided, snapshot) => (
               <div ref={provided.innerRef} {...provided.droppableProps} style={{background: snapshot.isDraggingOver ? "lightblue" : "lightgrey",}}>
