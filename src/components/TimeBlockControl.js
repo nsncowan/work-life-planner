@@ -35,7 +35,7 @@ function TimeBlockControl() {
   const [editing, setEditing] = useState(false);
   const [viewSelector, setViewSelector] = useState('timeBlockList');
   const [formVisible, setFormVisible] = useState(false);
-  /* const [scheduleItems, setScheduleItems] = useState([]); */
+  const [scheduleItems, setScheduleItems] = useState([]);
   
   function nextDay() {
     let newDay = parse(currentDay, 'MM-dd-yyyy', new Date());
@@ -101,6 +101,16 @@ function TimeBlockControl() {
           });
           console.log("scheduleToDisplay : ", scheduleToDisplay);
           setScheduleToDisplay(scheduleToDisplay);
+
+          const items = scheduleToDisplay.map((entry) => {
+            return entry.items;
+          });
+          const scheduleItems = [];
+          items.forEach((item) => {
+            scheduleItems.push(item);
+          });
+          setScheduleItems(scheduleItems.flat(2));
+          console.log('scheduleItems: ', scheduleItems);
         },
         // (error) => {}
         );
@@ -212,7 +222,7 @@ function TimeBlockControl() {
     if(!destination) return;
     
     if(source.droppableId === 'schedule' && destination.droppableId === 'schedule') {
-      setScheduleToDisplay(reorder(scheduleToDisplay, source.index, destination.index));
+      setScheduleItems(reorder(scheduleItems, source.index, destination.index));
     }
     else if (source.droppableId === 'timeBlockList' && destination.droppableId === 'timeBlockList') {
       setTimeBlockList(reorder(timeBlockList, source.index, destination.index));
@@ -242,20 +252,20 @@ function TimeBlockControl() {
   
   else {
     currentState = <TimeBlockList timeBlockList={timeBlockList} />;
-    otherCurrentState = <Schedule 
-                          scheduleToDisplay={scheduleToDisplay} 
-                          addItemToSchedule={addItemToSchedule} 
-                          addSchedule0={addSchedule0}
-                          currentDay={currentDay}
-                           />;
-    // otherCurrentState = <AltSchedule 
-    //                       //  schedule={schedule}
-    //                        scheduleToDisplay={scheduleToDisplay} 
-    //                        addItemToSchedule={addItemToSchedule} 
-    //                        addSchedule0={addSchedule0}
-    //                        currentDay={currentDay}
-    //                        scheduleItems={scheduleItems}
-    //                         />;
+    // otherCurrentState = <Schedule 
+    //                       scheduleToDisplay={scheduleToDisplay} 
+    //                       addItemToSchedule={addItemToSchedule} 
+    //                       addSchedule0={addSchedule0}
+    //                       currentDay={currentDay}
+    //                        />;
+    otherCurrentState = <AltSchedule 
+                          //  schedule={schedule}
+                           scheduleToDisplay={scheduleToDisplay} 
+                           addItemToSchedule={addItemToSchedule} 
+                           addSchedule0={addSchedule0}
+                           currentDay={currentDay}
+                           scheduleItems={scheduleItems}
+                            />;
     buttonOne = 'go to timeblock form';
   }
   
