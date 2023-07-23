@@ -1,7 +1,16 @@
+
+### Task list
+ * update `items:` within schedule docs ***[DONE]***
+ * re-render schedule when `currentDate` changes
+ * execute addItemsToSchedule each time a timeblock is dropped into schedule items
+ * execute addItemsToSchedule each time a itemList is re-ordered
+ * troubleshoot why console log of scheduleItems is always 1 move behind
+
+
+
 ## Data
 
 ## brainstorm
-make a select date component that will affect 'currentDate' state
 
 Take a cue from the spread operator that reassigns an Id to the copied item. This could be a way to modify items with new times, names, etc
 
@@ -73,9 +82,6 @@ supabase???
     - TimeBlockForm
     
 
-### Task list
- * add timeblocks to list
-  - with submit action - assign category to timeblock (one-to-many)
 
 ### data structure
 

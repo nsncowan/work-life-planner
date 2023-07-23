@@ -37,6 +37,8 @@ function TimeBlockControl() {
   const [formVisible, setFormVisible] = useState(false);
   const [scheduleItems, setScheduleItems] = useState([]);
   
+// ==================================== DATE LOGIC ================================================
+
   function nextDay() {
     let newDay = parse(currentDay, 'MM-dd-yyyy', new Date());
     let nextDay = addDays(newDay, 1)
@@ -51,9 +53,10 @@ function TimeBlockControl() {
     // let nextDay = add(newDay, { days: 1}) /// THIS ALSO WORKS
     setCurrentDay(format(nextDay, 'MM-dd-yyyy'))
   }
+// ================================================================================================
 
-  
-  useEffect(() => {
+// ================================================================================================
+useEffect(() => {
     const unSubscribeTimeBlocks = onSnapshot(
       collection(db, "timeBlocks"),
       (collectionSnapshot) => {
@@ -87,6 +90,61 @@ function TimeBlockControl() {
         // (error) => {}
         );
             
+    // const ref = collection(db, "schedules");
+    // const q = query(ref, where("date", "==", currentDay));
+    // const findSchedule = 
+    //     onSnapshot(q,(snapshot) => {
+    //       const scheduleToDisplay = [];
+    //       snapshot.docs.forEach((doc) => {
+    //         scheduleToDisplay.push({
+    //           id: doc.id,
+    //           date: doc.data().date,
+    //           items: doc.data().items,
+    //         });
+    //       });
+    //       console.log("scheduleToDisplay : ", scheduleToDisplay);
+    //       setScheduleToDisplay(scheduleToDisplay);
+
+    //       const items = scheduleToDisplay.map((entry) => {
+    //         return entry.items;
+    //       });
+    //       const scheduleItems = [];
+    //       items.forEach((item) => {
+    //         scheduleItems.push(item);
+    //       });
+    //       setScheduleItems(scheduleItems.flat(2));
+    //       console.log('scheduleItems: ', scheduleItems);
+    //     },
+    //     // (error) => {}
+    //     );
+
+/*     const unSubscribeSchedule = onSnapshot(
+      collection(db, "schedules"),
+      (collectionSnapshot) => {
+        const schedule = [];
+        collectionSnapshot.forEach((doc) => {
+          schedule.push({
+            id: doc.id,
+            date: doc.data().date,
+            items: doc.data().items,
+            // add key property set to id for help with dnd
+          });
+        });
+        setSchedule(schedule);
+      },
+      // (error) => {}
+    );
+ */
+
+    const initialize = () => {
+      unSubscribeTimeBlocks();
+      unSubscribeCategory();
+      // findSchedule();
+    }
+    return initialize;
+  }, []);
+
+  useEffect(() => {
     const ref = collection(db, "schedules");
     const q = query(ref, where("date", "==", currentDay));
     const findSchedule = 
@@ -114,37 +172,15 @@ function TimeBlockControl() {
         },
         // (error) => {}
         );
+    return () => findSchedule();
+  }, [currentDay])
+// ================================================================================================
 
-/*     const unSubscribeSchedule = onSnapshot(
-      collection(db, "schedules"),
-      (collectionSnapshot) => {
-        const schedule = [];
-        collectionSnapshot.forEach((doc) => {
-          schedule.push({
-            id: doc.id,
-            date: doc.data().date,
-            items: doc.data().items,
-            // add key property set to id for help with dnd
-          });
-        });
-        setSchedule(schedule);
-      },
-      // (error) => {}
-    );
- */
-    const initialize = () => {
-      unSubscribeTimeBlocks();
-      unSubscribeCategory();
-      findSchedule();
-    }
-    return initialize;
-  }, []);
-
-  const handleClick = () => {
+const handleClick = () => {
     formVisible ? setFormVisible(false) : setFormVisible(true);
   }
 
-// DATABASE LOGIC =================================================================================
+// ====================================== DATABASE LOGIC ==========================================
   const addTimeBlock0 = async (timeBlock) => {
     const collectionReference = collection(db, "timeBlocks");
     await addDoc(collectionReference, timeBlock);
@@ -182,8 +218,10 @@ function TimeBlockControl() {
   //   });
   //   return scheduleItemsToDisplay;
   // };
-
 // ================================================================================================
+
+// ====================================== DRAG AND DROP LOGIC =====================================
+
   const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
