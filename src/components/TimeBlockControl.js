@@ -221,16 +221,16 @@ function TimeBlockControl() {
 
     if(!destination) return;
     
-    if(source.droppableId === 'schedule' && destination.droppableId === 'schedule') {
+    if(source.droppableId === 'scheduleItems' && destination.droppableId === 'scheduleItems') {
       setScheduleItems(reorder(scheduleItems, source.index, destination.index));
     }
     else if (source.droppableId === 'timeBlockList' && destination.droppableId === 'timeBlockList') {
       setTimeBlockList(reorder(timeBlockList, source.index, destination.index));
     }
     else {
-      const result = move(timeBlockList, schedule, source, destination);
+      const result = move(timeBlockList, scheduleItems, source, destination);
       setTimeBlockList(result.timeBlockList)
-      setSchedule(result.schedule)
+      setScheduleItems(result.scheduleItems)
       // addItemToSchedule(result.removedItem, schedule)
     };
   }

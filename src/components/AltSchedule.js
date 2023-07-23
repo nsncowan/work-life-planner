@@ -49,7 +49,7 @@ function AltSchedule(props) {
       <button onClick={handleAddScheduleButtonClick}>addSchedule0</button>
       <button onClick={handleAddItemToScheduleButtonClick}>addItemToSchedule</button>
         {/* <h2>{scheduleToDisplay.date}</h2> */}
-        <Droppable droppableId='schedule' key='schedule'>
+        <Droppable droppableId='scheduleItems' key='scheduleItems'>
           {(provided, snapshot) => (
             <StyledScheduleDiv ref={provided.innerRef} {...provided.droppableProps} style={{background: snapshot.isDraggingOver ? "lightblue" : "lightgrey",}}>
               {scheduleItems.map((timeSlot, index) =>
