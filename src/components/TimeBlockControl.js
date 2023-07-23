@@ -239,7 +239,7 @@ function TimeBlockControl() {
     if(!destination) return;
     
     if(source.droppableId === 'schedule' && destination.droppableId === 'schedule') {
-      setSchedule(reorder(schedule, source.index, destination.index));
+      setScheduleItems(reorder(schedule, source.index, destination.index));
     }
     else if (source.droppableId === 'timeBlockList' && destination.droppableId === 'timeBlockList') {
       setTimeBlockList(reorder(timeBlockList, source.index, destination.index));
@@ -269,21 +269,22 @@ function TimeBlockControl() {
   
   else {
     currentState = <TimeBlockList timeBlockList={timeBlockList} />;
-    otherCurrentState = <Schedule 
-                          schedule={schedule}
-                          scheduleToDisplay={scheduleToDisplay} 
-                          addItemToSchedule={addItemToSchedule} 
-                          addSchedule0={addSchedule0}
-                          currentDay={currentDay}
-                           />;
-    // otherCurrentState = <AltSchedule 
-    //                       //  schedule={schedule}
-    //                        scheduleToDisplay={scheduleToDisplay} 
-    //                        addItemToSchedule={addItemToSchedule} 
-    //                        addSchedule0={addSchedule0}
-    //                        currentDay={currentDay}
-    //                        scheduleItems={scheduleItems}
-    //                         />;
+    otherCurrentState = 
+                        // <Schedule 
+                        //   schedule={schedule}
+                        //   scheduleToDisplay={scheduleToDisplay} 
+                        //   addItemToSchedule={addItemToSchedule} 
+                        //   addSchedule0={addSchedule0}
+                        //   currentDay={currentDay}
+                        //    />;
+    otherCurrentState = <AltSchedule 
+                          //  schedule={schedule}
+                           scheduleToDisplay={scheduleToDisplay} 
+                           addItemToSchedule={addItemToSchedule} 
+                           addSchedule0={addSchedule0}
+                           currentDay={currentDay}
+                           scheduleItems={scheduleItems}
+                            />;
     buttonOne = 'go to timeblock form';
   }
   
