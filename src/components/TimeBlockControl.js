@@ -250,18 +250,13 @@ function TimeBlockControl() {
       setSchedule(result.schedule)
       // addItemToSchedule(result.removedItem, schedule)
     };
-    // console.log('timeBlocks', timeBlockList);
-    // console.log('schedule', schedule);
-    // console.log('result', result);
   }
   
   let currentState = null;
   let otherCurrentState = null;
   let dateDisplay = <SelectDate currentDay={currentDay} nextDay={nextDay} prevDay={prevDay} />;
   let buttonOne = null;
-  let topTaskBar = <PlannerViewSelector />;
-  // let bottomTaskBar = <BottomTaskBar />;
-  
+  let topTaskBar = <PlannerViewSelector />;  
   
   if(formVisible) {
     currentState = <NewTimeBlockForm 
@@ -271,7 +266,6 @@ function TimeBlockControl() {
     addCategory1={addCategory0} />;
     buttonOne = 'back to timeblock list'
   }
-  
   
   else {
     currentState = <TimeBlockList timeBlockList={timeBlockList} />;
@@ -291,7 +285,6 @@ function TimeBlockControl() {
     //                        scheduleItems={scheduleItems}
     //                         />;
     buttonOne = 'go to timeblock form';
-    
   }
   
   return (
@@ -310,11 +303,6 @@ function TimeBlockControl() {
       {/* {bottomTaskBar} */}
     </React.Fragment>
   );
-  
-  
-  
-  
-  
 }
 
 export default TimeBlockControl;
