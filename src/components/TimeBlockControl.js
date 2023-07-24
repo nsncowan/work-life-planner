@@ -13,6 +13,7 @@ import Schedule from "./Schedule";
 import AltSchedule from "./Schedule_Alt";
 import TimeSlot from "./TimeSlot";
 import SelectDate from "./SelectDate";
+import ScheduleThird from "./Schedule_Third";
 import { format, addDays, eachDayOfInterval, startOfToday, startOfMonth, endOfMonth, parseISO, parse, add, subDays} from "date-fns";
 
 
@@ -277,14 +278,22 @@ const handleClick = () => {
     //                       addSchedule0={addSchedule0}
     //                       currentDay={currentDay}
     //                        />;
-    otherCurrentState = <AltSchedule 
+    // otherCurrentState = <AltSchedule 
+    //                       //  schedule={schedule}
+    //                        scheduleToDisplay={scheduleToDisplay} 
+    //                        addItemToSchedule={addItemToSchedule} 
+    //                        addSchedule0={addSchedule0}
+    //                        currentDay={currentDay}
+    //                        scheduleItems={scheduleItems}
+    //                         />;
+    otherCurrentState = <ScheduleThird 
                           //  schedule={schedule}
-                           scheduleToDisplay={scheduleToDisplay} 
-                           addItemToSchedule={addItemToSchedule} 
-                           addSchedule0={addSchedule0}
-                           currentDay={currentDay}
-                           scheduleItems={scheduleItems}
-                            />;
+                          scheduleToDisplay={scheduleToDisplay} 
+                          addItemToSchedule={addItemToSchedule} 
+                          addSchedule0={addSchedule0}
+                          currentDay={currentDay}
+                          scheduleItems={scheduleItems}
+                          />;
     buttonOne = 'go to timeblock form';
   }
   
