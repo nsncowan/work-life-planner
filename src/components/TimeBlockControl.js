@@ -92,6 +92,24 @@ useEffect(() => {
         },
         // (error) => {}
         );
+
+      // const unSubscribeSchedule = onSnapshot(
+      //   collection(db, "schedules"),
+      //   (collectionSnapshot) => {
+      //     const schedule = [];
+      //     collectionSnapshot.forEach((doc) => {
+      //       schedule.push({
+      //         id: doc.id,
+      //         date: doc.data().date,
+      //         items: doc.data().items,
+      //         // add key property set to id for help with dnd
+      //       });
+      //     });
+      //     setSchedule(schedule);
+      //   },
+      //   // (error) => {}
+      // );
+    
             
     const ref = collection(db, "schedules");
     const q = query(ref, where("date", "==", currentDay));
