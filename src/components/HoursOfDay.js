@@ -1,5 +1,6 @@
+import { v4 } from 'uuid';
 
-const Hours = [
+const hoursOfDay = [
   { id: v4(), hour: '8:00' },
   { id: v4(), hour: '9:00' },
   { id: v4(), hour: '10:00' },
@@ -14,3 +15,5 @@ const Hours = [
   { id: v4(), hour: '7:00' },
   { id: v4(), hour: '8:00' },
 ]
+
+export default hoursOfDay;

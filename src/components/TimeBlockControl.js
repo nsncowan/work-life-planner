@@ -10,7 +10,7 @@ import NewCategoryForm from "./NewCategoryForm";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { initialDayData, initialTimeBlocks, dayColumns } from "./initial-day-data";
 import Schedule from "./Schedule";
-import AltSchedule from "./AltSchedule";
+import AltSchedule from "./Schedule_Alt";
 import TimeSlot from "./TimeSlot";
 import SelectDate from "./SelectDate";
 import { format, addDays, eachDayOfInterval, startOfToday, startOfMonth, endOfMonth, parseISO, parse, add, subDays} from "date-fns";

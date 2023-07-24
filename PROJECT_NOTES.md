@@ -7,6 +7,23 @@
  * troubleshoot why console log of scheduleItems is always 1 move behind
 
 
+Import hours
+
+Div 
+  Hours map (hour) => {
+    Droppable 
+      StyledDiv
+        {hour.time}
+        <timeslot >
+
+  }    
+
+
+
+
+
+
+
 
 ## Data
 
