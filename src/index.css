@@ -14,10 +14,10 @@ body {
 header {
   font-size: 2rem;
 }
-/* header, */
-/* form {
+header,
+ form {
   min-height: 20vh;
   display: flex;
   justify-content: center;
   align-items: center;
-} */
+}

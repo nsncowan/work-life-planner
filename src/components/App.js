@@ -3,8 +3,10 @@ import "./../App.css"
 import Header from "./Header";
 import TimeBlockControl from "./TimeBlockControl";
 import { DragDropContext } from "react-beautiful-dnd";
-import SignUp from "./SignUp";
+import SignIn from "./SignIn";
 import { Container } from "react-bootstrap";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 function App(){
 
   const AppStyles = {
@@ -23,14 +25,13 @@ function App(){
   return (
     <div style={AppStyles}>
       <React.Fragment>
-        <Container className="d-flex align-items-center justify-content-center"
-          style={{ minHeight: "100vh" }}>
-          <div className="w-100" style={{ maxWidth: "400px" }}>
-            <SignUp />
-          </div>
-        </Container>
-        {/* <Header />
-        <TimeBlockControl /> */}
+        <Router>
+          <Header />
+          <Routes>
+            <Route path="/sign-in" element={<SignIn />} />
+            <Route path="/" element={<TimeBlockControl />} />
+          </Routes>
+        </Router>
       </React.Fragment>
     </div>
   );

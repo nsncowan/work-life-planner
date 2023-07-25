@@ -19,4 +19,4 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-export { db, auth }; // I initially had 'default' included in this line, but it was throwing an error. idk why yet.
+export { db, auth };

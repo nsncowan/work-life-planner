@@ -4,7 +4,7 @@ import { v4 } from 'uuid';
 import NewTimeBlockForm from "./NewTImeBlockForm";
 import TimeBlockList from "./TimeBlockList";
 import PlannerViewSelector from "./PlannerViewSelector";
-import { db } from "../firebase";
+import { db, auth } from "../firebase";
 import { collection, doc, addDoc, onSnapshot, getDocs, setDoc, updateDoc, arrayUnion, arrayRemove, getDoc, query, where } from "firebase/firestore";
 import NewCategoryForm from "./NewCategoryForm";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
@@ -251,11 +251,13 @@ const handleClick = () => {
 
     if(!destination) return;
     
-    if(source.droppableId === 'scheduleItems' && destination.droppableId === 'scheduleItems') {
-      setScheduleItems(reorder(scheduleItems, source.index, destination.index));
-    }
-    else if (source.droppableId === 'timeBlockList' && destination.droppableId === 'timeBlockList') {
-      setTimeBlockList(reorder(timeBlockList, source.index, destination.index));
+    if(source.droppableId === destination.droppableId) {
+      if (source.droppableId === 'timeBlockList' && destination.droppableId === 'timeBlockList') {
+        setTimeBlockList(reorder(timeBlockList, source.index, destination.index));
+      }
+      else {
+        setScheduleItems(reorder(scheduleItems, source.index, destination.index));
+      }
     }
     else {
       const result = move(timeBlockList, scheduleItems, source, destination);

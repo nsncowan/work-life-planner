@@ -37,14 +37,19 @@ Div
 function ScheduleThird(props) {
   const { schedule, scheduleToDisplay, currentDay, addItemToSchedule, addSchedule0, scheduleItems } = props;
 
+ 
+
   return (
     <React.Fragment>
       <div>
         {hoursOfDay.map((hour, index) => 
-          <Droppable>
+          <Droppable droppableId={hour.id} key={hour.id} /* type="hourDropZone" */>
             {(provided, snapshot) => (
               <StyledTimeSlotDiv ref={provided.innerRef} {...provided.droppableProps} style={{background: snapshot.isDraggingOver ? "lightblue" : "lightgrey",}}>
                 <h2>{hour.hour}</h2>
+                {scheduleItems.filter((timeSlot) => {return timeSlot.time === hour.hour}).map((timeSlot, index) =>
+                <TimeSlot time={timeSlot.hour} name={timeSlot.name} category={timeSlot.category} id={timeSlot.id} key={timeSlot.id} index={index} v4={v4()}/>
+              )}
                 {provided.placeholder}
               </StyledTimeSlotDiv>
             )}
