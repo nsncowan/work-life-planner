@@ -43,7 +43,7 @@ function ScheduleThird(props) {
     <React.Fragment>
       <div>
         {hoursOfDay.map((hour, index) => 
-          <Droppable droppableId={hour.id} key={hour.id} /* type="hourDropZone" */>
+          <Droppable droppableId={hour.hour} key={hour.id}>
             {(provided, snapshot) => (
               <StyledTimeSlotDiv ref={provided.innerRef} {...provided.droppableProps} style={{background: snapshot.isDraggingOver ? "lightblue" : "lightgrey",}}>
                 <h2>{hour.hour}</h2>

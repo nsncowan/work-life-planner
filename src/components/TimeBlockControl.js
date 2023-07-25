@@ -240,8 +240,8 @@ const handleClick = () => {
     sourceClone.splice(droppableSource.index, 0, removed); 
         
     return {
-      [droppableSource.droppableId]: sourceClone,
-      [droppableDestination.droppableId]: destClone,
+      [droppableSource.droppableId]/* source */: sourceClone,
+      [droppableDestination.droppableId]/* destination */: destClone,
       removedItem: removedWithNewId
     };
   };
@@ -273,6 +273,7 @@ const handleClick = () => {
     // setScheduleToDisplay(scheduleToDisplay)
     console.log('scheduleItems onDragEnd: ', scheduleItems)
     console.log('scheduleToDisplay[0] onDragEnd: ', scheduleToDisplay[0])
+    console.log("result", result)
   }
   
   let currentState = null;
