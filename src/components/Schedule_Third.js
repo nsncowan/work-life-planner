@@ -33,31 +33,59 @@ Div
         <timeslot >
   }    
 */
+/* 
+Div
+  droppable
+    div
+      hoursOfDay.map
+        styledTimeSlotDiv
+          scheduleItems.map
+            <timeslot>
+
+*/
 
 function ScheduleThird(props) {
   const { schedule, scheduleToDisplay, currentDay, addItemToSchedule, addSchedule0, scheduleItems } = props;
 
  
 
-  return (
-    <React.Fragment>
-      <div>
-        {hoursOfDay.map((hour, index) => 
-          <Droppable droppableId={hour.hour} key={hour.id}>
-            {(provided, snapshot) => (
-              <StyledTimeSlotDiv ref={provided.innerRef} {...provided.droppableProps} style={{background: snapshot.isDraggingOver ? "lightblue" : "lightgrey",}}>
-                <h2>{hour.hour}</h2>
-                {scheduleItems.filter((timeSlot) => {return timeSlot.time === hour.hour}).map((timeSlot, index) =>
-                <TimeSlot time={timeSlot.hour} name={timeSlot.name} category={timeSlot.category} id={timeSlot.id} key={timeSlot.id} index={index} v4={v4()}/>
-              )}
-                {provided.placeholder}
-              </StyledTimeSlotDiv>
-            )}
-          </Droppable>
-        )}
-      </div>
-    </React.Fragment>
-  )
+  // return (
+  //   <React.Fragment>
+  //     <Droppable droppableId='scheduleItems' key='scheduleItems'>
+  //       {(provided, snapshot) => (
+  //         <div>
+  //           {hoursOfDay.map((hour,index) => 
+  //             <StyledTimeSlotDiv ref={provided.innerRef} {...provided.droppableProps} style={{background: snapshot.isDraggingOver ? "lightblue" : "lightgrey",}}>
+  //               <h2>{hour.hour}</h2>
+  //               {scheduleItems.filter(timeSlot => timeSlot.time === hour.hour).map(timeSlotToRender, index => (
+  //                 <TimeSlot time={timeSlotToRender.hour} name={timeSlotToRender.name} category={timeSlotToRender.category} id={timeSlotToRender.id} key={timeSlotToRender.id} index={index} v4={v4()}/>
+  //               ))}
+  //             </StyledTimeSlotDiv>)}
+  //         </div>
+  //       )}
+  //     </Droppable>
+  //   </React.Fragment>
+  // )
+
+  // return (
+  //   <React.Fragment>
+  //     <div>
+  //       {hoursOfDay.map((hour, index) => 
+  //         <Droppable droppableId={hour.hour} key={hour.id}>
+  //           {(provided, snapshot) => (
+  //             <StyledTimeSlotDiv ref={provided.innerRef} {...provided.droppableProps} style={{background: snapshot.isDraggingOver ? "lightblue" : "lightgrey",}}>
+  //               <h2>{hour.hour}</h2>
+  //               {scheduleItems.filter((timeSlot) => {return timeSlot.time === hour.hour}).map((timeSlot, index) =>
+  //               <TimeSlot time={timeSlot.hour} name={timeSlot.name} category={timeSlot.category} id={timeSlot.id} key={timeSlot.id} index={index} v4={v4()}/>
+  //             )}
+  //               {provided.placeholder}
+  //             </StyledTimeSlotDiv>
+  //           )}
+  //         </Droppable>
+  //       )}
+  //     </div>
+  //   </React.Fragment>
+  // )
 
 
 

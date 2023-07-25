@@ -28,19 +28,19 @@ function AltSchedule(props) {
     addSchedule0({
       date: currentDay,
       items: [
-        { id: v4(), hour: '8:00' },
-        { id: v4(), hour: '9:00' },
-        { id: v4(), hour: '10:00' },
-        { id: v4(), hour: '11:00' },
-        { id: v4(), hour: '12:00' },
-        { id: v4(), hour: '1:00' },
-        { id: v4(), hour: '2:00' },
-        { id: v4(), hour: '3:00' },
-        { id: v4(), hour: '4:00' },
-        { id: v4(), hour: '5:00' },
-        { id: v4(), hour: '6:00' },
-        { id: v4(), hour: '7:00' },
-        { id: v4(), hour: '8:00' },
+        { id: v4(), hour: '8:00', name: 'aaa', category: 'cat1' },
+        { id: v4(), hour: '9:00', name: 'bbb', category: 'cat2' },
+        { id: v4(), hour: '10:00', name: 'ccc', category: 'cat3' },
+        { id: v4(), hour: '11:00', name: 'ddd', category: 'cat4' },
+        { id: v4(), hour: '12:00', name: 'eee', category: 'cat5' },
+        { id: v4(), hour: '1:00', name: 'fff', category: 'cat6' },
+        { id: v4(), hour: '2:00', name: 'ggg', category: 'cat7' },
+        { id: v4(), hour: '3:00', name: 'hhh', category: 'cat8' },
+        { id: v4(), hour: '4:00', name: 'iii', category: 'cat9' },
+        { id: v4(), hour: '5:00', name: 'jjj', category: 'cat10' },
+        { id: v4(), hour: '6:00', name: 'kkk', category: 'cat12' },
+        { id: v4(), hour: '7:00', name: 'lll', category: 'cat12' },
+        { id: v4(), hour: '8:00', name: 'mmm', category: 'cat13' },
       ]
     });
   }

@@ -299,22 +299,22 @@ const handleClick = () => {
     //                       addSchedule0={addSchedule0}
     //                       currentDay={currentDay}
     //                        />;
-    // otherCurrentState = <AltSchedule 
-    //                       //  schedule={schedule}
-    //                        scheduleToDisplay={scheduleToDisplay} 
-    //                        addItemToSchedule={addItemToSchedule} 
-    //                        addSchedule0={addSchedule0}
-    //                        currentDay={currentDay}
-    //                        scheduleItems={scheduleItems}
-    //                         />;
-    otherCurrentState = <ScheduleThird 
+    otherCurrentState = <AltSchedule 
                           //  schedule={schedule}
-                          scheduleToDisplay={scheduleToDisplay} 
-                          addItemToSchedule={addItemToSchedule} 
-                          addSchedule0={addSchedule0}
-                          currentDay={currentDay}
-                          scheduleItems={scheduleItems}
-                          />;
+                           scheduleToDisplay={scheduleToDisplay} 
+                           addItemToSchedule={addItemToSchedule} 
+                           addSchedule0={addSchedule0}
+                           currentDay={currentDay}
+                           scheduleItems={scheduleItems}
+                            />;
+    // otherCurrentState = <ScheduleThird 
+    //                       //  schedule={schedule}
+    //                       scheduleToDisplay={scheduleToDisplay} 
+    //                       addItemToSchedule={addItemToSchedule} 
+    //                       addSchedule0={addSchedule0}
+    //                       currentDay={currentDay}
+    //                       scheduleItems={scheduleItems}
+    //                       />;
     buttonOne = 'go to timeblock form';
   }
   
