@@ -1,5 +1,35 @@
 
 ```js
+// this is one droppable, but rendered in each timeSlot
+  return (
+    <React.Fragment>
+      <Droppable droppableId='scheduleItems' key='scheduleItems'>
+        {(provided, snapshot) => (
+          <div>
+            {hoursOfDay.map((hour,index) => 
+              <StyledTimeSlotDiv ref={provided.innerRef} {...provided.droppableProps} style={{background: snapshot.isDraggingOver ? "lightblue" : "lightgrey",}}>
+                <h2>{hour.hour}</h2>
+                {scheduleItems.map((timeSlot, index) =>
+                  <TimeSlot time={timeSlot.hour} name={timeSlot.name} category={timeSlot.category} id={timeSlot.id} key={timeSlot.id} index={index} v4={v4()}/>
+                )}
+                {provided.placeholder}
+              </StyledTimeSlotDiv>)}
+          </div>
+        )}
+      </Droppable>
+    </React.Fragment>
+  )
+```
+```js
+
+```
+```js
+
+```
+
+
+
+```js
 // alternate code to persist a re-arrange dnd WITHIN a single list.
 // I changed it in favor of using a call-back function
 const newTimeBlockList = Array.from(timeBlockList);
