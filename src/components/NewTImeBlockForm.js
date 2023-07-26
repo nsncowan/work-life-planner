@@ -16,7 +16,8 @@ function NewTimeBlockForm(props) {
     e.preventDefault();
     props.addTimeBlock1({
       name: e.target.name.value,
-      category: e.target.categoryName.value
+      category: e.target.categoryName.value,
+      hour: '8:00am'
     });
   }
 

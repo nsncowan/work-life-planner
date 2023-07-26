@@ -45,9 +45,11 @@ function TimeSlot(props) {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
            /* isDragging={snapshot.isDragging} */ >
-            <h6>{props.time}</h6>
-            <h4>{props.name}</h4>
-            <h6>{props.category}</h6>
+            <div>
+              <h6>{props.time}</h6>
+              <h4>{props.name}</h4>
+              <h6>{props.category}</h6>
+            </div>
             {provided.placeholder}
         </StyledTimeSlotDiv>
       )}
