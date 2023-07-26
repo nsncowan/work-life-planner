@@ -1,3 +1,64 @@
+```js
+function countUniqueItems(arr) {
+  const itemCounts = {};
+
+  arr.forEach(item => {
+    if (itemCounts[item]) {
+      itemCounts[item] += 1;
+    } else {
+      itemCounts[item] = 1;
+    }
+  });
+
+  return itemCounts;
+}
+```
+```js
+function countUniqueItems(arr) {
+  return arr.reduce((itemCounts, item) => {
+    itemCounts[item] = (itemCounts[item] || 0) + 1;
+    return itemCounts;
+  }, {});
+}
+```
+```js
+function countUniqueItemsWithLabels(arr) {
+  const itemCounts = {};
+
+  arr.forEach(item => {
+    if (itemCounts[item]) {
+      itemCounts[item].value += 1;
+    } else {
+      itemCounts[item] = { name: item, value: 1 };
+    }
+  });
+
+  // Convert the object values into an array of objects
+  const result = Object.values(itemCounts);
+
+  return result;
+}
+```
+```js
+function countUniqueItemsWithLabels(arr) {
+  return arr.reduce((itemCounts, item) => {
+    const existingItem = itemCounts.find(obj => obj.name === item);
+
+    if (existingItem) {
+      existingItem.value += 1;
+    } else {
+      itemCounts.push({ name: item, value: 1 });
+    }
+
+    return itemCounts;
+  }, []);
+}
+```
+
+
+
+
+
 
 ```js
 // this is one droppable, but rendered in each timeSlot

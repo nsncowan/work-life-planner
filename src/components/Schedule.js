@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import TimeSlot from "./TimeSlot";
 import { Droppable } from 'react-beautiful-dnd';
 import { v4 } from 'uuid';
-
+import CategoryPieChart from "./CategoryPieChart";
 
 const StyledScheduleDiv = styled.div`
     display: flex;
@@ -72,6 +72,7 @@ function Schedule(props) {
       <h2>{currentDay}</h2>
       <button onClick={handleAddScheduleButtonClick}>Add Schedule</button>
       <button onClick={handleAddItemToScheduleButtonClick}>Save Schedule</button>
+      <CategoryPieChart scheduleItems={scheduleItems} />
         <Droppable droppableId='scheduleItems' key='scheduleItems'>
           {(provided, snapshot) => (
             <StyledScheduleDiv ref={provided.innerRef} {...provided.droppableProps} style={{background: snapshot.isDraggingOver ? "lightblue" : "lightgrey",}}>

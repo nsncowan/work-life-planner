@@ -11,6 +11,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Schedule from "./Schedule";
 import SelectDate from "./SelectDate";
 import { format, addDays, eachDayOfInterval, startOfToday, startOfMonth, endOfMonth, parseISO, parse, add, subDays} from "date-fns";
+import CategoryPieChart from "./CategoryPieChart";
 
 
 const StyledMainBodyDiv = styled.div`
@@ -123,6 +124,7 @@ useEffect(() => {
         // (error) => {}
         );
         console.log('scheduleToDisplay: ', scheduleToDisplay);
+        console.log('scheduleItems: ', scheduleItems);
     return () => findSchedule();
   }, [currentDay])
 // ================================================================================================
@@ -210,6 +212,7 @@ const handleClick = () => {
   
   let currentState = null;
   let otherCurrentState = null;
+  let pieChartComponent = null;
   let dateDisplay = <SelectDate currentDay={currentDay} nextDay={nextDay} prevDay={prevDay} />;
   let buttonOne = null;
   let topTaskBar = <PlannerViewSelector />;  
@@ -225,6 +228,7 @@ const handleClick = () => {
   
   else {
     currentState = <TimeBlockList timeBlockList={timeBlockList} />;
+    pieChartComponent = <CategoryPieChart scheduleItems={scheduleItems} />;
     otherCurrentState = <Schedule 
                           //  schedule={schedule}
                            scheduleToDisplay={scheduleToDisplay} 
@@ -244,6 +248,7 @@ const handleClick = () => {
         <DragDropContext onDragEnd={onDragEnd}>
           {currentState}
           {otherCurrentState}
+          {/* {pieChartComponent} */}
         </DragDropContext>
           <button onClick={handleClick}>{buttonOne}</button>
       </StyledMainBodyDiv>
