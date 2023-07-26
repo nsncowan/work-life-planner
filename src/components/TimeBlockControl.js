@@ -62,30 +62,30 @@ function TimeBlockControl() {
     // let nextDay = add(newDay, { days: 1}) /// THIS ALSO WORKS
     setCurrentDay(format(nextDay, 'MM-dd-yyyy'))
     // addItemToSchedule({
-    //   id: scheduleToDisplay[0].id,
-    //   date: scheduleToDisplay[0].date,
-    //   items: scheduleItems
-    // });
-
+      //   id: scheduleToDisplay[0].id,
+      //   date: scheduleToDisplay[0].date,
+      //   items: scheduleItems
+      // });
+      
   }
 // ================================================================================================
 
 // ================================================================================================
 useEffect(() => {
-    const unSubscribeTimeBlocks = onSnapshot(
-      collection(db, "timeBlocks"),
-      (collectionSnapshot) => {
-        const timeBlocks = [];
-        collectionSnapshot.forEach((doc) => {
-          timeBlocks.push({
-            name: doc.data().name,
-            category: doc.data().category,
-            // add key property set to id for help with dnd
-            id: doc.id
-          });
+  const unSubscribeTimeBlocks = onSnapshot(
+    collection(db, "timeBlocks"),
+    (collectionSnapshot) => {
+      const timeBlocks = [];
+      collectionSnapshot.forEach((doc) => {
+        timeBlocks.push({
+          name: doc.data().name,
+          category: doc.data().category,
+          // add key property set to id for help with dnd
+          id: doc.id
         });
-        setTimeBlockList(timeBlocks);
-        console.log('timeblocks: ', timeBlocks);
+      });
+      setTimeBlockList(timeBlocks);
+      console.log('timeblocks: ', timeBlocks);
       },
       // (error) => {}
       );
@@ -104,13 +104,13 @@ useEffect(() => {
         },
         // (error) => {}
         );
-
-    const initialize = () => {
-      unSubscribeTimeBlocks();
-      unSubscribeCategory();
-      // findSchedule();
-    }
-    return initialize;
+        
+        const initialize = () => {
+          unSubscribeTimeBlocks();
+          unSubscribeCategory();
+          // findSchedule();
+        }
+        return initialize;
   }, []);
 
   useEffect(() => {
@@ -123,7 +123,13 @@ useEffect(() => {
             scheduleToDisplay.push({
               id: doc.id,
               date: doc.data().date,
-              items: doc.data().items,
+              morning: doc.data().morning,
+              lateMorning: doc.data().lateMorning,
+              midDay: doc.data().midDay,
+              afternoon: doc.data().afternoon,
+              lateAfternoon: doc.data().lateAfternoon,
+              earlyEvening: doc.data().earlyEvening,
+              lateEvening: doc.data().lateEvening,
             });
           });
           setScheduleToDisplay(scheduleToDisplay);
@@ -139,6 +145,7 @@ useEffect(() => {
         },
         // (error) => {}
         );
+        console.log('scheduleToDisplay: ', scheduleToDisplay);
     return () => findSchedule();
   }, [currentDay])
 // ================================================================================================
