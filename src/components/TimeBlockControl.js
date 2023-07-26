@@ -47,6 +47,12 @@ function TimeBlockControl() {
     let nextDay = addDays(newDay, 1)
     // let nextDay = add(newDay, { days: 1}) /// THIS ALSO WORKS
     setCurrentDay(format(nextDay, 'MM-dd-yyyy'))
+    // addItemToSchedule({
+    //   id: scheduleToDisplay[0].id,
+    //   date: scheduleToDisplay[0].date,
+    //   items: scheduleItems
+    // });
+
     // setDisplayCurrentSchedule(getScheduleToDisplay(schedule));
   }
   
@@ -55,6 +61,12 @@ function TimeBlockControl() {
     let nextDay = subDays(newDay, 1)
     // let nextDay = add(newDay, { days: 1}) /// THIS ALSO WORKS
     setCurrentDay(format(nextDay, 'MM-dd-yyyy'))
+    // addItemToSchedule({
+    //   id: scheduleToDisplay[0].id,
+    //   date: scheduleToDisplay[0].date,
+    //   items: scheduleItems
+    // });
+
   }
 // ================================================================================================
 
@@ -93,24 +105,15 @@ useEffect(() => {
         // (error) => {}
         );
 
-      // const unSubscribeSchedule = onSnapshot(
-      //   collection(db, "schedules"),
-      //   (collectionSnapshot) => {
-      //     const schedule = [];
-      //     collectionSnapshot.forEach((doc) => {
-      //       schedule.push({
-      //         id: doc.id,
-      //         date: doc.data().date,
-      //         items: doc.data().items,
-      //         // add key property set to id for help with dnd
-      //       });
-      //     });
-      //     setSchedule(schedule);
-      //   },
-      //   // (error) => {}
-      // );
-    
-            
+    const initialize = () => {
+      unSubscribeTimeBlocks();
+      unSubscribeCategory();
+      // findSchedule();
+    }
+    return initialize;
+  }, []);
+
+  useEffect(() => {
     const ref = collection(db, "schedules");
     const q = query(ref, where("date", "==", currentDay));
     const findSchedule = 
@@ -123,7 +126,6 @@ useEffect(() => {
               items: doc.data().items,
             });
           });
-          console.log("scheduleToDisplay : ", scheduleToDisplay);
           setScheduleToDisplay(scheduleToDisplay);
 
           const items = scheduleToDisplay.map((entry) => {
@@ -133,47 +135,12 @@ useEffect(() => {
           items.forEach((item) => {
             scheduleItems.push(item);
           });
-          setScheduleItems(scheduleItems.flat(2));
-          console.log('scheduleItems: ', scheduleItems);
+          setScheduleItems(scheduleItems.flat());
         },
-      );
-
-    const initialize = () => {
-      unSubscribeTimeBlocks();
-      unSubscribeCategory();
-      findSchedule();
-    }
-    return initialize;
-  }, []);
-
-  // useEffect(() => {
-  //   const ref = collection(db, "schedules");
-  //   const q = query(ref, where("date", "==", currentDay));
-  //   const findSchedule = 
-  //       onSnapshot(q,(snapshot) => {
-  //         const scheduleToDisplay = [];
-  //         snapshot.docs.forEach((doc) => {
-  //           scheduleToDisplay.push({
-  //             id: doc.id,
-  //             date: doc.data().date,
-  //             items: doc.data().items,
-  //           });
-  //         });
-  //         setScheduleToDisplay(scheduleToDisplay);
-
-  //         const items = scheduleToDisplay.map((entry) => {
-  //           return entry.items;
-  //         });
-  //         const scheduleItems = [];
-  //         items.forEach((item) => {
-  //           scheduleItems.push(item);
-  //         });
-  //         setScheduleItems(scheduleItems.flat());
-  //       },
-  //       // (error) => {}
-  //       );
-  //   return () => findSchedule();
-  // }, [currentDay, scheduleItems])
+        // (error) => {}
+        );
+    return () => findSchedule();
+  }, [currentDay])
 // ================================================================================================
 
 const handleClick = () => {
@@ -192,6 +159,10 @@ const handleClick = () => {
   
   const addSchedule0 = async (schedule) => {
     await addDoc(collection(db, "schedules"), schedule);
+  }
+  
+  const addEmptyTimeSlots = async (timeSlot) => {
+    await addDoc(collection(db, "schedules", "timeSlots", "hour"), timeSlot);
   }
 
   // const addItemToSchedule = async (item, currentScheduleId) => {
@@ -230,19 +201,27 @@ const handleClick = () => {
     return result;
   };
 
+  const combine = (origin, destiny) => ({
+    id: v4(),
+    name: origin.name,
+    category: origin.category,
+    hour: destiny.hour
+  });
+  
+
   const move = (source, destination, droppableSource, droppableDestination) => {
     const sourceClone = Array.from(source);
     const destClone = Array.from(destination);
     const [removed] = sourceClone.splice(droppableSource.index, 1);
     // const copyItem = sourceClone[droppableSource.index];
-    const removedWithNewId = { ...removed, id: v4() };
-    destClone.splice(droppableDestination.index, 0, removedWithNewId); // replaces the dragged timeBlock with a copy (and assigns a new id in the process)
+    // const removedWithNewId = { ...removed, id: v4() };
+    destClone.splice(droppableDestination.index, 0, { ...removed, id: v4(), name: droppableDestination.droppableId }); // replaces the dragged timeBlock with a copy (and assigns a new id in the process)
     sourceClone.splice(droppableSource.index, 0, removed); 
         
     return {
       [droppableSource.droppableId]/* source */: sourceClone,
       [droppableDestination.droppableId]/* destination */: destClone,
-      removedItem: removedWithNewId
+      // removedItem: removedWithNewId
     };
   };
 
@@ -263,17 +242,16 @@ const handleClick = () => {
       const result = move(timeBlockList, scheduleItems, source, destination);
       setTimeBlockList(result.timeBlockList)
       setScheduleItems(result.scheduleItems)
-      // addItemToSchedule({
-      //   id: scheduleToDisplay[0].id,
-      //   date: scheduleToDisplay[0].date,
-      //   items: scheduleItems
-      // });
-
     };
     // setScheduleToDisplay(scheduleToDisplay)
     console.log('scheduleItems onDragEnd: ', scheduleItems)
     console.log('scheduleToDisplay[0] onDragEnd: ', scheduleToDisplay[0])
     console.log("result", result)
+    // addItemToSchedule({
+    //   id: scheduleToDisplay[0].id,
+    //   date: scheduleToDisplay[0].date,
+    //   items: scheduleItems
+    // });
   }
   
   let currentState = null;
@@ -299,22 +277,23 @@ const handleClick = () => {
     //                       addSchedule0={addSchedule0}
     //                       currentDay={currentDay}
     //                        />;
-    otherCurrentState = <AltSchedule 
-                          //  schedule={schedule}
-                           scheduleToDisplay={scheduleToDisplay} 
-                           addItemToSchedule={addItemToSchedule} 
-                           addSchedule0={addSchedule0}
-                           currentDay={currentDay}
-                           scheduleItems={scheduleItems}
-                            />;
-    // otherCurrentState = <ScheduleThird 
+    // otherCurrentState = <AltSchedule 
     //                       //  schedule={schedule}
-    //                       scheduleToDisplay={scheduleToDisplay} 
-    //                       addItemToSchedule={addItemToSchedule} 
-    //                       addSchedule0={addSchedule0}
-    //                       currentDay={currentDay}
-    //                       scheduleItems={scheduleItems}
-    //                       />;
+    //                        scheduleToDisplay={scheduleToDisplay} 
+    //                        addItemToSchedule={addItemToSchedule}
+    //                        addEmptyTimeSlots={addEmptyTimeSlots} 
+    //                        addSchedule0={addSchedule0}
+    //                        currentDay={currentDay}
+    //                        scheduleItems={scheduleItems}
+    //                         />;
+    otherCurrentState = <ScheduleThird 
+                          //  schedule={schedule}
+                          scheduleToDisplay={scheduleToDisplay} 
+                          addItemToSchedule={addItemToSchedule} 
+                          addSchedule0={addSchedule0}
+                          currentDay={currentDay}
+                          scheduleItems={scheduleItems}
+                          />;
     buttonOne = 'go to timeblock form';
   }
   

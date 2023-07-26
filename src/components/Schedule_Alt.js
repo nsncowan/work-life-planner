@@ -41,37 +41,37 @@ const StyledScheduleDiv = styled.div`
 
 function AltSchedule(props) {
 
-  const { schedule, scheduleToDisplay, currentDay, addItemToSchedule, addSchedule0, scheduleItems } = props;
+  const { addEmptyTimeSlots ,schedule, scheduleToDisplay, currentDay, addItemToSchedule, addSchedule0, scheduleItems } = props;
 
   function handleAddScheduleButtonClick(e) {
     e.preventDefault();
     addSchedule0({
       date: currentDay,
       items: [
-        { id: v4(), hour: '8:00am', name: 'aaa', category: 'cat1' },
-        { id: v4(), hour: '9:00am', name: 'bbb', category: 'cat2' },
-        { id: v4(), hour: '10:00am', name: 'ccc', category: 'cat3' },
-        { id: v4(), hour: '11:00am', name: 'ddd', category: 'cat4' },
-        { id: v4(), hour: '12:00pm', name: 'eee', category: 'cat5' },
-        { id: v4(), hour: '1:00pm', name: 'fff', category: 'cat6' },
-        { id: v4(), hour: '2:00pm', name: 'ggg', category: 'cat7' },
-        { id: v4(), hour: '3:00pm', name: 'hhh', category: 'cat8' },
-        { id: v4(), hour: '4:00pm', name: 'iii', category: 'cat9' },
-        { id: v4(), hour: '5:00pm', name: 'jjj', category: 'cat10' },
-        { id: v4(), hour: '6:00pm', name: 'kkk', category: 'cat12' },
-        { id: v4(), hour: '7:00pm', name: 'lll', category: 'cat12' },
-        { id: v4(), hour: '8:00pm', name: 'mmm', category: 'cat13' },
+        { id: v4(), hour: '8:00am', name: null, category: null },
+        { id: v4(), hour: '9:00am', name: null, category: null },
+        { id: v4(), hour: '10:00am', name: null, category: null },
+        { id: v4(), hour: '11:00am', name: null, category: null },
+        { id: v4(), hour: '12:00pm', name: null, category: null },
+        { id: v4(), hour: '1:00pm', name: null, category: null },
+        { id: v4(), hour: '2:00pm', name: null, category: null },
+        { id: v4(), hour: '3:00pm', name: null, category: null },
+        { id: v4(), hour: '4:00pm', name: null, category: null },
+        { id: v4(), hour: '5:00pm', name: null, category: null },
+        { id: v4(), hour: '6:00pm', name: null, category: null },
+        { id: v4(), hour: '7:00pm', name: null, category: null },
+        { id: v4(), hour: '8:00pm', name: null, category: null },
       ]
     });
   }
   
-  function handleAddScheduleButtonClick(e) {
-    e.preventDefault();
-    addSchedule0({
-      date: currentDay,
-      items: scheduleItems
-    });
-  }
+  // function handleAddScheduleButtonClick(e) {
+  //   e.preventDefault();
+  //   addSchedule0({
+  //     date: currentDay,
+  //     items: scheduleItems
+  //   });
+  // }
   
   function handleAddItemToScheduleButtonClick(e) {
     e.preventDefault();
@@ -82,6 +82,15 @@ function AltSchedule(props) {
     });
   }
 
+  function handleAddEmptyTimeSlotsButtonClick(e) {
+    e.preventDefault();
+    addEmptyTimeSlots({
+      id: scheduleToDisplay[0].id,
+      hour: '8:00am',
+      items: []
+    });
+  }
+
   
 
   return (
@@ -89,6 +98,7 @@ function AltSchedule(props) {
       <h2>{currentDay}</h2>
       <button onClick={handleAddScheduleButtonClick}>Add Schedule</button>
       <button onClick={handleAddItemToScheduleButtonClick}>Save Schedule</button>
+      <button onClick={handleAddEmptyTimeSlotsButtonClick}>Add Empty Time Slot</button>
         {/* <h2>{scheduleToDisplay[0].date}</h2> */}
         <Droppable droppableId='scheduleItems' key='scheduleItems'>
           {(provided, snapshot) => (
