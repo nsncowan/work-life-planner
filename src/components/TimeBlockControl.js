@@ -8,12 +8,8 @@ import { db, auth } from "../firebase";
 import { collection, doc, addDoc, onSnapshot, getDocs, setDoc, updateDoc, arrayUnion, arrayRemove, getDoc, query, where } from "firebase/firestore";
 import NewCategoryForm from "./NewCategoryForm";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { initialDayData, initialTimeBlocks, dayColumns } from "./initial-day-data";
 import Schedule from "./Schedule";
-import AltSchedule from "./Schedule_Alt";
-import TimeSlot from "./TimeSlot";
 import SelectDate from "./SelectDate";
-import ScheduleThird from "./Schedule_Third";
 import { format, addDays, eachDayOfInterval, startOfToday, startOfMonth, endOfMonth, parseISO, parse, add, subDays} from "date-fns";
 
 
@@ -47,13 +43,6 @@ function TimeBlockControl() {
     let nextDay = addDays(newDay, 1)
     // let nextDay = add(newDay, { days: 1}) /// THIS ALSO WORKS
     setCurrentDay(format(nextDay, 'MM-dd-yyyy'))
-    // addItemToSchedule({
-    //   id: scheduleToDisplay[0].id,
-    //   date: scheduleToDisplay[0].date,
-    //   items: scheduleItems
-    // });
-
-    // setDisplayCurrentSchedule(getScheduleToDisplay(schedule));
   }
   
   function prevDay() {
@@ -61,11 +50,6 @@ function TimeBlockControl() {
     let nextDay = subDays(newDay, 1)
     // let nextDay = add(newDay, { days: 1}) /// THIS ALSO WORKS
     setCurrentDay(format(nextDay, 'MM-dd-yyyy'))
-    // addItemToSchedule({
-      //   id: scheduleToDisplay[0].id,
-      //   date: scheduleToDisplay[0].date,
-      //   items: scheduleItems
-      // });
       
   }
 // ================================================================================================
@@ -80,7 +64,6 @@ useEffect(() => {
         timeBlocks.push({
           name: doc.data().name,
           category: doc.data().category,
-          // add key property set to id for help with dnd
           id: doc.id
         });
       });
@@ -123,13 +106,7 @@ useEffect(() => {
             scheduleToDisplay.push({
               id: doc.id,
               date: doc.data().date,
-              morning: doc.data().morning,
-              lateMorning: doc.data().lateMorning,
-              midDay: doc.data().midDay,
-              afternoon: doc.data().afternoon,
-              lateAfternoon: doc.data().lateAfternoon,
-              earlyEvening: doc.data().earlyEvening,
-              lateEvening: doc.data().lateEvening,
+              items: doc.data().items,
             });
           });
           setScheduleToDisplay(scheduleToDisplay);
@@ -168,34 +145,11 @@ const handleClick = () => {
     await addDoc(collection(db, "schedules"), schedule);
   }
   
-  const addEmptyTimeSlots = async (timeSlot) => {
-    await addDoc(collection(db, "schedules", "timeSlots", "hour"), timeSlot);
-  }
-
-  // const addItemToSchedule = async (item, currentScheduleId) => {
-  //   const reference = doc(db, "schedules", currentScheduleId)
-  //   await updateDoc(reference, {
-  //     items: arrayUnion(item)
-  //   });
-  // }
-
   const addItemToSchedule = async (scheduleToEdit) => {
     const docRef = doc(db, "schedules", scheduleToEdit.id);
     await updateDoc(docRef, scheduleToEdit);
   }
 
-  // const addItemToSchedule = async (schedule) => {
-  //   await setDoc(collection(db, "schedules"), schedule);
-  // }
-
-  // const getScheduleToDisplay = (schedules) => {
-  //   const scheduleItemsToDisplay = [];
-  //   const targetSchedule = schedule.find(({ date }) => date === currentDay);
-  //   targetSchedule.items.forEach((item) => {
-  //     scheduleItemsToDisplay.push(item);
-  //   });
-  //   return scheduleItemsToDisplay;
-  // };
 // ================================================================================================
 
 // ====================================== DRAG AND DROP LOGIC =====================================
@@ -222,13 +176,12 @@ const handleClick = () => {
     const [removed] = sourceClone.splice(droppableSource.index, 1);
     // const copyItem = sourceClone[droppableSource.index];
     // const removedWithNewId = { ...removed, id: v4() };
-    destClone.splice(droppableDestination.index, 0, { ...removed, id: v4(), name: droppableDestination.droppableId }); // replaces the dragged timeBlock with a copy (and assigns a new id in the process)
+    destClone.splice(droppableDestination.index, 0, { ...removed, id: v4() });
     sourceClone.splice(droppableSource.index, 0, removed); 
         
     return {
-      [droppableSource.droppableId]/* source */: sourceClone,
-      [droppableDestination.droppableId]/* destination */: destClone,
-      // removedItem: removedWithNewId
+      [droppableSource.droppableId]: sourceClone,
+      [droppableDestination.droppableId]: destClone,
     };
   };
 
@@ -250,15 +203,9 @@ const handleClick = () => {
       setTimeBlockList(result.timeBlockList)
       setScheduleItems(result.scheduleItems)
     };
-    // setScheduleToDisplay(scheduleToDisplay)
     console.log('scheduleItems onDragEnd: ', scheduleItems)
     console.log('scheduleToDisplay[0] onDragEnd: ', scheduleToDisplay[0])
     console.log("result", result)
-    // addItemToSchedule({
-    //   id: scheduleToDisplay[0].id,
-    //   date: scheduleToDisplay[0].date,
-    //   items: scheduleItems
-    // });
   }
   
   let currentState = null;
@@ -278,30 +225,14 @@ const handleClick = () => {
   
   else {
     currentState = <TimeBlockList timeBlockList={timeBlockList} />;
-    // otherCurrentState = <Schedule 
-    //                       scheduleToDisplay={scheduleToDisplay} 
-    //                       addItemToSchedule={addItemToSchedule} 
-    //                       addSchedule0={addSchedule0}
-    //                       currentDay={currentDay}
-    //                       scheduleItems={scheduleItems}
-    //                        />;
-    // otherCurrentState = <AltSchedule 
-    //                       //  schedule={schedule}
-    //                        scheduleToDisplay={scheduleToDisplay} 
-    //                        addItemToSchedule={addItemToSchedule}
-    //                        addEmptyTimeSlots={addEmptyTimeSlots} 
-    //                        addSchedule0={addSchedule0}
-    //                        currentDay={currentDay}
-    //                        scheduleItems={scheduleItems}
-    //                         />;
-    otherCurrentState = <ScheduleThird 
+    otherCurrentState = <Schedule 
                           //  schedule={schedule}
-                          scheduleToDisplay={scheduleToDisplay} 
-                          addItemToSchedule={addItemToSchedule} 
-                          addSchedule0={addSchedule0}
-                          currentDay={currentDay}
-                          scheduleItems={scheduleItems}
-                          />;
+                           scheduleToDisplay={scheduleToDisplay} 
+                           addItemToSchedule={addItemToSchedule}
+                           addSchedule0={addSchedule0}
+                           currentDay={currentDay}
+                           scheduleItems={scheduleItems}
+                            />;
     buttonOne = 'go to timeblock form';
   }
   
@@ -310,15 +241,12 @@ const handleClick = () => {
       {topTaskBar}
       {dateDisplay}
       <StyledMainBodyDiv>
-      {/* {console.log('schedule', schedule)}
-      {console.log('displayCurrentSchedule', displayCurrentSchedule)} */}
         <DragDropContext onDragEnd={onDragEnd}>
           {currentState}
           {otherCurrentState}
         </DragDropContext>
           <button onClick={handleClick}>{buttonOne}</button>
       </StyledMainBodyDiv>
-      {/* {bottomTaskBar} */}
     </React.Fragment>
   );
 }
