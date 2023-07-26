@@ -34,23 +34,34 @@ function ScheduleThird(props) {
     e.preventDefault();
     addSchedule0({
       date: currentDay,
-      items: [
-        { id: v4(), hour: '8:00am', name: null, category: null },
-        { id: v4(), hour: '9:00am', name: null, category: null },
-        { id: v4(), hour: '10:00am', name: null, category: null },
-        { id: v4(), hour: '11:00am', name: null, category: null },
-        { id: v4(), hour: '12:00pm', name: null, category: null },
-        { id: v4(), hour: '1:00pm', name: null, category: null },
-        { id: v4(), hour: '2:00pm', name: null, category: null },
-        { id: v4(), hour: '3:00pm', name: null, category: null },
-        { id: v4(), hour: '4:00pm', name: null, category: null },
-        { id: v4(), hour: '5:00pm', name: null, category: null },
-        { id: v4(), hour: '6:00pm', name: null, category: null },
-        { id: v4(), hour: '7:00pm', name: null, category: null },
-        { id: v4(), hour: '8:00pm', name: null, category: null },
-      ]
+      '8:00am': [],
+      '9:00am': [],
+      '10:00am': [],
+      '11:00am': [],
+      '12:00pm': [],
+      '1:00pm': [],
+      '2:00pm': [],
+      '3:00pm': [],
+      '4:00pm': [],
+      '5:00pm': [],
+      '6:00pm': [],
     });
   }
+  // items: [
+  //   { id: v4(), hour: '8:00am', name: null, category: null },
+  //   { id: v4(), hour: '9:00am', name: null, category: null },
+  //   { id: v4(), hour: '10:00am', name: null, category: null },
+  //   { id: v4(), hour: '11:00am', name: null, category: null },
+  //   { id: v4(), hour: '12:00pm', name: null, category: null },
+  //   { id: v4(), hour: '1:00pm', name: null, category: null },
+  //   { id: v4(), hour: '2:00pm', name: null, category: null },
+  //   { id: v4(), hour: '3:00pm', name: null, category: null },
+  //   { id: v4(), hour: '4:00pm', name: null, category: null },
+  //   { id: v4(), hour: '5:00pm', name: null, category: null },
+  //   { id: v4(), hour: '6:00pm', name: null, category: null },
+  //   { id: v4(), hour: '7:00pm', name: null, category: null },
+  //   { id: v4(), hour: '8:00pm', name: null, category: null },
+  // ]
 
   function handleAddItemToScheduleButtonClick(e) {
     e.preventDefault();
@@ -60,6 +71,7 @@ function ScheduleThird(props) {
       items: scheduleItems
     });
   }
+  
 
   return (
     <React.Fragment>

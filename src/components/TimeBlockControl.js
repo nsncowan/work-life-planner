@@ -276,6 +276,7 @@ const handleClick = () => {
     //                       addItemToSchedule={addItemToSchedule} 
     //                       addSchedule0={addSchedule0}
     //                       currentDay={currentDay}
+    //                       scheduleItems={scheduleItems}
     //                        />;
     // otherCurrentState = <AltSchedule 
     //                       //  schedule={schedule}
