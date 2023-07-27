@@ -207,7 +207,7 @@ const handleClick = () => {
     };
     console.log('scheduleItems onDragEnd: ', scheduleItems)
     console.log('scheduleToDisplay[0] onDragEnd: ', scheduleToDisplay[0])
-    console.log("result", result)
+    // console.log("result", result)
   }
   
   let currentState = null;

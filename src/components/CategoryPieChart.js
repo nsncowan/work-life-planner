@@ -5,33 +5,40 @@ export default function CategoryPieChart(props) {
 
   const { scheduleItems } = props;
   
-  function getData(arr) {
+  function getData() {
     const categoryData = {};
     const categoryArray = [];
     
     scheduleItems.forEach(element => {
       categoryArray.push(element.category)
     });
+    console.log('category array', categoryArray)
 
     categoryArray.forEach(item => {
       if(categoryData[item]) {
         categoryData[item] += 1;
       } else {
-        categoryData[item] = { category: item, value: 1 };
+        categoryData[item] = 1 ;
       }
     });
 
-    const result = Object.values(categoryData);
+    const result = Object.entries(categoryData).map(([category, count]) => ({
+      category, value: (count / categoryArray.length) * 100,
+    }));
+    console.log('result', result)
     return result;
   }
 
 const pieChartData = getData(scheduleItems);
+console.log('pieChartData', pieChartData)
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+// let renderLabel = entry => entry.category;
 
 return (
-    <PieChart width={300} height={300} /* onMouseEnter={this.onPieEnter} */>
+    <PieChart width={400} height={400} /* onMouseEnter={this.onPieEnter} */>
       <Pie
         data={pieChartData}
+        label={(entry) => entry.category}
         cx={120}
         cy={200}
         innerRadius={60}
