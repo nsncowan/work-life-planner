@@ -5,6 +5,8 @@ import { Droppable } from 'react-beautiful-dnd';
 import { v4 } from 'uuid';
 import CategoryPieChart from "./CategoryPieChart";
 import Grid from "@mui/system/Unstable_Grid/Grid";
+import { format, addDays, eachDayOfInterval, startOfToday, startOfMonth, endOfMonth, parseISO, parse, add, subDays} from "date-fns";
+
 
 const StyledScheduleDiv = styled.div`
     display: flex;
@@ -39,20 +41,20 @@ const StyledScheduleDiv = styled.div`
 
 function Schedule(props) {
 
-  const { schedule, scheduleToDisplay, currentDay, addItemToSchedule, addSchedule0, scheduleItems } = props;
+  const { schedules, scheduleToDisplay, currentDay, addItemToSchedule, addSchedule0, scheduleItems } = props;
 
   function handleAddScheduleButtonClick(e) {
     e.preventDefault();
     addSchedule0({
       date: currentDay,
       items: [
-        { id: v4(), name: 'family time', category: 'family' },
+        /* { id: v4(), name: 'family time', category: 'family' },
         { id: v4(), name: 'yoga', category: 'health' },
         { id: v4(), name: 'study', category: 'education' },
         { id: v4(), name: 'relax time', category: 'self-care' },
         { id: v4(), name: 'wash dishes', category: 'chores' },
         { id: v4(), name: 'gardening', category: 'outdoor time' },
-      ]
+       */]
     });
   }
     
@@ -64,7 +66,6 @@ function Schedule(props) {
       items: scheduleItems
     });
   }
-
   return (
     <ScheduleBodyDiv>
       <React.Fragment>
@@ -77,9 +78,6 @@ function Schedule(props) {
               <button onClick={handleAddScheduleButtonClick}>Add Schedule</button>
               <button onClick={handleAddItemToScheduleButtonClick}>Save Schedule</button>
             </Grid>
-            <Grid item md={12}>
-              <CategoryPieChart scheduleItems={scheduleItems} />
-            </Grid>
               <Droppable droppableId='scheduleItems' key='scheduleItems'>
                 {(provided, snapshot) => (
                   <StyledScheduleDiv ref={provided.innerRef} {...provided.droppableProps} style={{background: snapshot.isDraggingOver ? "lightblue" : "lightgrey",}}>
@@ -90,6 +88,9 @@ function Schedule(props) {
                   </StyledScheduleDiv>
                 )}
               </Droppable>
+            <Grid item md={12}>
+              <CategoryPieChart scheduleItems={scheduleItems} />
+            </Grid>
           {/* </ScheduleBodyDiv> */}
         </Grid>
       </React.Fragment>

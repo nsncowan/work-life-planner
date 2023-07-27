@@ -11,7 +11,7 @@ import NewCategoryForm from "./NewCategoryForm";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Schedule from "./Schedule";
 import SelectDate from "./SelectDate";
-import { format, addDays, eachDayOfInterval, startOfToday, startOfMonth, endOfMonth, parseISO, parse, add, subDays} from "date-fns";
+import { format, addDays, startOfWeek, endOfWeek, startOfToday, parseISO, parse, add, subDays, eachDayOfInterval } from "date-fns";
 import CategoryPieChart from "./CategoryPieChart";
 
 
@@ -28,9 +28,12 @@ const StyledMainBodyDiv = styled.div`
 
 function TimeBlockControl() {
   let today = startOfToday();
-  const [currentDay, setCurrentDay] = useState(format(today, 'MM-dd-yyyy'))
+  const [currentDay, setCurrentDay] = useState(format(today, 'MM-dd-yyyy'));
+  const [startOfCurrentWeek, setStartOfCurrentWeek] = useState(format(startOfWeek(today, { weekStartsOn: 0 }), 'MM-dd-yyyy'));
+  const [endOfCurrentWeek, setEndOfCurrentWeek] = useState(format(endOfWeek(today, { weekStartsOn: 0 }), 'MM-dd-yyyy'));
   const [timeBlockList, setTimeBlockList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
+  const [weeklySchedules, setWeeklySchedules] = useState([]);
   const [schedules, setSchedules] = useState([]);
   const [scheduleToDisplay, setScheduleToDisplay] = useState([]);
   const [editing, setEditing] = useState(false);
@@ -39,7 +42,6 @@ function TimeBlockControl() {
   const [scheduleItems, setScheduleItems] = useState([]);
   
 // ==================================== DATE LOGIC ================================================
-
   function nextDay() {
     let newDay = parse(currentDay, 'MM-dd-yyyy', new Date());
     let nextDay = addDays(newDay, 1)
@@ -49,11 +51,22 @@ function TimeBlockControl() {
   
   function prevDay() {
     let newDay = parse(currentDay, 'MM-dd-yyyy', new Date());
-    let nextDay = subDays(newDay, 1)
-    // let nextDay = add(newDay, { days: 1}) /// THIS ALSO WORKS
-    setCurrentDay(format(nextDay, 'MM-dd-yyyy'))
-      
+    let prevDay = subDays(newDay, 1)
+    setCurrentDay(format(prevDay, 'MM-dd-yyyy')) 
   }
+
+  // function startOfWeek() {
+  //   let newDay = parse(currentDay, 'MM-dd-yyyy', new Date());
+  //   let startOfWeek = startOfWeek(newDay, { weekStartsOn: 0 })
+  //   setStartOfCurrentWeek(format(startOfWeek, 'MM-dd-yyyy')) 
+  // }
+
+  // function endOfWeek() {
+  //   let newDay = parse(currentDay, 'MM-dd-yyyy', new Date());
+  //   let endOfWeek = endOfWeek(newDay, { weekStartsOn: 0 })
+  //   setEndOfCurrentWeek(format(endOfWeek, 'MM-dd-yyyy')) 
+  // }
+
 // ================================================================================================
 
 // ================================================================================================
@@ -146,7 +159,32 @@ useEffect(() => {
         );
         console.log('scheduleToDisplay: ', scheduleToDisplay);
         console.log('scheduleItems: ', scheduleItems);
+        console.log('startOfWeek: ', startOfCurrentWeek);
+        console.log('endOfWeek: ', endOfCurrentWeek);
+
     return () => findSchedule();
+  }, [currentDay])
+
+  useEffect(() => {
+    const dateRange = eachDayOfInterval({start: startOfWeek(today, { weekStartsOn: 0 }), end: startOfWeek(today, { weekStartsOn: 0 }) });
+    const formattedDateRange = dateRange.map(date => format(date, 'MM-dd-yyyy'));
+    const ref = collection(db, "schedules");
+    const q = query(ref, where('date', 'in', formattedDateRange
+                              // 'date', '>=', startOfCurrentWeek.toISOString(),
+                              //   'date', '>=', endOfCurrentWeek.toISOString()
+                                ));
+    const getWeeklySchedules = 
+        onSnapshot(q,(snapshot) => {
+          const weeklySchedules = [];
+          snapshot.docs.forEach((doc) => {
+            weeklySchedules.push(doc.data());
+          });
+          setWeeklySchedules(weeklySchedules);
+        },
+        // (error) => {}
+        );
+        console.log('weeklySchedules', weeklySchedules);
+    return () => getWeeklySchedules();
   }, [currentDay])
 // ================================================================================================
 
@@ -168,26 +206,10 @@ const handleClick = () => {
     await addDoc(collection(db, "schedules"), schedule);
   }
   
-  // const addItemToSchedule = async (scheduleToEdit) => {
-  //   const docRef = doc(db, "schedules", scheduleToEdit);
-  //   await updateDoc(docRef, scheduleToEdit);
-  // }
-
-  // const addItemToSchedule = async (item, currentSchedule) => {
-  //   const reference = doc(db, "schedules", currentSchedule)
-  //   await updateDoc(reference, {
-  //     items: arrayUnion(item)
-  //   });
-  // }
-
   const addItemToSchedule = async (currentSchedule) => {
     const reference = doc(db, "schedules", currentSchedule.id)
     await updateDoc(reference, currentSchedule);
   }
-
-  // const addItemToSchedule = async (schedule) => {
-  //   await setDoc(collection(db, "schedules"), schedule);
-  // }
 
 // ================================================================================================
 
@@ -259,7 +281,7 @@ const handleClick = () => {
     currentState = <TimeBlockList timeBlockList={timeBlockList} />;
     // pieChartComponent = <CategoryPieChart scheduleItems={scheduleItems} />;
     otherCurrentState = <Schedule 
-                          //  schedule={schedule}
+                          //  schedules={schedules}
                            scheduleToDisplay={scheduleToDisplay} 
                            addItemToSchedule={addItemToSchedule}
                            addSchedule0={addSchedule0}
