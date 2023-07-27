@@ -45,7 +45,7 @@ function Schedule(props) {
   function handleAddScheduleButtonClick(e) {
     e.preventDefault();
     addSchedule0({
-      date: {currentDay},
+      date: currentDay,
       items: [
         { id: v4(), name: 'family time', category: 'family' },
         { id: v4(), name: 'yoga', category: 'health' },
