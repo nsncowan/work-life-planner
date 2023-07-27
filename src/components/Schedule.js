@@ -41,7 +41,7 @@ const StyledScheduleDiv = styled.div`
 
 function Schedule(props) {
 
-  const { schedules, scheduleToDisplay, currentDay, addItemToSchedule, addSchedule0, scheduleItems } = props;
+  const { weeklySchedules, scheduleToDisplay, currentDay, addItemToSchedule, addSchedule0, scheduleItems } = props;
 
   function handleAddScheduleButtonClick(e) {
     e.preventDefault();
@@ -88,6 +88,18 @@ function Schedule(props) {
                   </StyledScheduleDiv>
                 )}
               </Droppable>
+              <StyledScheduleDiv>
+                {weeklySchedules.map((schedule) => (
+                  <div key={schedule.id}>
+                    <h3>{schedule.date}</h3>
+                    <ul>
+                      {schedule.items.map((item, index) => (
+                        <li key={index}>{item.name}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </StyledScheduleDiv>
             <Grid item md={12}>
               <CategoryPieChart scheduleItems={scheduleItems} />
             </Grid>

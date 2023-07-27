@@ -283,7 +283,7 @@ const handleClick = () => {
     currentState = <TimeBlockList timeBlockList={timeBlockList} />;
     // pieChartComponent = <CategoryPieChart scheduleItems={scheduleItems} />;
     otherCurrentState = <Schedule 
-                          //  schedules={schedules}
+                           weeklySchedules={weeklySchedules}
                            scheduleToDisplay={scheduleToDisplay} 
                            addItemToSchedule={addItemToSchedule}
                            addSchedule0={addSchedule0}
