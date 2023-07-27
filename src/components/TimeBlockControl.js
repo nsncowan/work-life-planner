@@ -166,23 +166,25 @@ useEffect(() => {
   }, [currentDay])
 
   useEffect(() => {
-    const dateRange = eachDayOfInterval({start: startOfWeek(today, { weekStartsOn: 0 }), end: startOfWeek(today, { weekStartsOn: 0 }) });
+    const dateRange = eachDayOfInterval({start: startOfWeek(today, { weekStartsOn: 0 }), end: endOfWeek(today, { weekStartsOn: 0 }) });
     const formattedDateRange = dateRange.map(date => format(date, 'MM-dd-yyyy'));
     const ref = collection(db, "schedules");
-    const q = query(ref, where('date', 'in', formattedDateRange
-                              // 'date', '>=', startOfCurrentWeek.toISOString(),
-                              //   'date', '>=', endOfCurrentWeek.toISOString()
-                                ));
+    const q = query(ref, where('date', 'in', formattedDateRange));
     const getWeeklySchedules = 
         onSnapshot(q,(snapshot) => {
           const weeklySchedules = [];
           snapshot.docs.forEach((doc) => {
-            weeklySchedules.push(doc.data());
+            weeklySchedules.push({
+              id: doc.id,
+              date: doc.data().date,
+              items: doc.data().items,
+            });
           });
           setWeeklySchedules(weeklySchedules);
         },
         // (error) => {}
         );
+        console.log('formattedDateRange', formattedDateRange);
         console.log('weeklySchedules', weeklySchedules);
     return () => getWeeklySchedules();
   }, [currentDay])
