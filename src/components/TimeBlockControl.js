@@ -31,7 +31,7 @@ function TimeBlockControl() {
   const [currentDay, setCurrentDay] = useState(format(today, 'MM-dd-yyyy'))
   const [timeBlockList, setTimeBlockList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
-  const [schedule, setSchedule] = useState([]);
+  const [schedules, setSchedules] = useState([]);
   const [scheduleToDisplay, setScheduleToDisplay] = useState([]);
   const [editing, setEditing] = useState(false);
   const [viewSelector, setViewSelector] = useState('timeBlockList');
@@ -70,7 +70,7 @@ useEffect(() => {
         });
       });
       setTimeBlockList(timeBlocks);
-      console.log('timeblocks: ', timeBlocks);
+      // console.log('timeblocks: ', timeBlocks);
       },
       // (error) => {}
       );
@@ -89,31 +89,51 @@ useEffect(() => {
         },
         // (error) => {}
         );
+
+        const unSubscribeSchedule = onSnapshot(
+        collection(db, "schedules"),
+        (collectionSnapshot) => {
+          const schedules = [];
+          collectionSnapshot.forEach((doc) => {
+            schedules.push({
+              id: doc.id,
+              date: doc.data().date,
+              items: doc.data().items
+            });
+          });
+          setSchedules(schedules);
+          console.log('schedules', schedules)
+        },
+        // (error) => {}
+        );
         
         const initialize = () => {
           unSubscribeTimeBlocks();
           unSubscribeCategory();
-          // findSchedule();
+          unSubscribeSchedule();
         }
         return initialize;
   }, []);
 
   useEffect(() => {
+    // const currentSchedule = []
+
     const ref = collection(db, "schedules");
     const q = query(ref, where("date", "==", currentDay));
     const findSchedule = 
         onSnapshot(q,(snapshot) => {
-          const scheduleToDisplay = [];
+          const thisSchedule = [];
           snapshot.docs.forEach((doc) => {
-            scheduleToDisplay.push({
+            thisSchedule.push({
               id: doc.id,
               date: doc.data().date,
               items: doc.data().items,
             });
           });
-          setScheduleToDisplay(scheduleToDisplay);
+          console.log('thisSchedule', thisSchedule);
+          setScheduleToDisplay(thisSchedule);
 
-          const items = scheduleToDisplay.map((entry) => {
+          const items = thisSchedule.map((entry) => {
             return entry.items;
           });
           const scheduleItems = [];
@@ -127,7 +147,7 @@ useEffect(() => {
         console.log('scheduleToDisplay: ', scheduleToDisplay);
         console.log('scheduleItems: ', scheduleItems);
     return () => findSchedule();
-  }, [])
+  }, [currentDay])
 // ================================================================================================
 
 const handleClick = () => {
@@ -148,10 +168,26 @@ const handleClick = () => {
     await addDoc(collection(db, "schedules"), schedule);
   }
   
-  const addItemToSchedule = async (scheduleToEdit) => {
-    const docRef = doc(db, "schedules", scheduleToEdit);
-    await updateDoc(docRef, scheduleToEdit);
+  // const addItemToSchedule = async (scheduleToEdit) => {
+  //   const docRef = doc(db, "schedules", scheduleToEdit);
+  //   await updateDoc(docRef, scheduleToEdit);
+  // }
+
+  // const addItemToSchedule = async (item, currentSchedule) => {
+  //   const reference = doc(db, "schedules", currentSchedule)
+  //   await updateDoc(reference, {
+  //     items: arrayUnion(item)
+  //   });
+  // }
+
+  const addItemToSchedule = async (currentSchedule) => {
+    const reference = doc(db, "schedules", currentSchedule.id)
+    await updateDoc(reference, currentSchedule);
   }
+
+  // const addItemToSchedule = async (schedule) => {
+  //   await setDoc(collection(db, "schedules"), schedule);
+  // }
 
 // ================================================================================================
 
