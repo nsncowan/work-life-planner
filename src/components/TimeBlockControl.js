@@ -149,7 +149,7 @@ const handleClick = () => {
   }
   
   const addItemToSchedule = async (scheduleToEdit) => {
-    const docRef = doc(db, "schedules", scheduleToEdit.id);
+    const docRef = doc(db, "schedules", scheduleToEdit);
     await updateDoc(docRef, scheduleToEdit);
   }
 

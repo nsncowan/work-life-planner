@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import styled from 'styled-components';
 import TimeSlot from "./TimeSlot";
 import { Droppable } from 'react-beautiful-dnd';
@@ -61,7 +60,7 @@ function Schedule(props) {
     e.preventDefault();
     addItemToSchedule({
       id: scheduleToDisplay[0].id,
-      date: {currentDay},
+      date: scheduleToDisplay[0].date,
       items: scheduleItems
     });
   }
@@ -99,10 +98,6 @@ function Schedule(props) {
   );
 }
 
-Schedule.propTypes = {
-  time: PropTypes.string,
-  content: PropTypes.array
-};
 
 export default Schedule;
 
