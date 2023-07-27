@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Grid from "@mui/system/Unstable_Grid/Grid";
 import styled from 'styled-components';
 import { v4 } from 'uuid';
 import NewTimeBlockForm from "./NewTImeBlockForm";
@@ -126,7 +127,7 @@ useEffect(() => {
         console.log('scheduleToDisplay: ', scheduleToDisplay);
         console.log('scheduleItems: ', scheduleItems);
     return () => findSchedule();
-  }, [currentDay])
+  }, [])
 // ================================================================================================
 
 const handleClick = () => {
@@ -162,15 +163,7 @@ const handleClick = () => {
     result.splice(endIndex, 0, removed);
 
     return result;
-  };
-
-  const combine = (origin, destiny) => ({
-    id: v4(),
-    name: origin.name,
-    category: origin.category,
-    hour: destiny.hour
-  });
-  
+  };  
 
   const move = (source, destination, droppableSource, droppableDestination) => {
     const sourceClone = Array.from(source);
@@ -206,7 +199,7 @@ const handleClick = () => {
       setScheduleItems(result.scheduleItems)
     };
     console.log('scheduleItems onDragEnd: ', scheduleItems)
-    console.log('scheduleToDisplay[0] onDragEnd: ', scheduleToDisplay[0])
+    console.log('scheduleToDisplay onDragEnd: ', scheduleToDisplay)
     // console.log("result", result)
   }
   
@@ -228,7 +221,7 @@ const handleClick = () => {
   
   else {
     currentState = <TimeBlockList timeBlockList={timeBlockList} />;
-    pieChartComponent = <CategoryPieChart scheduleItems={scheduleItems} />;
+    // pieChartComponent = <CategoryPieChart scheduleItems={scheduleItems} />;
     otherCurrentState = <Schedule 
                           //  schedule={schedule}
                            scheduleToDisplay={scheduleToDisplay} 
@@ -242,17 +235,23 @@ const handleClick = () => {
   
   return (
     <React.Fragment>
-      {topTaskBar}
-      {dateDisplay}
-      <StyledMainBodyDiv>
-        <DragDropContext onDragEnd={onDragEnd}>
-          {currentState}
-          {otherCurrentState}
-          {/* {pieChartComponent} */}
-        </DragDropContext>
-          <button onClick={handleClick}>{buttonOne}</button>
-      </StyledMainBodyDiv>
-    </React.Fragment>
+        {topTaskBar}
+        {dateDisplay}
+        <button onClick={handleClick}>{buttonOne}</button>
+        <Grid container>
+          <StyledMainBodyDiv>
+            <DragDropContext onDragEnd={onDragEnd}>
+              <Grid item md={6}>
+                {currentState}
+              </Grid>
+              <Grid item md={6}>
+                {otherCurrentState}
+              </Grid>
+              {/* {pieChartComponent} */}
+            </DragDropContext>
+          </StyledMainBodyDiv>
+        </Grid>
+      </React.Fragment>
   );
 }
 

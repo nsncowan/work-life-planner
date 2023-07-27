@@ -1,29 +1,13 @@
 
+### hooks
+useNavigate
+
 ### Task list
  * update `items:` within schedule docs ***[DONE]***
  * re-render schedule when `currentDate` changes ***[DONE]***
  * execute addItemsToSchedule each time a timeblock is dropped into schedule items
  * execute addItemsToSchedule each time a itemList is re-ordered
  * troubleshoot why console log of scheduleItems is always 1 move behind
-
-
-Import hours
-
-Div 
-  Hours map (hour) => {
-    Droppable 
-      StyledDiv
-        {hour.time}
-        <timeslot >
-
-  }    
-
-
-
-
-
-
-
 
 ## Data
 
