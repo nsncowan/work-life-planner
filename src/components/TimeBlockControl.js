@@ -293,12 +293,8 @@ const handleWeeklyViewClick = () => {
     timeBlockListComponent = <TimeBlockList timeBlockList={timeBlockList} />;
     otherCurrentState = <WeeklyView
                            weeklySchedules={weeklySchedules}
-                           scheduleToDisplay={scheduleToDisplay} 
-                           addItemToSchedule={addItemToSchedule}
-                           addSchedule0={addSchedule0}
                            deleteItem={deleteItem}
-                           currentDay={currentDay}
-                           scheduleItems={scheduleItems} />;
+                           currentDay={currentDay} />;
     buttonOne = 'Timeblock Form'
     buttonTwo = 'Weekly / Daily View'
   }
