@@ -11,7 +11,7 @@ const WeeklyScheduleDiv = styled.div`
     align-content: top;
     justify-content: center;
     width: 100%;
-    border: 5px solid #FF9494;
+    border: 2px solid red;
     padding: .75rem;
     text-align: center;
     font-size: .833rem;
@@ -19,18 +19,19 @@ const WeeklyScheduleDiv = styled.div`
   `;
 
   const ScheduleColumnDiv = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: top;
+  /* align-items: top;
+  display: flex;
+  flex-direction: column;
     align-content: top;
     justify-content: top;
-    width: 100%;
+    max-width: 100%;
     padding: .75rem;
     text-align: center;
     font-size: .833rem;
     font-weight: 500;
-  `;
+    border: 2px dotted blue; */
 
+  `;
 
   const StyledTimeSlotDiv = styled.div`
   display: flex;
@@ -38,7 +39,7 @@ const WeeklyScheduleDiv = styled.div`
   align-items: center;
   align-content: space-around;
   justify-content: center;
-  width: 9rem;
+  max-width: 12rem;
   padding: .75rem;
   margin: .15rem;
   border-radius: 54px;
