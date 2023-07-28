@@ -6,7 +6,7 @@ import NewTimeBlockForm from "./NewTImeBlockForm";
 import TimeBlockList from "./TimeBlockList";
 import PlannerViewSelector from "./PlannerViewSelector";
 import { db, auth } from "../firebase";
-import { collection, doc, addDoc, onSnapshot, getDocs, setDoc, updateDoc, arrayUnion, arrayRemove, getDoc, query, where, deleteDoc } from "firebase/firestore";
+import { collection, doc, addDoc, onSnapshot, orderBy, updateDoc, query, where, deleteDoc } from "firebase/firestore";
 import NewCategoryForm from "./NewCategoryForm";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Schedule from "./Schedule";
@@ -170,7 +170,7 @@ useEffect(() => {
     const dateRange = eachDayOfInterval({start: startOfWeek(today, { weekStartsOn: 0 }), end: endOfWeek(today, { weekStartsOn: 0 }) });
     const formattedDateRange = dateRange.map(date => format(date, 'MM-dd-yyyy'));
     const ref = collection(db, "schedules");
-    const q = query(ref, where('date', 'in', formattedDateRange));
+    const q = query(ref, where('date', 'in', formattedDateRange), orderBy('date'));
     const getWeeklySchedules = 
         onSnapshot(q,(snapshot) => {
           const weeklySchedules = [];
@@ -181,11 +181,13 @@ useEffect(() => {
               items: doc.data().items,
             });
           });
-          setWeeklySchedules(weeklySchedules);
+          const sortedWeeklySchedules = weeklySchedules.sort(
+            (a, b) => Number(a.date) - Number(b.date),
+          );
+          setWeeklySchedules(sortedWeeklySchedules);
         },
         // (error) => {}
         );
-        console.log('formattedDateRange', formattedDateRange);
         console.log('weeklySchedules', weeklySchedules);
     return () => getWeeklySchedules();
   }, [currentDay])
