@@ -4,31 +4,26 @@ import { Card } from "@mui/material";
 import styled from 'styled-components';
 
 const PieChartDiv = styled.div`
+    height: 200px;
     display: flex;
     flex-direction: row;
     align-items: center;
     align-content: center;
     justify-content: center;
     max-width: 100%;
-    border: 2px solid red;
-    padding: .75rem;
+    /* border: 2px solid red; */
+    padding: 0rem;
     text-align: center;
-    font-size: .833rem;
-    font-weight: 500;
-  `;
-
-
-
-
+    font-size: .7rem;
+    font-weight: 400;
+   `;
 
 export default function CategoryPieChart(props) {
-
   const { scheduleItems } = props;
   
   function getData() {
     const categoryData = {};
     const categoryArray = [];
-    
     scheduleItems.forEach(element => {
       categoryArray.push(element.category)
     });
@@ -48,19 +43,20 @@ export default function CategoryPieChart(props) {
   }
 
 const pieChartData = getData(scheduleItems);
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+const COLORS = ['#F6114A', '#0AA0BF', '#F36E98', '#78B177', '#9862A2', '#F05006', '#25998F', '#FCA00C'];
 // let renderLabel = entry => entry.category;
 
 return (
     <PieChartDiv>
-        <PieChart width={400} height={400} /* onMouseEnter={this.onPieEnter} */>
+      <ResponsiveContainer width="80%" height="80%">
+        <PieChart width={800} height={800} margin={{ top: 10, right: 10, bottom: 10, left: 10 }} >
           <Pie
             data={pieChartData}
             label={(entry) => entry.category}
-            cx="60%"
+            cx="50%"
             cy="50%"
-            innerRadius={60}
-            outerRadius={80}
+            innerRadius='75%'
+            outerRadius='100%'
             fill="#8884d8"
             paddingAngle={5}
             dataKey="value"
@@ -70,6 +66,7 @@ return (
             ))}
           </Pie>
         </PieChart>
+      </ResponsiveContainer>
     </PieChartDiv>
   )
 }
