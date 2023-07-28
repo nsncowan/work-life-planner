@@ -78,6 +78,9 @@ function Schedule(props) {
               <button onClick={handleAddScheduleButtonClick}>Add Schedule</button>
               <button onClick={handleAddItemToScheduleButtonClick}>Save Schedule</button>
             </Grid>
+            <Grid item md={12}>
+              <CategoryPieChart scheduleItems={scheduleItems} />
+            </Grid>
               <Droppable droppableId='scheduleItems' key='scheduleItems'>
                 {(provided, snapshot) => (
                   <StyledScheduleDiv ref={provided.innerRef} {...provided.droppableProps} style={{background: snapshot.isDraggingOver ? "lightblue" : "lightgrey",}}>
@@ -88,21 +91,6 @@ function Schedule(props) {
                   </StyledScheduleDiv>
                 )}
               </Droppable>
-              <StyledScheduleDiv>
-                {weeklySchedules.map((schedule) => (
-                  <div key={schedule.id}>
-                    <h3>{schedule.date}</h3>
-                    <ul>
-                      {schedule.items.map((item, index) => (
-                        <li key={index}>{item.name}</li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </StyledScheduleDiv>
-            <Grid item md={12}>
-              <CategoryPieChart scheduleItems={scheduleItems} />
-            </Grid>
           {/* </ScheduleBodyDiv> */}
         </Grid>
       </React.Fragment>

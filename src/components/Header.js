@@ -8,6 +8,7 @@ function Header() {
       <ul>
         <li><Link to="/">Home</Link> </li>
         <li><Link to="/sign-in">Sign In</Link> </li>
+        <li><Link to="/weekly-view">Weekly View</Link> </li>
       </ul>
 
     </React.Fragment>

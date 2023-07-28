@@ -6,12 +6,13 @@ import { DragDropContext } from "react-beautiful-dnd";
 import SignIn from "./SignIn";
 import { Container } from "react-bootstrap";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import WeeklyView from "./WeeklyView";
 
 function App(){
 
   const AppStyles = {
     height: "100%",
-    padding: "0 17% 10% 17%",
+    padding: "0 10% 10% 10%",
     backgroundColor: '#FFF5E4',
     // backgroundImage: "url(./background_photo_desktop.jpg)",
     // backgroundSize: "cover",
@@ -29,6 +30,7 @@ function App(){
           <Header />
           <Routes>
             <Route path="/sign-in" element={<SignIn />} />
+            <Route path="/weekly-view" element={<WeeklyView />} />
             <Route path="/" element={<TimeBlockControl />} />
           </Routes>
         </Router>
