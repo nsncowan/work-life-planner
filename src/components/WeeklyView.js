@@ -18,20 +18,18 @@ const WeeklyScheduleDiv = styled.div`
     font-weight: 500;
   `;
 
-  const ScheduleColumnDiv = styled.div`
-  /* align-items: top;
-  display: flex;
-  flex-direction: column;
-    align-content: top;
-    justify-content: top;
-    max-width: 100%;
-    padding: .75rem;
-    text-align: center;
-    font-size: .833rem;
-    font-weight: 500;
-    border: 2px dotted blue; */
-
-  `;
+const ScheduleColumnDiv = styled.div`
+display: flex;
+flex-direction: column;
+align-items: top;
+align-content: top;
+justify-content: top;
+max-width: 100%;
+// padding: .75rem;
+text-align: center;
+font-size: .833rem;
+font-weight: 500;
+`;
 
   const StyledTimeSlotDiv = styled.div`
   display: flex;
@@ -55,22 +53,11 @@ const WeeklyScheduleDiv = styled.div`
 export default function WeeklyView(props) {
   const { weeklySchedules, scheduleToDisplay, currentDay, addItemToSchedule, addSchedule0, scheduleItems } = props;
 
-
-  function GetItemArray(schedule) {
-    const items = schedule.map((entry) => {
-      return entry.items;
-    });
-    const scheduleItems = [];
-    items.forEach((item) => {
-      scheduleItems.push(item);
-      return scheduleItems;
-  });
-  }
-
   return (
     <WeeklyScheduleDiv>
       {weeklySchedules.map((schedule) => (
         <ScheduleColumnDiv>
+          <CategoryPieChart scheduleItems={schedule.items} />
             <Typography variant="h6">{schedule.date}</Typography>
               <ul>
                   {schedule.items.map((item, index) => (
@@ -83,28 +70,4 @@ export default function WeeklyView(props) {
       ))}
     </WeeklyScheduleDiv>
   )
-
-
-  // return (
-  //   <WeeklyScheduleDiv>
-  //     {weeklySchedules.map((schedule) => (
-  //       <Grid container spacing={3}>
-  //         <Card>
-  //           <CardHeader title={<Typography variant="h6">{schedule.date}</Typography>} />
-  //           <CardContent>
-  //             <ul>
-  //               <Grid item md={12}>
-  //                 {schedule.items.map((item, index) => (
-  //                   <StyledTimeSlotDiv>
-  //                     <p key={index}>{item.name}</p>
-  //                   </StyledTimeSlotDiv>
-  //                 ))}
-  //               </Grid>
-  //             </ul>
-  //           </CardContent>
-  //         </Card>
-  //       </Grid>
-  //     ))}
-  //   </WeeklyScheduleDiv>
-  // )
 }

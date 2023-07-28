@@ -4,13 +4,13 @@ import styled from 'styled-components';
 
 function NewTimeBlockForm(props) {
 
-  // const Wrapper = styled.section`
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
-  // padding-top: 2rem;
-  // margin-bottom: 2rem;
-  // `;
+  const Wrapper = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 2rem;
+  margin-bottom: 2rem;
+  `;
 
   function handleFormSubmission2(e) {
     e.preventDefault();
