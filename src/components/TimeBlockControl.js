@@ -6,7 +6,7 @@ import NewTimeBlockForm from "./NewTImeBlockForm";
 import TimeBlockList from "./TimeBlockList";
 import PlannerViewSelector from "./PlannerViewSelector";
 import { db, auth } from "../firebase";
-import { collection, doc, addDoc, onSnapshot, getDocs, setDoc, updateDoc, arrayUnion, arrayRemove, getDoc, query, where } from "firebase/firestore";
+import { collection, doc, addDoc, onSnapshot, getDocs, setDoc, updateDoc, arrayUnion, arrayRemove, getDoc, query, where, deleteDoc } from "firebase/firestore";
 import NewCategoryForm from "./NewCategoryForm";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Schedule from "./Schedule";
@@ -213,6 +213,10 @@ const handleClick = () => {
     await updateDoc(reference, currentSchedule);
   }
 
+  const deleteItem = async (id) => {
+    await deleteDoc(doc(db, 'schedules'), id)
+  }
+
 // ================================================================================================
 
 // ====================================== DRAG AND DROP LOGIC =====================================
@@ -287,6 +291,7 @@ const handleClick = () => {
                            scheduleToDisplay={scheduleToDisplay} 
                            addItemToSchedule={addItemToSchedule}
                            addSchedule0={addSchedule0}
+                           deleteItem={deleteItem}
                            currentDay={currentDay}
                            scheduleItems={scheduleItems}
                             />;

@@ -5,8 +5,8 @@ import { Draggable } from "react-beautiful-dnd";
 
 const StyledTimeSlotDiv = styled.div`
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    align-items: center; xxx
     align-content: space-around;
     justify-content: center;
     width: 15rem;
@@ -20,21 +20,18 @@ const StyledTimeSlotDiv = styled.div`
     font-weight: 500;
     cursor: pointer;
     color: #FF9494;
-    background-color: #FFF5E4;
-  `;
+    background-color: #FFF5E4; 
+`;
 
-// function TimeSlot(props) {
-//   return (
-//     <Draggable draggableId={props.id} index={props.index}>
-//       {provided => (
-//         <StyledTimeSlotDiv ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-//           <h5>{props.time}</h5>
-//           <h6>{props.content}</h6>
-//         </StyledTimeSlotDiv>
-//       )}
-//     </Draggable>
-//   );
-// }
+const DeleteButton = styled.div`
+padding-left: 10px;
+color: #888;
+font-weight: bold;
+float: right;
+font-size: 20px;
+cursor: pointer; 
+
+`;
 
 function TimeSlot(props) {
   return (
@@ -51,6 +48,7 @@ function TimeSlot(props) {
               <h6>{props.category}</h6>
             </div>
             {provided.placeholder}
+            <DeleteButton>X</DeleteButton>
         </StyledTimeSlotDiv>
       )}
     </Draggable>
