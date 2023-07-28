@@ -3,6 +3,7 @@ import React from "react";
 import { Typography, Grid, Card, CardHeader, CardContent, CardMedia } from "@mui/material";
 import styled from 'styled-components';
 import CategoryPieChart from "./CategoryPieChart";
+import Schedule from "./Schedule";
 
 const WeeklyScheduleDiv = styled.div`
     display: flex;
@@ -52,7 +53,7 @@ font-weight: 500;
 
 export default function WeeklyView(props) {
   const { weeklySchedules, scheduleToDisplay, currentDay, addItemToSchedule, addSchedule0, scheduleItems } = props;
-
+  
   return (
     <WeeklyScheduleDiv>
       {weeklySchedules.map((schedule) => (

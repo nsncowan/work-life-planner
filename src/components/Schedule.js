@@ -30,6 +30,7 @@ const StyledScheduleDiv = styled.div`
   align-items: center;
   align-content: space-around;
   justify-content: center;
+  max-width: 100%;
   text-align: center;
   font-size: .833rem;
   transition: background-color .25s;
@@ -83,7 +84,7 @@ function Schedule(props) {
             </Grid>
               <Droppable droppableId='scheduleItems' key='scheduleItems'>
                 {(provided, snapshot) => (
-                  <StyledScheduleDiv ref={provided.innerRef} {...provided.droppableProps} /* style={{background: snapshot.isDraggingOver ? "lightblue" : "lightgrey",}} */>
+                  <StyledScheduleDiv ref={provided.innerRef} {...provided.droppableProps} >
                       {scheduleItems.map((timeSlot, index) =>
                         <TimeSlot name={timeSlot.name} category={timeSlot.category} id={timeSlot.id} key={timeSlot.id} index={index}/>
                       )}

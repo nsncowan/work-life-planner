@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
 import { Card } from "@mui/material";
 import styled from 'styled-components';
+import Box from "@mui/material";
 
 const PieChartDiv = styled.div`
     height: 200px;
@@ -16,6 +17,7 @@ const PieChartDiv = styled.div`
     text-align: center;
     font-size: .7rem;
     font-weight: 400;
+    overflow: auto;
    `;
 
 export default function CategoryPieChart(props) {
@@ -49,12 +51,12 @@ const COLORS = ['#F6114A', '#0AA0BF', '#F36E98', '#78B177', '#9862A2', '#F05006'
 return (
     <PieChartDiv>
       <ResponsiveContainer width="80%" height="80%">
-        <PieChart width={800} height={800} margin={{ top: 10, right: 10, bottom: 10, left: 10 }} >
+        <PieChart width={200} height={200}  >
           <Pie
             data={pieChartData}
             label={(entry) => entry.category}
-            cx="50%"
-            cy="50%"
+            // cx="50%"
+            // cy="50%"
             innerRadius='75%'
             outerRadius='100%'
             fill="#8884d8"
