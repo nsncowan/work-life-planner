@@ -15,7 +15,7 @@ function NewCategoryForm(props) {
 
   function handleFormSubmission(e) {
     e.preventDefault();
-    props.addCategory1({
+    props.addCategory({
       name: e.target.name.value
     });
   }
@@ -37,7 +37,7 @@ function NewCategoryForm(props) {
 }
 
 NewCategoryForm.propTypes = {
-  addCategory1: PropTypes.func
+  addCategory: PropTypes.func
 };
 
 export default NewCategoryForm;

@@ -41,11 +41,11 @@ const StyledScheduleDiv = styled.div`
 
 function Schedule(props) {
 
-  const { weeklySchedules, scheduleToDisplay, currentDay, addItemToSchedule, addSchedule0, scheduleItems } = props;
+  const { weeklySchedules, scheduleToDisplay, currentDay, addItemToSchedule, addSchedule, scheduleItems } = props;
 
   function handleAddScheduleButtonClick(e) {
     e.preventDefault();
-    addSchedule0({
+    addSchedule({
       date: currentDay,
       items: [
         /* { id: v4(), name: 'family time', category: 'family' },

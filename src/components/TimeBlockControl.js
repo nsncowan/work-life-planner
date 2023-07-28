@@ -201,16 +201,16 @@ const handleWeeklyViewClick = () => {
   }
 
 // ====================================== DATABASE LOGIC ==========================================
-  const addTimeBlock0 = async (timeBlock) => {
+  const addTimeBlock = async (timeBlock) => {
     const collectionReference = collection(db, "timeBlocks");
     await addDoc(collectionReference, timeBlock);
   }
 
-  const addCategory0 = async (category) => {
+  const addCategory = async (category) => {
     await addDoc(collection(db, "categories"), category);
   }
   
-  const addSchedule0 = async (schedule) => {
+  const addSchedule = async (schedule) => {
     await addDoc(collection(db, "schedules"), schedule);
   }
   
@@ -273,42 +273,49 @@ const handleWeeklyViewClick = () => {
     // console.log("result", result)
   }
   
-  let timeBlockListComponent = null;
-  let otherCurrentState = null;
+  let sideComponent = null;
+  let mainComponent = null;
+  let weeklyScheduleComponent = null;
+  let categoryFormComponent = null;
+  let timeBlockFormComponent = null;
   let pieChartComponent = null;
+  let otherCurrentState = null;
   let dateDisplay = <SelectDate currentDay={currentDay} nextDay={nextDay} prevDay={prevDay} />;
   let buttonOne = null;
   let buttonTwo = null;
   let topTaskBar = <PlannerViewSelector />;  
   
   if(formVisible) {
-    timeBlockListComponent = <NewTimeBlockForm 
-    addTimeBlock1 = {addTimeBlock0}
-    categoryList = {categoryList} />;
-    otherCurrentState = <NewCategoryForm
-    addCategory1={addCategory0} />;
+    sideComponent = <TimeBlockList 
+                        timeBlockList={timeBlockList} />;
+    mainComponent = <NewTimeBlockForm 
+                        addTimeBlock = {addTimeBlock}
+                        addCategory={addCategory}
+                        categoryList = {categoryList} />;
     buttonOne = 'Timeblock list'
     buttonTwo = 'Weekly / Daily View'
   }
 
   else if(weeklyView) {
-    timeBlockListComponent = <TimeBlockList timeBlockList={timeBlockList} />;
-    otherCurrentState = <WeeklyView
-                           weeklySchedules={weeklySchedules}
-                           deleteItem={deleteItem}
-                           currentDay={currentDay} />;
+    sideComponent = <TimeBlockList 
+                        timeBlockList={timeBlockList} />;
+    mainComponent = <WeeklyView
+                        weeklySchedules={weeklySchedules}
+                        deleteItem={deleteItem}
+                        currentDay={currentDay} />;
     buttonOne = 'Timeblock Form'
     buttonTwo = 'Weekly / Daily View'
   }
   
   else {
-    timeBlockListComponent = <TimeBlockList timeBlockList={timeBlockList} />;
+    sideComponent = <TimeBlockList 
+                          timeBlockList={timeBlockList} />;
     // pieChartComponent = <CategoryPieChart scheduleItems={scheduleItems} />;
-    otherCurrentState = <Schedule 
+    mainComponent = <Schedule 
                            weeklySchedules={weeklySchedules}
                            scheduleToDisplay={scheduleToDisplay} 
                            addItemToSchedule={addItemToSchedule}
-                           addSchedule0={addSchedule0}
+                           addSchedule={addSchedule}
                            deleteItem={deleteItem}
                            currentDay={currentDay}
                            scheduleItems={scheduleItems}
@@ -327,10 +334,10 @@ const handleWeeklyViewClick = () => {
           <StyledMainBodyDiv>
             <DragDropContext onDragEnd={onDragEnd}>
               <Grid item md={2}>
-                {timeBlockListComponent}
+                {sideComponent}
               </Grid>
               <Grid item md={10}>
-                {otherCurrentState}
+                {mainComponent}
               </Grid>
               {/* {pieChartComponent} */}
             </DragDropContext>
