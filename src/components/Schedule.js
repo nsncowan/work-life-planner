@@ -51,7 +51,7 @@ function Schedule(props) {
         /* { id: v4(), name: 'family time', category: 'family' },
         { id: v4(), name: 'yoga', category: 'health' },
         { id: v4(), name: 'study', category: 'education' },
-        { id: v4(), name: 'relax time', category: 'self-care' },
+        { id: v4(), name: 'relax time', category: 'Self-care' },
         { id: v4(), name: 'wash dishes', category: 'chores' },
         { id: v4(), name: 'gardening', category: 'outdoor time' },
        */]

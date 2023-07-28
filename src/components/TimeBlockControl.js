@@ -285,8 +285,8 @@ const handleWeeklyViewClick = () => {
     categoryList = {categoryList} />;
     otherCurrentState = <NewCategoryForm
     addCategory1={addCategory0} />;
-    buttonOne = 'back to timeblock list'
-    buttonTwo = 'go to weekly view'
+    buttonOne = 'Timeblock list'
+    buttonTwo = 'Weekly / Daily View'
   }
 
   else if(weeklyView) {
@@ -299,8 +299,8 @@ const handleWeeklyViewClick = () => {
                            deleteItem={deleteItem}
                            currentDay={currentDay}
                            scheduleItems={scheduleItems} />;
-    buttonOne = 'go to timeblock form'
-    buttonTwo = 'go to weekly view'
+    buttonOne = 'Timeblock Form'
+    buttonTwo = 'Weekly / Daily View'
   }
   
   else {
@@ -315,8 +315,8 @@ const handleWeeklyViewClick = () => {
                            currentDay={currentDay}
                            scheduleItems={scheduleItems}
                             />;
-    buttonOne = 'go to timeblock form';
-    buttonTwo = 'go to weekly view'
+    buttonOne = 'Timeblock Form';
+    buttonTwo = 'Weekly / Daily View'
   }
   
   return (
