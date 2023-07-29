@@ -50,13 +50,13 @@ const COLORS = ['#F6114A', '#0AA0BF', '#F36E98', '#78B177', '#9862A2', '#F05006'
 
 return (
     <PieChartDiv>
-      <ResponsiveContainer width="80%" height="80%">
-        <PieChart width={200} height={200}  >
+      <ResponsiveContainer width="100%" height={250}>
+        <PieChart height={250}  >
           <Pie
             data={pieChartData}
             label={(entry) => entry.category}
-            // cx="50%"
-            // cy="50%"
+            cx="50%"
+            cy="50%"
             innerRadius='75%'
             outerRadius='100%'
             fill="#8884d8"

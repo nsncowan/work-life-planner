@@ -266,6 +266,11 @@ const handleWeeklyViewClick = () => {
         setScheduleItems(reorder(scheduleItems, source.index, destination.index));
       }
     }
+    // else if (source.droppableId === 'scheduleItems' && destination.droppableId === 'timeBlockList') {
+    //   const result = move(timeBlockList, scheduleItems, source, destination);
+    //   setTimeBlockList(result.timeBlockList)
+    //   setScheduleItems(result.scheduleItems)
+    // };
     else {
       const result = move(timeBlockList, scheduleItems, source, destination);
       setTimeBlockList(result.timeBlockList)
