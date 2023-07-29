@@ -69,6 +69,17 @@ function Schedule(props) {
   }
 
 
+  function removeItemFromArray(item) {
+    const itemToRemove = item.index;
+    scheduleItems.splice(itemToRemove, 1);
+    return scheduleItems;
+  }
+
+  function handleDeleteItemClick(e) {
+    e.preventDefault();
+    removeItemFromArray();
+    // deleteItem(scheduleToDisplay[0].id, timeSlot.id);
+  }
 
   return (
     <ScheduleBodyDiv>
@@ -89,14 +100,14 @@ function Schedule(props) {
                 {(provided, snapshot) => (
                   <StyledScheduleDiv ref={provided.innerRef} {...provided.droppableProps} >
                       {scheduleItems.map((timeSlot, index) =>
-                        <TimeSlot
+                        <><TimeSlot
                           name={timeSlot.name}
                           category={timeSlot.category}
                           id={timeSlot.id}
                           key={timeSlot.id}
                           index={index}
                           deleteItem={deleteItem}
-                          scheduleToDisplay={scheduleToDisplay} />
+                          scheduleToDisplay={scheduleToDisplay} /><button onClick={removeItemFromArray(timeSlot)}>delete</button></>
                         )}
                       {provided.placeholder}
                   </StyledScheduleDiv>

@@ -54,7 +54,7 @@ function TimeSlot(props) {
               <h6>{props.category}</h6>
             </div>
             {provided.placeholder}
-            <button onClick={handleDeleteItemClick}>delete</button>
+            {/* <button onClick={handleDeleteItemClick}>delete</button> */}
         </StyledTimeSlotDiv>
       )}
     </Draggable>
