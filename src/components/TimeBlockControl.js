@@ -208,10 +208,16 @@ const handleWeeklyViewClick = () => {
     await updateDoc(reference, currentSchedule);
   }
 
-  const deleteItem = (item, list) => {
-     const arrayClone = Array.from(list);
-     arrayClone.splice(item.index, 1);
-     setScheduleItems(arrayClone);
+  const deleteItem = async (currentSchedule, item) => {
+    const reference = doc(db, "schedules", currentSchedule.id);
+    await updateDoc(reference, {
+              items: arrayRemove(item.id)
+            });
+            console.log('Item deleted successfully.');
+
+    //  const arrayClone = Array.from(list);
+    //  arrayClone.splice(item.index, 1);
+    //  setScheduleItems(arrayClone);
     };
   
   // const deleteItem = async (currentSchedule, item) => {

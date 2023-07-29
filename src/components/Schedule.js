@@ -67,6 +67,9 @@ function Schedule(props) {
       items: scheduleItems
     });
   }
+
+
+
   return (
     <ScheduleBodyDiv>
       <React.Fragment>
@@ -86,9 +89,15 @@ function Schedule(props) {
                 {(provided, snapshot) => (
                   <StyledScheduleDiv ref={provided.innerRef} {...provided.droppableProps} >
                       {scheduleItems.map((timeSlot, index) =>
-                        <TimeSlot name={timeSlot.name} category={timeSlot.category} id={timeSlot.id} key={timeSlot.id} index={index} /* deleteItem={deleteItem} *//>
+                        <TimeSlot
+                          name={timeSlot.name}
+                          category={timeSlot.category}
+                          id={timeSlot.id}
+                          key={timeSlot.id}
+                          index={index}
+                          deleteItem={deleteItem}
+                          scheduleToDisplay={scheduleToDisplay} />
                         )}
-                        {/* <button onClick={deleteItem(scheduleItems)}>delete</button> */}
                       {provided.placeholder}
                   </StyledScheduleDiv>
                 )}
