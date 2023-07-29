@@ -6,7 +6,7 @@ import NewTimeBlockForm from "./NewTImeBlockForm";
 import TimeBlockList from "./TimeBlockList";
 import PlannerViewSelector from "./PlannerViewSelector";
 import { db, auth } from "../firebase";
-import { collection, doc, addDoc, onSnapshot, orderBy, updateDoc, query, where, deleteDoc } from "firebase/firestore";
+import { collection, doc, addDoc, onSnapshot, orderBy, updateDoc, query, where, deleteDoc, arrayRemove } from "firebase/firestore";
 import NewCategoryForm from "./NewCategoryForm";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Schedule from "./Schedule";
@@ -56,17 +56,6 @@ function TimeBlockControl() {
     setCurrentDay(format(prevDay, 'MM-dd-yyyy')) 
   }
 
-  // function startOfWeek() {
-  //   let newDay = parse(currentDay, 'MM-dd-yyyy', new Date());
-  //   let startOfWeek = startOfWeek(newDay, { weekStartsOn: 0 })
-  //   setStartOfCurrentWeek(format(startOfWeek, 'MM-dd-yyyy')) 
-  // }
-
-  // function endOfWeek() {
-  //   let newDay = parse(currentDay, 'MM-dd-yyyy', new Date());
-  //   let endOfWeek = endOfWeek(newDay, { weekStartsOn: 0 })
-  //   setEndOfCurrentWeek(format(endOfWeek, 'MM-dd-yyyy')) 
-  // }
 
 // ================================================================================================
 
@@ -219,9 +208,17 @@ const handleWeeklyViewClick = () => {
     await updateDoc(reference, currentSchedule);
   }
 
-  const deleteItem = async (id) => {
-    await deleteDoc(doc(db, 'schedules'), id)
-  }
+  const deleteItem = (item, list) => {
+     const arrayClone = Array.from(list);
+     arrayClone.splice(item.index, 1);
+     setScheduleItems(arrayClone);
+    };
+  
+  // const deleteItem = async (currentSchedule, item) => {
+  //   await updateDoc(doc(db, 'schedules', currentSchedule.id), {
+  //     items: arrayRemove(item.id)
+  //   });
+  // }
 
 // ================================================================================================
 

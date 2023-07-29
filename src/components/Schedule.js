@@ -42,7 +42,7 @@ const StyledScheduleDiv = styled.div`
 
 function Schedule(props) {
 
-  const { weeklySchedules, scheduleToDisplay, currentDay, addItemToSchedule, addSchedule, scheduleItems } = props;
+  const { deleteItem, scheduleToDisplay, currentDay, addItemToSchedule, addSchedule, scheduleItems } = props;
 
   function handleAddScheduleButtonClick(e) {
     e.preventDefault();
@@ -86,8 +86,9 @@ function Schedule(props) {
                 {(provided, snapshot) => (
                   <StyledScheduleDiv ref={provided.innerRef} {...provided.droppableProps} >
                       {scheduleItems.map((timeSlot, index) =>
-                        <TimeSlot name={timeSlot.name} category={timeSlot.category} id={timeSlot.id} key={timeSlot.id} index={index}/>
-                      )}
+                        <TimeSlot name={timeSlot.name} category={timeSlot.category} id={timeSlot.id} key={timeSlot.id} index={index} /* deleteItem={deleteItem} *//>
+                        )}
+                        {/* <button onClick={deleteItem(scheduleItems)}>delete</button> */}
                       {provided.placeholder}
                   </StyledScheduleDiv>
                 )}

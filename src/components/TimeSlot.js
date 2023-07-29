@@ -23,7 +23,7 @@ const StyledTimeSlotDiv = styled.div`
     background-color: #FFF5E4; 
 `;
 
-const DeleteButton = styled.div`
+const DeleteButton = styled.button`
 padding-left: 10px;
 color: #888;
 font-weight: bold;
@@ -48,7 +48,7 @@ function TimeSlot(props) {
               <h6>{props.category}</h6>
             </div>
             {provided.placeholder}
-            <DeleteButton>X</DeleteButton>
+            {/* <button onClick={props.deleteItem}>X</button> */}
         </StyledTimeSlotDiv>
       )}
     </Draggable>

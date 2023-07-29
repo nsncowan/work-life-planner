@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import styled from 'styled-components';
 
 const Form = styled.form`
-display: flex;
-flex-direction: column;
-align-items: top;
-align-content: top;
-justify-content: top;
-padding: .75rem
+  display: flex;
+  flex-direction: column;
+  align-items: top;
+  align-content: top;
+  justify-content: top;
+  padding: .75rem
 `;
 
 const Input = styled.input`
