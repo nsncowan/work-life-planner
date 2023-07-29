@@ -7,6 +7,7 @@ import SignIn from "./SignIn";
 import { Container } from "react-bootstrap";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import WeeklyView from "./WeeklyView";
+import Welcome from "./Welcome";
 
 function App(){
 
@@ -15,8 +16,8 @@ function App(){
     padding: "0 10% 10% 10%",
     backgroundColor: '#FFF5E4',
     // backgroundImage: "url(./background_photo_desktop.jpg)",
-    // backgroundSize: "cover",
-    // backgroundPosition: "center",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
     // backgroundRepeat: "no-repeat",
     fontFamily: "Work Sans, sans-serif",
     fontWeight: 500,
@@ -30,8 +31,9 @@ function App(){
           <Header />
           <Routes>
             <Route path="/sign-in" element={<SignIn />} />
-            <Route path="/weekly-view" element={<WeeklyView />} />
-            <Route path="/" element={<TimeBlockControl />} />
+            {/* <Route path="/weekly-view" element={<WeeklyView />} /> */}
+            <Route path="/main" element={<TimeBlockControl />} />
+            <Route path="/" element={<Welcome />} />
           </Routes>
         </Router>
       </React.Fragment>

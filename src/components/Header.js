@@ -6,9 +6,10 @@ function Header() {
     <React.Fragment>
       <h1>WorkLifePlanner</h1>
       <ul>
-        <li><Link to="/">Home</Link> </li>
+        <li><Link to="/">Welcome</Link> </li>
+        <li><Link to="/main">Main Page</Link> </li>
         <li><Link to="/sign-in">Sign In</Link> </li>
-        <li><Link to="/weekly-view">Weekly View</Link> </li>
+        {/* <li><Link to="/weekly-view">Weekly View</Link> </li> */}
       </ul>
 
     </React.Fragment>
