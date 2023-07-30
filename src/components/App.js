@@ -8,17 +8,20 @@ import { Container } from "react-bootstrap";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import WeeklyView from "./WeeklyView";
 import Welcome from "./Welcome";
+import styled from 'styled-components';
+
 
 function App(){
 
   const AppStyles = {
+    alignItems: 'center',
+    alignContent: 'center',
+    justifyContent: 'center',
     height: "100%",
     padding: "0 10% 10% 10%",
     backgroundColor: '#FFF5E4',
-    // backgroundImage: "url(./background_photo_desktop.jpg)",
     backgroundSize: "cover",
     backgroundPosition: "center",
-    // backgroundRepeat: "no-repeat",
     fontFamily: "Work Sans, sans-serif",
     fontWeight: 500,
     color: "#FF9494",

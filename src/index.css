@@ -6,11 +6,16 @@
   box-sizing: border-box;
 }
 body {
-  /* background-color: #FFF5E4; */
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+
+  background-color: #FFF5E4;
   color: #FF9494;
   font-family: "Poppins", sans-serif;
   min-height: 100vh;
-  max-width: 100%;
+  max-width: 80%;
 }
 header {
   font-size: 2rem;
