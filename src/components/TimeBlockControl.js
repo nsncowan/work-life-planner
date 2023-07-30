@@ -15,12 +15,22 @@ import { format, addDays, startOfWeek, endOfWeek, startOfToday, parseISO, parse,
 import CategoryPieChart from "./CategoryPieChart";
 import WeeklyView from "./WeeklyView";
 
-
 const StyledMainBodyDiv = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   align-content: flex-start;
+  justify-content: center;
+  width: 80%;
+  border: 2px solid #FF9494;
+  padding: 5px;
+  `;
+
+const TopBarDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
   justify-content: center;
   width: 80%;
   border: 2px solid #FF9494;
@@ -343,10 +353,12 @@ const handleWeeklyViewClick = () => {
   
   return (
     <React.Fragment>
-        {topTaskBar}
-        {dateDisplay}
-        <button onClick={handleClick}>{buttonOne}</button>
-        <button onClick={handleWeeklyViewClick}>{buttonTwo}</button>
+        <TopBarDiv>
+          {/* {topTaskBar} */}
+          <button onClick={handleClick}>{buttonOne}</button>
+          <button onClick={handleWeeklyViewClick}>{buttonTwo}</button>
+          {dateDisplay}
+        </TopBarDiv>
         <Grid container>
           <StyledMainBodyDiv>
             <DragDropContext onDragEnd={onDragEnd}>

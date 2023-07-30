@@ -12,7 +12,6 @@ const WeeklyScheduleDiv = styled.div`
     align-content: top;
     justify-content: center;
     width: 100%;
-    border: 2px solid red;
     padding: .75rem;
     text-align: center;
     font-size: .833rem;
@@ -59,7 +58,7 @@ export default function WeeklyView(props) {
       {weeklySchedules.map((schedule) => (
         <ScheduleColumnDiv>
           <CategoryPieChart scheduleItems={schedule.items} />
-            <Typography variant="h6">{schedule.date}</Typography>
+            <Typography variant="body1">{schedule.date}</Typography>
               <ul>
                   {schedule.items.map((item, index) => (
                     <StyledTimeSlotDiv>

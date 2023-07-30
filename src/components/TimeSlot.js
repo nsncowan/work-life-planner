@@ -10,11 +10,12 @@ const StyledTimeSlotDiv = styled.div`
     align-content: center;
     justify-content: center;
     width: 15rem;
-    padding: .75rem;
+    height: 4.5rem;
+    padding: .5rem;
     margin: .15rem;
     border-radius: 54px;
     text-align: center;
-    font-size: .833rem;
+    font-size: 1rem;
     transition: background-color .25s;
     border: 2px solid #FF9494;
     font-weight: 500;
