@@ -13,9 +13,8 @@ const StyledScheduleDiv = styled.div`
     align-content: center;
     justify-content: center;
     width: 100%;
-    // border: 2px solid #FF9494;
-    min-width: 400px;
-    min-height: 600px;
+    border: 2px solid #FF9494;
+    min-height: 100px;
     padding: .77rem 0;
     text-align: center;
     font-size: .833rem;

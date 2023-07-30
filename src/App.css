@@ -4,6 +4,7 @@ button {
   cursor: pointer;
   width: 8.11rem;
   padding: .77rem 0;
+  margin: .5rem;
   border-radius: 54px;
   background-color: #FFF5E4;
   text-align: center;
