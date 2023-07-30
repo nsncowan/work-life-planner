@@ -208,24 +208,24 @@ const handleWeeklyViewClick = () => {
     await updateDoc(reference, currentSchedule);
   }
 
-  const deleteItem = async (currentSchedule, item) => {
-    const reference = doc(db, "schedules", currentSchedule.id);
-    await updateDoc(reference, {
-              items: arrayRemove(item.id)
-            });
-            console.log('Item deleted successfully.');
-
-    //  const arrayClone = Array.from(list);
-    //  arrayClone.splice(item.index, 1);
-    //  setScheduleItems(arrayClone);
-    };
-  
   // const deleteItem = async (currentSchedule, item) => {
-  //   await updateDoc(doc(db, 'schedules', currentSchedule.id), {
-  //     items: arrayRemove(item.id)
-  //   });
-  // }
+  //   const reference = doc(db, "schedules", currentSchedule.id);
+  //   await updateDoc(reference, {
+  //             items: arrayRemove(item.id)
+  //           });
+  //   };
+  
+  const handleDeleteTimeBlock = async (timeBlockId) => {
+    const updatedScheduleItems = [...scheduleItems];
 
+    const index = updatedScheduleItems.findIndex((timeBlock) => timeBlock.id === timeBlockId);
+
+    if (index !== -1) {
+      updatedScheduleItems.splice(index, 1);
+
+      setScheduleItems(updatedScheduleItems);
+    }
+  };
 // ================================================================================================
 
 // ====================================== DRAG AND DROP LOGIC =====================================
@@ -309,7 +309,6 @@ const handleWeeklyViewClick = () => {
                         timeBlockList={timeBlockList} />;
     mainComponent = <WeeklyView
                         weeklySchedules={weeklySchedules}
-                        deleteItem={deleteItem}
                         currentDay={currentDay} />;
     buttonOne = 'Timeblock Form'
     buttonTwo = 'Weekly / Daily View'
@@ -324,9 +323,9 @@ const handleWeeklyViewClick = () => {
                            scheduleToDisplay={scheduleToDisplay} 
                            addItemToSchedule={addItemToSchedule}
                            addSchedule={addSchedule}
-                           deleteItem={deleteItem}
                            currentDay={currentDay}
                            scheduleItems={scheduleItems}
+                           onDeleteTimeBlock={handleDeleteTimeBlock}
                             />;
     buttonOne = 'Timeblock Form';
     buttonTwo = 'Weekly / Daily View'

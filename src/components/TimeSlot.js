@@ -35,11 +35,6 @@ cursor: pointer;
 
 function TimeSlot(props) {
 
-  function handleDeleteItemClick(e) {
-    e.preventDefault();
-    props.deleteItem(props.scheduleToDisplay[0].id, props.id);
-  }
-
   return (
     <Draggable draggableId={props.id} index={props.index} key={props.id}>
       {(provided, snapshot) => (
@@ -53,8 +48,8 @@ function TimeSlot(props) {
               <h4>{props.name}</h4>
               <h6>{props.category}</h6>
             </div>
+              <button onClick={() => props.onDeleteTimeBlock(props.id)}>Delete</button>
             {provided.placeholder}
-            {/* <button onClick={handleDeleteItemClick}>delete</button> */}
         </StyledTimeSlotDiv>
       )}
     </Draggable>

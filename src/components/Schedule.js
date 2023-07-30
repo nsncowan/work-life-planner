@@ -62,7 +62,7 @@ const StyledTimeSlotDiv = styled.div`
 
 function Schedule(props) {
 
-  const { deleteItem, scheduleToDisplay, currentDay, addItemToSchedule, addSchedule, scheduleItems } = props;
+  const { onDeleteTimeBlock, deleteItem, scheduleToDisplay, currentDay, addItemToSchedule, addSchedule, scheduleItems } = props;
 
   function handleAddScheduleButtonClick(e) {
     e.preventDefault();
@@ -88,19 +88,6 @@ function Schedule(props) {
     });
   }
 
-
-  function removeItemFromArray(item) {
-    const itemToRemove = item.index;
-    scheduleItems.splice(itemToRemove, 1);
-    return scheduleItems;
-  }
-
-  function handleDeleteItemClick(e) {
-    e.preventDefault();
-    removeItemFromArray();
-    // deleteItem(scheduleToDisplay[0].id, timeSlot.id);
-  }
-
   return (
     <ScheduleBodyDiv>
       <React.Fragment>
@@ -120,15 +107,14 @@ function Schedule(props) {
                 {(provided, snapshot) => (
                   <StyledScheduleDiv ref={provided.innerRef} {...provided.droppableProps} >
                       {scheduleItems.map((timeSlot, index) =>
-                        <TimeSlot
+                        <><TimeSlot
                           name={timeSlot.name}
                           category={timeSlot.category}
                           id={timeSlot.id}
                           key={timeSlot.id}
                           index={index}
-                          deleteItem={deleteItem}
-                          scheduleToDisplay={scheduleToDisplay} />
-                        )}
+                          onDeleteTimeBlock={onDeleteTimeBlock} />{/* <button onClick={() => onDeleteTimeBlock(timeSlot.id)}>Delete</button> */}</>
+                          )}
                       {provided.placeholder}
                   </StyledScheduleDiv>
                 )}
