@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import { Draggable } from "react-beautiful-dnd";
 
 const StyledTimeSlotDiv = styled.div`
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
-    align-items: center; xxx
-    align-content: space-around;
+    align-items: center;
+    align-content: center;
     justify-content: center;
     width: 15rem;
     padding: .75rem;
@@ -24,12 +24,16 @@ const StyledTimeSlotDiv = styled.div`
 `;
 
 const DeleteButton = styled.button`
-padding-left: 10px;
 color: #888;
 font-weight: bold;
-float: right;
 font-size: 20px;
 cursor: pointer; 
+max-width: 25%;
+align-items: center;
+align-content: center;
+justify-content: center;
+text-align: center;
+margin-left: 5rem;
 
 `;
 
@@ -48,7 +52,7 @@ function TimeSlot(props) {
               <h4>{props.name}</h4>
               <h6>{props.category}</h6>
             </div>
-              <button onClick={() => props.onDeleteTimeBlock(props.id)}>Delete</button>
+              <DeleteButton onClick={() => props.deleteScheduleItems(props.id)}>X</DeleteButton>
             {provided.placeholder}
         </StyledTimeSlotDiv>
       )}

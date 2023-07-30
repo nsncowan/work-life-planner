@@ -215,14 +215,13 @@ const handleWeeklyViewClick = () => {
   //           });
   //   };
   
-  const handleDeleteTimeBlock = async (timeBlockId) => {
+  const deleteScheduleItems = async (timeBlockId) => {
     const updatedScheduleItems = [...scheduleItems];
 
     const index = updatedScheduleItems.findIndex((timeBlock) => timeBlock.id === timeBlockId);
-
+    
     if (index !== -1) {
       updatedScheduleItems.splice(index, 1);
-
       setScheduleItems(updatedScheduleItems);
     }
   };
@@ -242,8 +241,6 @@ const handleWeeklyViewClick = () => {
     const sourceClone = Array.from(source);
     const destClone = Array.from(destination);
     const [removed] = sourceClone.splice(droppableSource.index, 1);
-    // const copyItem = sourceClone[droppableSource.index];
-    // const removedWithNewId = { ...removed, id: v4() };
     destClone.splice(droppableDestination.index, 0, { ...removed, id: v4() });
     sourceClone.splice(droppableSource.index, 0, removed); 
         
@@ -266,11 +263,6 @@ const handleWeeklyViewClick = () => {
         setScheduleItems(reorder(scheduleItems, source.index, destination.index));
       }
     }
-    // else if (source.droppableId === 'scheduleItems' && destination.droppableId === 'timeBlockList') {
-    //   const result = move(timeBlockList, scheduleItems, source, destination);
-    //   setTimeBlockList(result.timeBlockList)
-    //   setScheduleItems(result.scheduleItems)
-    // };
     else {
       const result = move(timeBlockList, scheduleItems, source, destination);
       setTimeBlockList(result.timeBlockList)
@@ -283,11 +275,6 @@ const handleWeeklyViewClick = () => {
   
   let sideComponent = null;
   let mainComponent = null;
-  let weeklyScheduleComponent = null;
-  let categoryFormComponent = null;
-  let timeBlockFormComponent = null;
-  let pieChartComponent = null;
-  let otherCurrentState = null;
   let dateDisplay = <SelectDate currentDay={currentDay} nextDay={nextDay} prevDay={prevDay} />;
   let buttonOne = null;
   let buttonTwo = null;
@@ -325,7 +312,7 @@ const handleWeeklyViewClick = () => {
                            addSchedule={addSchedule}
                            currentDay={currentDay}
                            scheduleItems={scheduleItems}
-                           onDeleteTimeBlock={handleDeleteTimeBlock}
+                           deleteScheduleItems={deleteScheduleItems}
                             />;
     buttonOne = 'Timeblock Form';
     buttonTwo = 'Weekly / Daily View'
