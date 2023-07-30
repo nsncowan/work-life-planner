@@ -29,6 +29,7 @@ const StyledMainBodyDiv = styled.div`
 
 function TimeBlockControl() {
   let today = startOfToday();
+  const [unFormattedCurrentDay, setUnformattedCurrentDay] = useState(today);
   const [currentDay, setCurrentDay] = useState(format(today, 'MM-dd-yyyy'));
   const [startOfCurrentWeek, setStartOfCurrentWeek] = useState(format(startOfWeek(today, { weekStartsOn: 0 }), 'MM-dd-yyyy'));
   const [endOfCurrentWeek, setEndOfCurrentWeek] = useState(format(endOfWeek(today, { weekStartsOn: 0 }), 'MM-dd-yyyy'));
@@ -43,17 +44,30 @@ function TimeBlockControl() {
   const [scheduleItems, setScheduleItems] = useState([]);
   
 // ==================================== DATE LOGIC ================================================
-  function nextDay() {
+  function nextDay(weeklyView) {
     let newDay = parse(currentDay, 'MM-dd-yyyy', new Date());
-    let nextDay = addDays(newDay, 1)
-    // let nextDay = add(newDay, { days: 1}) /// THIS ALSO WORKS
-    setCurrentDay(format(nextDay, 'MM-dd-yyyy'))
+    if (weeklyView) {
+      let nextWeekStart = startOfWeek(addDays(newDay, 7));
+      setCurrentDay(format(nextWeekStart, 'MM-dd-yyyy'));
+      setUnformattedCurrentDay(nextWeekStart);
+    } else {
+      let nextDay = addDays(newDay, 1)
+      setCurrentDay(format(nextDay, 'MM-dd-yyyy'))
+      setUnformattedCurrentDay(nextDay);
+    }
   }
   
-  function prevDay() {
+  function prevDay(weeklyView) {
     let newDay = parse(currentDay, 'MM-dd-yyyy', new Date());
-    let prevDay = subDays(newDay, 1)
-    setCurrentDay(format(prevDay, 'MM-dd-yyyy')) 
+    if (weeklyView) {
+      let prevWeekStart = startOfWeek(subDays(newDay, 7));
+      setCurrentDay(format(prevWeekStart, 'MM-dd-yyyy'));
+      setUnformattedCurrentDay(prevWeekStart);
+    } else {
+      let prevDay = subDays(newDay, 1);
+      setCurrentDay(format(prevDay, 'MM-dd-yyyy'));
+      setUnformattedCurrentDay(prevDay);
+    }
   }
 
 
@@ -156,8 +170,9 @@ useEffect(() => {
   }, [currentDay])
 
   useEffect(() => {
-    const dateRange = eachDayOfInterval({start: startOfWeek(today, { weekStartsOn: 0 }), end: endOfWeek(today, { weekStartsOn: 0 }) });
+    const dateRange = eachDayOfInterval({start: startOfWeek(unFormattedCurrentDay, { weekStartsOn: 0 }), end: endOfWeek(unFormattedCurrentDay, { weekStartsOn: 0 }) });
     const formattedDateRange = dateRange.map(date => format(date, 'MM-dd-yyyy'));
+
     const ref = collection(db, "schedules");
     const q = query(ref, where('date', 'in', formattedDateRange), orderBy('date'));
     const getWeeklySchedules = 
