@@ -8,6 +8,7 @@ const PieChartDiv = styled.div`
   margin: 1rem
   font-size: .5rem;
   font-weight: 400;
+  overflow: visible;
   `;
 
 export default function CategoryPieChart(props) {

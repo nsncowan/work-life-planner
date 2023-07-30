@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Draggable } from "react-beautiful-dnd";
 
 const StyledTimeSlotDiv = styled.div`
-    display: inline-flex;
+    display: flex;
     flex-direction: row;
     align-items: center;
     align-content: center;

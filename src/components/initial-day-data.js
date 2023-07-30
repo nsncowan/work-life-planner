@@ -1,5 +1,15 @@
 import { v4 } from 'uuid';
 
+const items = [
+  { id: v4(), name: 'Start Your Day Here', category: 'Other' },
+  { id: v4(), name: 'family time', category: 'Family' },
+  { id: v4(), name: 'go to gym', category: 'Health' },
+  { id: v4(), name: 'work on project', category: 'School' },
+  { id: v4(), name: 'read', category: 'Self-Care' },
+  { id: v4(), name: 'wash dishes', category: 'Chores' },
+  { id: v4(), name: 'grocery shopping', category: 'Errands' },
+ ]
+
 const initialDayData = [
   // add date property
   { id: v4(), time: "10:00am" },

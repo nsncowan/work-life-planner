@@ -13,7 +13,7 @@ const StyledScheduleDiv = styled.div`
     align-content: center;
     justify-content: center;
     width: 100%;
-   /*  border: 2px solid #FF9494; */
+    // border: 2px solid #FF9494;
     min-width: 400px;
     min-height: 600px;
     padding: .77rem 0;
@@ -47,12 +47,7 @@ function Schedule(props) {
     addSchedule({
       date: currentDay,
       items: [
-        { id: v4(), name: 'family time', category: 'family' },
-        { id: v4(), name: 'yoga', category: 'health' },
-        { id: v4(), name: 'study', category: 'education' },
-        { id: v4(), name: 'relax time', category: 'Self-care' },
-        { id: v4(), name: 'wash dishes', category: 'chores' },
-        { id: v4(), name: 'gardening', category: 'outdoor time' },
+        { id: v4(), name: 'Start Your Day Here', category: 'Other' },
        ]
     });
   }

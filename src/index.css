@@ -6,7 +6,7 @@
   box-sizing: border-box;
 }
 body {
-  display: flex;
+  /* display: flex; */
   align-items: center;
   align-content: center;
   justify-content: center;
@@ -15,7 +15,7 @@ body {
   color: #FF9494;
   font-family: "Poppins", sans-serif;
   min-height: 100vh;
-  max-width: 80%;
+  max-width: 100%;
 }
 header {
   font-size: 2rem;

@@ -44,7 +44,7 @@ function TimeBlockControl() {
   const [scheduleItems, setScheduleItems] = useState([]);
   
 // ==================================== DATE LOGIC ================================================
-  function nextDay(weeklyView) {
+  function nextDay(/* weeklyView */) {
     let newDay = parse(currentDay, 'MM-dd-yyyy', new Date());
     if (weeklyView) {
       let nextWeekStart = startOfWeek(addDays(newDay, 7));
@@ -57,7 +57,7 @@ function TimeBlockControl() {
     }
   }
   
-  function prevDay(weeklyView) {
+  function prevDay(/* weeklyView */) {
     let newDay = parse(currentDay, 'MM-dd-yyyy', new Date());
     if (weeklyView) {
       let prevWeekStart = startOfWeek(subDays(newDay, 7));
@@ -147,6 +147,14 @@ useEffect(() => {
               items: doc.data().items,
             });
           });
+          if (thisSchedule.length === 0) {
+            addSchedule({
+              date: currentDay,
+              items: [
+                { id: v4(), name: 'Start Your Day Here', category: 'Other' },
+               ]
+            });
+          }
           console.log('thisSchedule', thisSchedule);
           setScheduleToDisplay(thisSchedule);
 
