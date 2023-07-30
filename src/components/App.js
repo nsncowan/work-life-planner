@@ -2,13 +2,9 @@ import React from "react";
 import "./../App.css"
 import Header from "./Header";
 import TimeBlockControl from "./TimeBlockControl";
-import { DragDropContext } from "react-beautiful-dnd";
 import SignIn from "./SignIn";
-import { Container } from "react-bootstrap";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import WeeklyView from "./WeeklyView";
 import Welcome from "./Welcome";
-import styled from 'styled-components';
 
 
 function App(){
@@ -34,7 +30,6 @@ function App(){
           <Header />
           <Routes>
             <Route path="/sign-in" element={<SignIn />} />
-            {/* <Route path="/weekly-view" element={<WeeklyView />} /> */}
             <Route path="/main" element={<TimeBlockControl />} />
             <Route path="/" element={<Welcome />} />
           </Routes>
