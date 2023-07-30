@@ -7,7 +7,7 @@ const StyledTimeSlotDiv = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    align-content: center;
+    align-content: space-around;
     justify-content: center;
     width: 15rem;
     height: 4.5rem;
