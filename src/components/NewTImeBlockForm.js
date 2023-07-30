@@ -53,6 +53,7 @@ function NewTimeBlockForm(props) {
     props.addCategory({
       name: e.target.name.value
     });
+    e.target.reset();
   }
 
   function handleFormSubmission2(e) {
@@ -61,6 +62,7 @@ function NewTimeBlockForm(props) {
       name: e.target.name.value,
       category: e.target.categoryName.value,
     });
+    e.target.reset();
   }
 
   return (
