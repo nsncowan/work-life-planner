@@ -5,7 +5,7 @@ import { format, addDays, eachDayOfInterval, startOfToday, startOfMonth, endOfMo
 const StyledDateDiv = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center
+  align-items: center;
   `;
 
 function SelectDate(props) {

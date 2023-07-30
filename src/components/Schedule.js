@@ -64,16 +64,15 @@ function Schedule(props) {
     <ScheduleBodyDiv>
       <React.Fragment>
         <Grid container>
-          {/* <ScheduleBodyDiv> */}
-            <Grid item md={12}>
+            {/* <Grid item md={12}>
                 {currentDay}
-            </Grid>
-            <Grid item md={12}>
-              <button onClick={handleAddScheduleButtonClick}>Add Schedule</button>
-              <button onClick={handleAddItemToScheduleButtonClick}>Save Schedule</button>
-            </Grid>
+            </Grid> */}
             <Grid item md={12}>
               <CategoryPieChart scheduleItems={scheduleItems} />
+            </Grid>
+            <Grid item md={12}>
+              {/* <button onClick={handleAddScheduleButtonClick}>Add Schedule</button> */}
+              <button onClick={handleAddItemToScheduleButtonClick}>Save Schedule</button>
             </Grid>
               <Droppable droppableId='scheduleItems' key='scheduleItems'>
                 {(provided, snapshot) => (
@@ -91,7 +90,6 @@ function Schedule(props) {
                   </StyledScheduleDiv>
                 )}
               </Droppable>
-          {/* </ScheduleBodyDiv> */}
         </Grid>
       </React.Fragment>
     </ScheduleBodyDiv>
