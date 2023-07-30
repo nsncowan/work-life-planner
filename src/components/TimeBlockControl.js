@@ -20,13 +20,13 @@ const StyledMainBodyDiv = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  align-content: center;
+  align-content: flex-start;
   justify-content: center;
-  width: 100%;
+  width: 80%;
   border: 2px solid #FF9494;
   padding: 5px;
   `;
-
+  
 function TimeBlockControl() {
   let today = startOfToday();
   const [unFormattedCurrentDay, setUnformattedCurrentDay] = useState(today);
@@ -350,10 +350,10 @@ const handleWeeklyViewClick = () => {
         <Grid container>
           <StyledMainBodyDiv>
             <DragDropContext onDragEnd={onDragEnd}>
-              <Grid item md={2}>
+              <Grid item md={4}>
                 {sideComponent}
               </Grid>
-              <Grid item md={10}>
+              <Grid item md={8}>
                 {mainComponent}
               </Grid>
               {/* {pieChartComponent} */}
