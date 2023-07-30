@@ -64,32 +64,33 @@ function Schedule(props) {
     <ScheduleBodyDiv>
       <React.Fragment>
         <Grid container>
-            {/* <Grid item md={12}>
-                {currentDay}
-            </Grid> */}
-            <Grid item md={12}>
-              <CategoryPieChart scheduleItems={scheduleItems} />
-            </Grid>
-            <Grid item md={12}>
-              {/* <button onClick={handleAddScheduleButtonClick}>Add Schedule</button> */}
-              <button onClick={handleAddItemToScheduleButtonClick}>Save Schedule</button>
-            </Grid>
-              <Droppable droppableId='scheduleItems' key='scheduleItems'>
-                {(provided, snapshot) => (
-                  <StyledScheduleDiv ref={provided.innerRef} {...provided.droppableProps} >
-                      {scheduleItems.map((timeSlot, index) =>
-                        <TimeSlot
-                          name={timeSlot.name}
-                          category={timeSlot.category}
-                          id={timeSlot.id}
-                          key={timeSlot.id}
-                          index={index}
-                          deleteScheduleItems={deleteScheduleItems} />
-                          )}
-                      {provided.placeholder}
-                  </StyledScheduleDiv>
+          {/* <Grid item md={12}>
+              {currentDay}
+          </Grid> */}
+          <Grid item md={12}>
+            <CategoryPieChart scheduleItems={scheduleItems} />
+          </Grid>
+          <Grid item md={12}>
+            {/* <button onClick={handleAddScheduleButtonClick}>Add Schedule</button> */}
+            <button onClick={handleAddItemToScheduleButtonClick}>Save Schedule</button>
+          </Grid>
+          <Droppable droppableId='scheduleItems' key='scheduleItems'>
+            {(provided, snapshot) => (
+              <StyledScheduleDiv ref={provided.innerRef} {...provided.droppableProps} >
+                {scheduleItems.map((timeSlot, index) =>
+                  <TimeSlot
+                    name={timeSlot.name}
+                    category={timeSlot.category}
+                    id={timeSlot.id}
+                    key={timeSlot.id}
+                    index={index}
+                    deleteScheduleItems={deleteScheduleItems} 
+                  />
                 )}
-              </Droppable>
+                {provided.placeholder}
+              </StyledScheduleDiv>
+            )}
+          </Droppable>
         </Grid>
       </React.Fragment>
     </ScheduleBodyDiv>
