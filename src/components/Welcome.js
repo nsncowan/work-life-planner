@@ -10,12 +10,12 @@ const Wrapper = styled.section`
 `;
 
 const Form = styled.form`
-display: flex;
-flex-direction: column;
-align-items: top;
-align-content: top;
-justify-content: top;
-padding: .75rem
+  display: flex;
+  flex-direction: column;
+  align-items: top;
+  align-content: top;
+  justify-content: top;
+  padding: .75rem
 `;
 
 const Input = styled.input`
@@ -31,24 +31,22 @@ const Input = styled.input`
   background-color: #FFF5E4;
 `;
 
-
 export default function Wecome() {
-
 
   return(
     <>
       <Wrapper>
         <h1>Welcome</h1>
         <Form>
-              <Input
-                className="sign-in"
-                type="text"
-                name='sign-in'
-                placeholder="Sign In Here" />
-              <button type="submit">Sign In</button>
-            </Form>
+          <Input
+            className="sign-in"
+            type="text"
+            name='sign-in'
+            placeholder="Sign In Here" 
+          />
+          <button type="submit">Sign In</button>
+        </Form>
       </Wrapper>
     </>
-  
   )
 }

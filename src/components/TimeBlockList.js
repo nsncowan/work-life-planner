@@ -1,6 +1,5 @@
 import React from "react";
 import TimeBlock from "./TimeBlock";
-import PropTypes from "prop-types";
 import styled from 'styled-components';
 import { Droppable } from 'react-beautiful-dnd';
 
@@ -17,10 +16,7 @@ const StyledTimeBlockDiv = styled.div`
     font-weight: 500;
   `;
 
-  
-  
 function TimeBlockList(props) {
-  
   
   return (
   <Droppable droppableId="timeBlockList" /* key="timeBlockList" */>
@@ -47,12 +43,5 @@ function TimeBlockList(props) {
   </Droppable>
   );
 }
-
-// TimeBlockList.propTypes = {
-//   name: PropTypes.string,
-//   category: PropTypes.string,
-//   id: PropTypes.string,
-//   key: PropTypes.string
-// };
 
 export default TimeBlockList;

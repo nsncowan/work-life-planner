@@ -7,12 +7,10 @@ import TimeBlockList from "./TimeBlockList";
 import PlannerViewSelector from "./PlannerViewSelector";
 import { db, auth } from "../firebase";
 import { collection, doc, addDoc, onSnapshot, orderBy, updateDoc, query, where, deleteDoc, arrayRemove } from "firebase/firestore";
-import NewCategoryForm from "./NewCategoryForm";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Schedule from "./Schedule";
 import SelectDate from "./SelectDate";
 import { format, addDays, startOfWeek, endOfWeek, startOfToday, parseISO, parse, add, subDays, eachDayOfInterval } from "date-fns";
-import CategoryPieChart from "./CategoryPieChart";
 import WeeklyView from "./WeeklyView";
 
 const StyledMainBodyDiv = styled.div`
@@ -54,7 +52,7 @@ function TimeBlockControl() {
   const [scheduleItems, setScheduleItems] = useState([]);
   
 // ==================================== DATE LOGIC ================================================
-  function nextDay(/* weeklyView */) {
+  function nextDay() {
     let newDay = parse(currentDay, 'MM-dd-yyyy', new Date());
     if (weeklyView) {
       let nextWeekStart = startOfWeek(addDays(newDay, 7));
@@ -67,7 +65,7 @@ function TimeBlockControl() {
     }
   }
   
-  function prevDay(/* weeklyView */) {
+  function prevDay() {
     let newDay = parse(currentDay, 'MM-dd-yyyy', new Date());
     if (weeklyView) {
       let prevWeekStart = startOfWeek(subDays(newDay, 7));

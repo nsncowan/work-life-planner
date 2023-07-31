@@ -5,9 +5,6 @@ function PlannerViewSelector() {
   return (
     <ToggleButtonGroup
       color="secondary"
-      // value={alignment}
-      // exclusive
-      // onChange={handleChange}
       aria-label="Platform">
       <ToggleButton value="web">TimeBlock List</ToggleButton>
       <ToggleButton value="android">TimeTable</ToggleButton>

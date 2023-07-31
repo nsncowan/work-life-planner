@@ -9,9 +9,7 @@ function Header() {
         <li><Link to="/">Welcome</Link> </li>
         <li><Link to="/main">Main Page</Link> </li>
         <li><Link to="/sign-in">Sign In</Link> </li>
-        {/* <li><Link to="/weekly-view">Weekly View</Link> </li> */}
       </ul>
-
     </React.Fragment>
   );
 }

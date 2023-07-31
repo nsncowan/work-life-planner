@@ -64,9 +64,6 @@ function Schedule(props) {
     <ScheduleBodyDiv>
       <React.Fragment>
         <Grid container>
-            {/* <Grid item md={12}>
-                {currentDay}
-            </Grid> */}
             <Grid item md={12}>
               <CategoryPieChart scheduleItems={scheduleItems} />
             </Grid>

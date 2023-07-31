@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from 'styled-components';
-import { format, addDays, eachDayOfInterval, startOfToday, startOfMonth, endOfMonth, parseISO, parse, add} from "date-fns";
 
 const StyledDateDiv = styled.div`
   display: flex;
@@ -9,7 +8,6 @@ const StyledDateDiv = styled.div`
   `;
 
 function SelectDate(props) {
-  
   return(
     <StyledDateDiv>
       <button type="button" id="previousDay" onClick={props.prevDay}>back</button>
